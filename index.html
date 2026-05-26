@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Cholevas | Academic & Software Engineer Portfolio</title>
+    <title>Dimitrios Cholevas | IT Systems & Infrastructure Specialist</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;800&family=Fira+Code:wght=400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            /* Tokyo Night Tech Dark Palette */
             --bg-dark: #050505;
             --surface-dark: #111111;
             --primary: #00f2ff;
@@ -25,11 +24,7 @@
 
         /* Accessibility Modifiers */
         body.high-contrast {
-            --bg-dark: #000000;
-            --surface-dark: #000000;
-            --primary: #ffff00;
-            --text-main: #ffffff;
-            --text-dim: #ffffff;
+            --bg-dark: #000; --surface-dark: #000; --primary: #ffff00; --text-main: #fff; --text-dim: #fff;
         }
         body.underline-links a, body.underline-links .tab-btn { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
@@ -38,369 +33,341 @@
         html { font-size: var(--font-scale); scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background 0.3s, color 0.3s;
+            background-color: var(--bg-dark); color: var(--text-main);
+            font-family: var(--font-main); line-height: 1.6; overflow-x: hidden;
+            transition: background 0.3s;
         }
 
-        .glow-bg {
+        /* Animated Particles Background */
+        #particles-js {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.04) 0%, transparent 60%);
-            z-index: -1; pointer-events: none;
+            z-index: -1; background: var(--bg-dark);
         }
 
-        /* Navigation (Navbar) */
+        /* Navigation (Fixed Header) */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
             z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); font-family: var(--font-code); }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; }
         
-        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
 
-        /* Tabs Μέσα στο Navbar (Πάνω Δεξιά) */
-        .nav-tabs { display: flex; gap: 10px; }
-        
+        /* Menu Tabs in Navbar */
+        .nav-tabs { display: flex; gap: 5px; }
         .tab-btn {
-            background: transparent; border: none;
-            color: var(--text-main); padding: 8px 16px;
-            cursor: pointer; font-weight: 600; font-size: 0.95rem; font-family: var(--font-main);
-            transition: all 0.3s; position: relative;
+            background: transparent; border: none; color: var(--text-main);
+            padding: 8px 15px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            transition: 0.3s; position: relative; border-radius: 20px;
         }
-        .tab-btn:hover, .tab-btn:focus { color: var(--primary); outline: none; }
-        
-        /* Εφέ γραμμής κάτω από την ενεργή καρτέλα */
-        .tab-btn::after {
-            content: ''; position: absolute; bottom: -22px; left: 0; width: 100%; height: 2px;
-            background: var(--primary); transform: scaleX(0); transition: transform 0.3s ease;
-        }
-        .tab-btn.active { color: var(--primary); font-weight: 700; }
-        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-btn:hover { background: rgba(0, 242, 255, 0.05); color: var(--primary); }
+        .tab-btn.active { color: var(--primary); background: rgba(0, 242, 255, 0.1); }
 
-        /* Κουμπί Γλώσσας */
         .lang-switch {
             background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
             padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
-            transition: 0.3s;
+            margin-left: 10px; transition: 0.3s;
         }
         .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
 
-        /* Content Viewports (Main Content Area) */
-        main { margin-top: 100px; } /* Κενό για να μην κρύβεται από το Navigation */
-        .content-section { display: none; padding: 60px 10% 80px 10%; min-height: 70vh; }
-        .content-section.active { display: block; animation: tabFade 0.5s ease-in-out; }
+        /* Content Container */
+        main { margin-top: 100px; }
+        .content-section { display: none; padding: 40px 10% 80px 10%; min-height: 70vh; }
+        .content-section.active { display: block; animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-        @keyframes tabFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 2.5rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; font-weight: 800; }
+        h2 { font-size: 2.5rem; margin-bottom: 35px; font-weight: 800; color: #fff; }
         .accent { color: var(--primary); }
 
-        /* Hero Layout (About Tab) */
-        .hero-title { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; font-weight: 800; }
-        #typed { color: var(--primary); font-family: var(--font-code); font-weight: 600; }
-
-        /* Grid Architecture */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 25px; }
+        /* Cards & Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 35px; border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s;
+            background: var(--surface-dark); padding: 35px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease;
+            position: relative; overflow: hidden;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-        .card h3 { margin-bottom: 12px; font-size: 1.4rem; color: #fff; font-weight: 600; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
-        
-        .card-meta { font-family: var(--font-code); color: var(--primary); font-size: 0.85rem; margin-bottom: 8px; display: block; }
-        .tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
-        .tags span { background: rgba(0, 242, 255, 0.07); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-family: var(--font-code); }
-        
-        .card-links { margin-top: 20px; display: flex; gap: 15px; }
-        .card-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
-        .card-links a:hover { color: var(--primary); }
+        .card:hover { 
+            transform: translateY(-8px) scale(1.02); border-color: var(--primary); 
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+        }
+        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 10px; display: block; font-weight: bold;}
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; font-weight: 700; color: #fff; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
 
-        /* PDF Resume Button */
-        .cv-btn {
-            display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+        .tag-container { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: rgba(0, 242, 255, 0.08); color: var(--primary); padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px;
             background: transparent; border: 2px solid var(--primary); color: var(--primary);
-            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 35px; transition: 0.3s;
+            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 25px; transition: 0.3s;
         }
-        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(0, 242, 255, 0.2); }
+        .btn:hover { background: var(--primary); color: var(--bg-dark); transform: scale(1.05); }
 
-        /* Accessibility Widget Container */
+        /* Accessibility Floating Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
         .a11y-toggle { 
             width: 55px; height: 55px; border-radius: 50%; background: var(--primary); 
             color: var(--bg-dark); border: none; cursor: pointer; font-size: 1.5rem;
-            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
+            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
         }
-        .a11y-toggle:hover { transform: scale(1.05); }
         .a11y-panel {
             position: absolute; bottom: 70px; left: 0; width: 280px; background: var(--surface-dark); 
-            border: 2px solid var(--primary); border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 2px solid var(--primary); border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 10px;
         }
-        .a11y-panel.active { display: flex; }
-        .a11y-panel button { 
-            padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.04); 
-            color: #fff; text-align: left; cursor: pointer; font-size: 0.9rem; transition: 0.2s;
-        }
+        .a11y-panel.active { display: flex; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } }
+        .a11y-panel button { padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; }
         .a11y-panel button:hover { background: var(--primary); color: var(--bg-dark); }
 
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; margin-top: 40px; }
+        footer { text-align: center; padding: 50px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
 
-        /* Responsive UI Optimization */
         @media (max-width: 900px) {
-            nav { padding: 15px 5%; flex-direction: column; gap: 15px; }
-            .nav-tabs { width: 100%; justify-content: center; }
-            .tab-btn { padding: 6px 10px; font-size: 0.85rem; }
-            .tab-btn::after { bottom: -17px; }
-            main { margin-top: 140px; }
-            .hero-title { font-size: 2.8rem; }
+            nav { padding: 15px 5%; flex-direction: column; gap: 10px; }
+            .nav-tabs { flex-wrap: wrap; justify-content: center; }
+            .tab-btn { padding: 5px 10px; font-size: 0.8rem; }
+            main { margin-top: 150px; }
         }
     </style>
 </head>
 <body>
-    <div class="glow-bg"></div>
+    <div id="particles-js"></div>
 
     <div class="a11y-container">
-        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility Menu"><i class="fa-solid fa-universal-access"></i></button>
+        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility"><i class="fa-solid fa-universal-access"></i></button>
         <div class="a11y-panel" id="a11yPanel">
             <button onclick="adjustFont(1.1)"><i class="fa-solid fa-plus"></i> <span data-i18n="a11y_increase">Increase Font</span></button>
             <button onclick="adjustFont(0.9)"><i class="fa-solid fa-minus"></i> <span data-i18n="a11y_decrease">Decrease Font</span></button>
             <button onclick="toggleA11y('high-contrast')"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="a11y_contrast">High Contrast</span></button>
-            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale Mode</span></button>
-            <button onclick="toggleA11y('underline-links')"><i class="fa-solid fa-underline"></i> <span data-i18n="a11y_underline">Underline Links</span></button>
-            <button onclick="resetA11y()" style="background: #ef4444; color: white;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
+            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale</span></button>
+            <button onclick="resetA11y()" style="background: #ef4444;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
         </div>
     </div>
 
     <nav>
-        <div class="logo">HOLEVAS.DEV</div>
-        
+        <a href="#" class="logo">CHOLEVAS.DEV</a>
         <div class="nav-right">
-            <div class="nav-tabs" role="tablist">
-                <button class="tab-btn active" role="tab" onclick="openTab(event, 'about')" data-i18n="tab_about">About Me</button>
-                <button class="tab-btn" role="tab" onclick="openTab(event, 'education')" data-i18n="tab_edu">Education</button>
-                <button class="tab-btn" role="tab" onclick="openTab(event, 'projects')" data-i18n="tab_proj">Projects</button>
-                <button class="tab-btn" role="tab" onclick="openTab(event, 'contact')" data-i18n="tab_cont">Contact</button>
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'about')" data-i18n="tab_about">Profile</button>
+                <button class="tab-btn" onclick="openTab(event, 'edu')" data-i18n="tab_edu">Education</button>
+                <button class="tab-btn" onclick="openTab(event, 'work')" data-i18n="tab_work">Experience</button>
+                <button class="tab-btn" onclick="openTab(event, 'skills')" data-i18n="tab_skills">Skills</button>
+                <button class="tab-btn" onclick="openTab(event, 'contact')" data-i18n="tab_cont">Contact</button>
             </div>
-            
             <button class="lang-switch" id="langBtn">EN</button>
         </div>
     </nav>
 
     <main>
-        
-        <section id="about" class="content-section active" role="tabpanel">
-            <p style="font-family: var(--font-code); color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;" data-i18n="about_welcome">Welcome to my space</p>
-            <h1 class="hero-title">Dimitrios <span class="accent">Cholevas</span></h1>
-            <div style="font-size: 2.5rem; min-height: 60px; margin-bottom: 25px;"><span id="typed"></span></div>
-            
-            <h2 style="font-size: 1.6rem; margin-top: 40px; border: none; padding: 0;" data-i18n="about_bio_title">Professional Profile</h2>
-            <p style="font-size: 1.1rem; max-width: 800px; color: var(--text-main); margin-bottom: 15px;" data-i18n="about_desc1">
-                Είμαι απόφοιτος του τμήματος Πληροφορικής με βαθύ ενδιαφέρον για την ανάπτυξη σύγχρονων, κλιμακούμενων και προσβάσιμων (WCAG compliant) εφαρμογών ιστού.
-            </p>
-            <p style="font-size: 1rem; max-width: 800px; color: var(--text-dim);" data-i18n="about_desc2">
-                Γεφυρώνω το χάσμα μεταξύ της ακαδημαϊκής θεωρίας της επιστήμης υπολογιστών και της πρακτικής μηχανικής λογισμικού, δίνοντας έμφαση στον καθαρό κώδικα και την αποδοτικότητα.
-            </p>
-            
-            <a href="resume.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume / CV</span></a>
-        </section>
-
-        <section id="education" class="content-section" role="tabpanel">
-            <h2 data-i18n="edu_title">Education & <span class="accent">Academic Work</span></h2>
+        <section id="about" class="content-section active">
+            <h1 style="font-size: 4rem; font-weight: 800; margin-bottom: 10px;">Dimitrios <span class="accent">Holevas</span></h1>
+            <div style="font-size: 2.2rem; min-height: 50px; font-family: var(--font-code); color: var(--primary);"><span id="typed"></span></div>
             
             <div class="grid">
-                <div class="card" data-aos="fade-up">
-                    <span class="card-meta">2022 - 2026</span>
-                    <h3 data-i18n="edu_card_title">BSc in Computer Science</h3>
-                    <p data-i18n="edu_card_desc">Ολοκλήρωση σπουδών στον τομέα της Πληροφορικής με εξειδίκευση στην Τεχνολογία Λογισμικού και τα Πληροφοριακά Συστήματα.</p>
-                    <div class="tags">
-                        <span data-i18n="tag_se">Software Engineering</span>
-                        <span data-i18n="tag_db">Databases</span>
-                        <span data-i18n="tag_ds">Data Structures</span>
+                <div class="card" style="grid-column: span 2;">
+                    <h3 data-i18n="profile_title">About Me</h3>
+                    <p data-i18n="profile_desc">Τελειόφοιτος φοιτητής Πληροφορικής και Τηλεπικοινωνιών στο ΕΚΠΑ. Εξειδικεύομαι στην υποστήριξη συστημάτων, τις υποδομές πληροφορικής και τη διαχείριση δικτύων. Παθιασμένος με την επίλυση τεχνικών προβλημάτων και τη συνεχή μάθηση.</p>
+                    <a href="resume.pdf" target="_blank" class="btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Full CV</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="edu" class="content-section">
+            <h2 data-i18n="edu_title">Education & <span class="accent">Adequacy</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-meta">2022 - PRESENT</span>
+                    <h3 data-i18n="edu_uni">NKUA (EKPA)</h3>
+                    <p data-i18n="edu_desc">BSc in Computer Science & Telecommunications. Focusing on Systems Programming, Networking, and Database Systems.</p>
+                    <div class="tag-container">
+                        <span class="tag" data-i18n="m1">Networks</span>
+                        <span class="tag" data-i18n="m2">OS</span>
+                        <span class="tag" data-i18n="m3">Databases</span>
+                        <span class="tag" data-i18n="m4">Algorithms</span>
                     </div>
                 </div>
-
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
-                    <span class="card-meta">RESEARCH / THESIS</span>
-                    <h3 data-i18n="thesis_card_title">Graduation Thesis</h3>
-                    <p data-i18n="thesis_card_desc">Σχεδίαση, ανάπτυξη και συγγραφή ερευνητικής πτυχιακής εργασίας. Ανάλυση προβλήματος, επιλογή κατάλληλης αρχιτεκτονικής και τεχνολογικού stack.</p>
-                    <div class="tags">
-                        <span>Research</span>
-                        <span>Architecture</span>
-                        <span>Documentation</span>
+                <div class="card">
+                    <span class="card-meta">PEDAGOGICAL COMPETENCE</span>
+                    <h3 data-i18n="ped_title">Teaching Adequacy</h3>
+                    <p data-i18n="ped_desc">Επιτυχής παρακολούθηση κύκλου μαθημάτων Παιδαγωγικής και Διδακτικής Επάρκειας, συμπεριλαμβανομένης της Ψηφιακής Προσβασιμότητας και της Διδακτικής Πληροφορικής.</p>
+                    <div class="tag-container">
+                        <span class="tag" data-i18n="p1">Didactics</span>
+                        <span class="tag" data-i18n="p2">Microteaching</span>
+                        <span class="tag" data-i18n="p3">Accessibility</span>
+                        <span class="tag" data-i18n="p4">Psychology</span>
                     </div>
                 </div>
+                <div class="card">
+                    <span class="card-meta">EPAL KALAMPAKAS</span>
+                    <h3 data-i18n="epal_title">Computer Technician</h3>
+                    <p data-i18n="epal_desc">Graduated with a perfect score (20/20). Specialized in Information Technology Applications.</p>
+                </div>
+            </div>
+        </section>
 
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="card-meta">CORE COMPETENCIES</span>
-                    <h3 data-i18n="courses_card_title">Key Coursework</h3>
-                    <p data-i18n="courses_card_desc">Επιτυχής παρακολούθηση και αριστεία σε εξειδικευμένα μαθήματα κορμού και κατεύθυνσης της επιστήμης υπολογιστών.</p>
-                    <div class="tags">
-                        <span data-i18n="course_1">Algorithms</span>
-                        <span data-i18n="course_2">Web Dev</span>
-                        <span data-i18n="course_3">Distributed Systems</span>
+        <section id="work" class="content-section">
+            <h2 data-i18n="work_title">Professional <span class="accent">Experience</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-meta">APR 2026 - JUL 2026</span>
+                    <h3 data-i18n="intern_title">IT Support & Infrastructure Intern</h3>
+                    <p data-i18n="intern_loc">Municipality of Kalambaka</p>
+                    <p style="margin-top: 10px;" data-i18n="intern_desc">Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, καθώς και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.</p>
+                    <div class="tag-container">
+                        <span class="tag">Network Maintenance</span>
+                        <span class="tag">System Support</span>
+                        <span class="tag">Infrastructure</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-meta">MARCH 2023</span>
+                    <h3 data-i18n="judge_title">STEM Judge</h3>
+                    <p data-i18n="judge_desc">Member of the Scientific Committee / Judge for the National STEM & Educational Robotics Competition at Athens College.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <h2 data-i18n="skills_title">Skills & <span class="accent">Interests</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 data-i18n="tech_title">Tech Stack</h3>
+                    <div class="tag-container">
+                        <span class="tag">Python</span><span class="tag">C / C++</span><span class="tag">SQL</span><span class="tag">HTML</span><span class="tag">Git</span>
+                    </div>
+                    <div style="margin-top:20px;" class="tag-container">
+                        <span class="tag">Linux</span><span class="tag">Windows Server</span><span class="tag">TCP/IP</span><span class="tag">DNS</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="interests_title">Research Interests</h3>
+                    <p data-i18n="interests_desc">Ενδιαφέρον για προχωρημένα συστήματα διαχείρισης δεδομένων, δικτύωση υπολογιστών και υλικό συστημάτων υψηλής απόδοσης.</p>
+                    <div class="tag-container">
+                        <span class="tag">Data Management</span>
+                        <span class="tag">Networking & Telecoms</span>
+                        <span class="tag">Computer Engineering</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="content-section" role="tabpanel">
-            <h2 data-i18n="proj_title">Selected <span class="accent">Engineering Projects</span></h2>
-            
+        <section id="contact" class="content-section">
+            <h2 data-i18n="cont_title">Get In <span class="accent">Touch</span></h2>
             <div class="grid">
-                <div class="card">
-                    <span class="card-meta">[BACKEND SYSTEM ARCHITECTURE]</span>
-                    <h3>E-Commerce Core API</h3>
-                    <p data-i18n="p1_desc">Σχεδιασμός και υλοποίηση ενός RESTful API για ηλεκτρονικό κατάστημα. Περιλαμβάνει σύστημα αυθεντικοποίησης JWT, διαχείριση χρηστών και βάση δεδομένων.</p>
-                    <div class="tags"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>JWT</span></div>
-                    <div class="card-links">
-                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <span class="card-meta">[ARTIFICIAL INTELLIGENCE / ML]</span>
-                    <h3>Computer Vision Object Classifier</h3>
-                    <p data-i18n="p2_desc">Ανάπτυξη νευρωνικού δικτύου για την αναγνώριση και ταξινόμηση αντικειμένων σε πραγματικό χρόνο από ροή βίντεο ή εικόνων.</p>
-                    <div class="tags"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>NumPy</span></div>
-                    <div class="card-links">
-                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <span class="card-meta">[FRONTEND / USER EXPERIENCE / A11Y]</span>
-                    <h3>Accessible SPA UI Framework</h3>
-                    <p data-i18n="p3_desc">Ανάπτυξη διεπαφής χρήστη (UI) προσαρμοσμένης πλήρως στα διεθνή πρότυπα προσβασιμότητας WCAG, με ενσωματωμένα εργαλεία υποβοήθησης.</p>
-                    <div class="tags"><span>HTML5</span><span>CSS Variables</span><span>Vanilla JS</span><span>A11y</span></div>
-                    <div class="card-links">
-                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="content-section" role="tabpanel">
-            <h2 data-i18n="cont_title">Let's <span class="accent">Connect</span></h2>
-            <p style="font-size: 1.1rem; max-width: 650px; margin-bottom: 30px;" data-i18n="cont_desc">
-                Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μπορείτε να επικοινωνήσετε μαζί μου απευθείας.
-            </p>
-            
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                 <div class="card" style="text-align: center;">
-                    <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <i class="fa-solid fa-envelope" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>Email</h3>
-                    <p style="margin-bottom: 15px;">your-email@email.com</p>
-                    <div class="card-links" style="justify-content: center;"><a href="mailto:your-email@email.com" data-i18n="cont_action_mail">Send Message</a></div>
+                    <p>holevasdimitrios71@gmail.com</p>
+                    <a href="mailto:your-email@email.com" class="btn" data-i18n="cont_send">Send Message</a>
                 </div>
                 <div class="card" style="text-align: center;">
-                    <i class="fab fa-linkedin" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <i class="fa-brands fa-linkedin" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>LinkedIn</h3>
-                    <p data-i18n="cont_li_desc">Professional Network Connection</p>
-                    <div class="card-links" style="justify-content: center;"><a href="https://linkedin.com" target="_blank" data-i18n="cont_action_visit">Open Profile</a></div>
-                </div>
-                <div class="card" style="text-align: center;">
-                    <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
-                    <h3>GitHub</h3>
-                    <p data-i18n="cont_gh_desc">Code Repositories Gateway</p>
-                    <div class="card-links" style="justify-content: center;"><a href="https://github.com/holevasdimitrios" target="_blank" data-i18n="cont_action_visit">Open Profile</a></div>
+                    <div class="card-links"><a href="#" target="_blank" class="btn">Connect</a></div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
         <p>&copy; 2026 Dimitrios Cholevas. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--primary);" data-i18n="footer_subtext">Engineered with absolute digital accessibility and zero build overhead.</p>
+        <p style="font-size: 0.7rem; margin-top: 5px; color: var(--primary);">BSc Student in Computer Science | NKUA</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     
     <script>
-        // AOS Animation Core Init
+        // Particles.js Floating Particles Core Engine Configurations
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00f2ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } }
+            },
+            "retina_detect": true
+        });
+
         AOS.init({ duration: 800, once: true });
 
-        // Multi-Language Localization Engine Dictionary
+        // Bilingual Dynamic Content Mapping System (EN / EL Dictionary)
         const translations = {
             en: {
-                tab_about: "About Me", tab_edu: "Education", tab_proj: "Projects", tab_cont: "Contact",
-                about_welcome: "Welcome to my space",
-                about_bio_title: "Professional Profile",
-                about_desc1: "I am a Computer Science graduate deeply invested in building modern, scalable, and highly accessible (WCAG-compliant) web applications.",
-                about_desc2: "Bridging the gap between theoretical computer science and practical software engineering with a sharp focus on clean code patterns and runtime efficiency.",
-                cv_download: "Download Resume / CV",
-                edu_title: "Education & Academic Work",
-                edu_card_title: "BSc in Computer Science",
-                edu_card_desc: "Completed core academic curriculum focusing heavily on software lifecycle engineering, compiler theories, and systems architecture optimization.",
-                tag_se: "Software Engineering", tag_db: "Databases", tag_ds: "Data Structures",
-                thesis_card_title: "Graduation Thesis Research",
-                thesis_card_desc: "Architected and documented a comprehensive graduation thesis solving distinct logic bottlenecks, using decoupled modern development frameworks.",
-                courses_card_title: "Key Core Coursework",
-                courses_card_desc: "Excelled in deep university tracks detailing foundational paradigms of discrete mathematics and real-world system optimization layers.",
-                course_1: "Algorithms", course_2: "Web Dev", course_3: "Distributed Systems",
-                proj_title: "Selected Engineering Projects",
-                p1_desc: "Engineered a production-ready RESTful web API featuring strict JWT token auth middleware, secure router handshakes, and a relational SQL storage engine.",
-                p2_desc: "Designed and trained an artificial convolutional neural network optimizing machine classification performance benchmarks via real-world input stream arrays.",
-                p3_desc: "Crafted a single-page frontend structure complying 100% with global WCAG specifications, embedding modular assisted-screen assistive technology tooling controls.",
-                cont_title: "Let's Connect",
-                cont_desc: "I am actively looking for software engineering tracks, collaborative research frameworks, or technical roles. Hit me up directly via any path.",
-                cont_action_mail: "Send Message", cont_action_visit: "Open Profile",
-                cont_li_desc: "Professional Network Connection", cont_gh_desc: "Code Repositories Gateway",
-                footer_subtext: "Engineered with absolute digital accessibility and zero build overhead.",
-                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)", a11y_underline: "Underline All Links", a11y_reset: "Reset Settings",
-                typed_strings: ["Software Engineer.", "A11y Advocate.", "Computer Science Graduate."]
+                tab_about: "Profile", tab_edu: "Education", tab_work: "Experience", tab_skills: "Skills", tab_cont: "Contact",
+                profile_title: "Professional Summary",
+                profile_desc: "Senior Computer Science and Telecommunications student at NKUA, seeking an internship or roles in IT Support, Infrastructure, and technical services. Familiar with Windows, Linux, and TCP/IP networking, with hands-on coding experience in Python, C, and SQL. Driven by analytical thinking, precise documentation, and structured team workflows.",
+                cv_download: "Download Full CV",
+                edu_title: "Education & Academic Records",
+                edu_uni: "NKUA (EKPA)", 
+                edu_desc: "BSc in Computer Science & Telecommunications. Completed specialized core tracks covering scalable system software development structures.",
+                m1: "Computer Networks", m2: "Operating Systems", m3: "Database Design", m4: "Algorithms & Complexity",
+                ped_title: "Pedagogical Competence", 
+                ped_desc: "Completed full educational curriculum yielding formal Teaching Proficiency upon graduation. Deep dive into accessible technical knowledge transfers.",
+                p1: "Informatics Didactics", p2: "Microteaching Lab", p3: "Digital Accessibility & Assistive Tech", p4: "Educational Psychology",
+                epal_title: "EPAKAL Kalambaka", epal_desc: "Technical School Graduate - Perfect 20/20 Grade. IT Applications Systems Specialist.",
+                work_title: "Professional Milestones",
+                intern_title: "IT Support & Infrastructure Intern", 
+                intern_loc: "Municipality of Kalambaka", 
+                intern_desc: "Hands-on engineering internship managing localized IT ticketing queues, hardware decoupling architectures, peripheral deployment matrices, and troubleshooting primary active routing connections.",
+                judge_title: "Scientific Committee / STEM Judge", judge_desc: "Appointed as an official evaluator and judge for the National STEM & Educational Robotics Competition at Athens College.",
+                skills_title: "Tech Skills & Core Focus",
+                tech_title: "Technology Stack Matrix",
+                interests_title: "Advanced Research Fields", interests_desc: "Main architectural focus points geared towards advanced graduate master tracks focusing on heavy enterprise data pipelines and systems engineering.",
+                cont_title: "Let's Connect", cont_send: "Send Message",
+                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_reset: "Reset Settings", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)",
+                typed_strings: ["IT Infrastructure Support.", "Computer Science Student.", "Networking Enthusiast."]
             },
             el: {
-                tab_about: "Ποιος είμαι", tab_edu: "Σπουδές", tab_proj: "Projects", tab_cont: "Επικοινωνία",
-                about_welcome: "Καλώς ήλθατε στο χώρο μου",
-                about_bio_title: "Επαγγελματικό Προφίλ",
-                about_desc1: "Είμαι απόφοιτος του τμήματος Πληροφορικής με βαθύ ενδιαφέρον για την ανάπτυξη σύγχρονων, κλιμακούμενων και προσβάσιμων (WCAG compliant) εφαρμογών ιστού.",
-                about_desc2: "Γεφυρώνω το χάσμα μεταξύ της ακαδημαϊκής θεωρίας της επιστήμης υπολογιστών και της πρακτικής μηχανικής λογισμικού, δίνοντας έμφαση στον καθαρό κώδικα και την αποδοτικότητα.",
-                cv_download: "Κατέβασε το Βιογραφικό (PDF)",
+                tab_about: "Προφίλ", tab_edu: "Σπουδές", tab_work: "Προϋπηρεσία", tab_skills: "Δεξιότητες", tab_cont: "Επικοινωνία",
+                profile_title: "Επαγγελματικό Προφίλ",
+                profile_desc: "Τελειόφοιτος φοιτητής Πληροφορικής και Τηλεπικοινωνιών στο ΕΚΠΑ, που αναζητά πρακτική άσκηση στον τομέα IT Support / Infrastructure ή στην τεχνική υποστήριξη. Εξοικειωμένος με Windows, Linux και βασικές αρχές δικτύων TCP/IP, με εμπειρία σε γλώσσες προγραμματισμού Python, C και SQL. Ισχυρό ενδιαφέρον για συνεχή μάθηση μέσω πρακτικής εμπειρίας στην επίλυση τεχνικών προβλημάτων, την τεκμηρίωση και την ομαδική συνεργασία.",
+                cv_download: "Κατέβασε το CV (PDF)",
                 edu_title: "Σπουδές & Ακαδημαϊκό Έργο",
-                edu_card_title: "Πτυχίο Επιστήμης Υπολογιστών",
-                edu_card_desc: "Ολοκλήρωση σπουδών στον τομέα της Πληροφορικής με εξειδίκευση στην Τεχνολογία Λογισμικού και τα Πληροφοριακά Συστήματα.",
-                tag_se: "Τεχνολογία Λογισμικού", tag_db: "Βάσεις Δεδομένων", tag_ds: "Δομές Δεδομένων",
-                thesis_card_title: "Πτυχιακή Εργασία & Έρευνα",
-                thesis_card_desc: "Σχεδίαση, ανάπτυξη και συγγραφή ερευνητικής πτυχιακής εργασίας. Ανάλυση προβλήματος, επιλογή κατάλληλης αρχιτεκτονικής και τεχνολογικού stack.",
-                courses_card_title: "Βασικά Μαθήματα Κορμού",
-                courses_card_desc: "Επιτυχής παρακολούθηση και αριστεία σε εξειδικευμένα μαθήματα κορμού και κατεύθυνσης της επιστήμης υπολογιστών.",
-                course_1: "Αλγόριθμοι", course_2: "Ανάπτυξη Ιστού", course_3: "Κατανεμημένα Συστήματα",
-                proj_title: "Επιλεγμένα Projects Μηχανικής",
-                p1_desc: "Σχεδιασμός και υλοποίηση ενός RESTful API για ηλεκτρονικό κατάστημα. Περιλαμβάνει σύστημα αυθεντικοποίησης JWT, διαχείριση χρηστών και βάση δεδομένων.",
-                p2_desc: "Ανάπτυξη νευρωνικού δικτύου για την αναγνώριση και ταξινόμηση αντικειμένων σε πραγματικό χρόνο από ροή βίντεο ή εικόνων.",
-                p3_desc: "Ανάπτυξη διεπαφής χρήστη (UI) προσαρμοσμένης πλήρως στα διεθνή πρότυπα προσβασιμότητας WCAG, με ενσωματωμένα εργαλεία υποβοήθησης.",
-                cont_title: "Ας Συνδεθούμε",
-                cont_desc: "Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μπορείτε να επικοινωνήσετε μαζί μου απευθείας.",
-                cont_action_mail: "Αποστολή Μηνύματος", cont_action_visit: "Άνοιγμα Προφίλ",
-                cont_li_desc: "Επαγγελματικό Δίκτυο Σύνδεσης", cont_gh_desc: "Πύλη Αποθετηρίων Κώδικα",
-                footer_subtext: "Σχεδιασμένο για μέγιστη ψηφιακή προσβασιμότητα και μηδενικό overhead μεταγλώττισης.",
-                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων",
-                typed_strings: ["Software Engineer.", "Υποστηρικτής Προσβασιμότητας.", "Απόφοιτος Πληροφορικής."]
+                edu_uni: "Εθνικό & Καποδιστριακό Πανεπιστήμιο Αθηνών", 
+                edu_desc: "BSc, Πληροφορικής και Τηλεπικοινωνιών (Επί πτυχίω). Παρακολούθηση μαθημάτων προγραμματισμού συστημάτων, δομών δεδομένων και κατανεμημένων δικτύων.",
+                m1: "Δίκτυα Υπολογιστών", m2: "Λειτουργικά Συστήματα", m3: "Σχεδίαση Βάσεων Δεδομένων", m4: "Αλγόριθμοι & Πολυπλοκότητα",
+                ped_title: "Παιδαγωγική & Διδακτική Επάρκεια", 
+                ped_desc: "Ολοκλήρωση του θεσμοθετημένου κύκλου σπουδών για τη λήψη διδακτικής επάρκειας πληροφορικής. Εστίαση σε σύγχρονες μεθόδους μάθησης και καθολική προσβασιμότητα.",
+                p1: "Διδακτική της Πληροφορικής", p2: "Σχολική Τάξη & Μικροδιδασκαλία", p3: "Ψηφιακή Προσβασιμότητα & Υποστηρικτικές Τεχνολογίες", p4: "Παιδαγωγική & Γνωστική Ψυχολογία",
+                epal_title: "ΕΠΑΛ Καλαμπάκας", epal_desc: "Απολυτήριο με βαθμό 20/20. Τεχνικός Εφαρμογών Πληροφορικής.",
+                work_title: "Επαγγελματική Εμπειρία",
+                intern_title: "Πρακτική Άσκηση: IT Support & Υποδομές", 
+                intern_loc: "Δήμος Καλαμπάκας (20 Απριλίου - 19 Ιουλίου)", 
+                intern_desc: "Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, έλεγχος λειτουργικού συστήματος και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.",
+                judge_title: "Κριτής / Επιστημονική Επιτροπή STEM", judge_desc: "Μέλος της Επιστημονικής Επιτροπής και Κριτής στον Τελικό Πανελλήνιο Διαγωνισμό STEM και Εκπαιδευτικής Ρομποτικής στο Κολλέγιο Αθηνών (Μάρτιος 2023).",
+                skills_title: "Δεξιότητες & Ενδιαφέροντα",
+                tech_title: "Τεχνικές Γνώσεις",
+                interests_title: "Ερευνητικά & Μεταπτυχιακά Ενδιαφέροντα", interests_desc: "Ενδιαφέρον για εξειδίκευση σε προχωρημένα συστήματα διαχείρισης δεδομένων (Data Management), δίκτυα επόμενης γενιάς, τηλεπικοινωνιακές δομές και μηχανική υπολογιστών.",
+                cont_title: "Επικοινωνία", cont_send: "Στείλε Email",
+                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_reset: "Επαναφορά", a11y_contrast: "Υψηλή Αντίθεση", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)",
+                typed_strings: ["Τεχνικός Υποστήριξης IT.", "Φοιτητής Πληροφορικής ΕΚΠΑ.", "Λάτρης των Δικτύων."]
             }
         };
 
-        // Navigation Tabs Execution Controller
+        // Tab Switching Runtime Manager
         function openTab(evt, tabId) {
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
-            
             AOS.refresh();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Localization Runtime Machine Controller
+        // Language Translation Runtime Controller
         let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
         let typedInstance;
 
@@ -426,7 +393,7 @@
             updateContent();
         });
 
-        // Accessibility Widget Core Controllers
+        // Accessibility Interactive Core Systems
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yPanel = document.getElementById('a11yPanel');
         a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
@@ -437,19 +404,17 @@
             }
         });
 
-        let currentFontScale = 100;
-        function adjustFont(mod) {
-            currentFontScale *= mod;
-            if(currentFontScale > 135) currentFontScale = 135;
-            if(currentFontScale < 85) currentFontScale = 85;
-            document.documentElement.style.setProperty('--font-scale', currentFontScale + '%');
+        let fontMod = 100;
+        function adjustFont(m) { 
+            fontMod *= m; 
+            if(fontMod > 135) fontMod = 135;
+            if(fontMod < 85) fontMod = 85;
+            document.documentElement.style.setProperty('--font-scale', fontMod + '%'); 
         }
-        function toggleA11y(cls) { document.body.classList.toggle(cls); }
-        function resetA11y() {
-            document.body.className = ''; currentFontScale = 100;
-            document.documentElement.style.setProperty('--font-scale', '100%');
-        }
+        function toggleA11y(c) { document.body.classList.toggle(c); }
+        function resetA11y() { document.body.className = ''; fontMod = 100; document.documentElement.style.setProperty('--font-scale', '100%'); }
 
+        // Boot system startup
         updateContent();
     </script>
 </body>

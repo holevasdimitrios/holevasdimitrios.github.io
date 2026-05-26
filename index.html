@@ -31,7 +31,7 @@
             --text-main: #ffffff;
             --text-dim: #ffffff;
         }
-        body.underline-links a { text-decoration: underline !important; }
+        body.underline-links a, body.underline-links .tab-btn { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,7 +52,7 @@
             z-index: -1; pointer-events: none;
         }
 
-        /* Navigation */
+        /* Navigation (Navbar) */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
@@ -61,6 +61,28 @@
         }
         .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); font-family: var(--font-code); }
         
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+
+        /* Tabs Μέσα στο Navbar (Πάνω Δεξιά) */
+        .nav-tabs { display: flex; gap: 10px; }
+        
+        .tab-btn {
+            background: transparent; border: none;
+            color: var(--text-main); padding: 8px 16px;
+            cursor: pointer; font-weight: 600; font-size: 0.95rem; font-family: var(--font-main);
+            transition: all 0.3s; position: relative;
+        }
+        .tab-btn:hover, .tab-btn:focus { color: var(--primary); outline: none; }
+        
+        /* Εφέ γραμμής κάτω από την ενεργή καρτέλα */
+        .tab-btn::after {
+            content: ''; position: absolute; bottom: -22px; left: 0; width: 100%; height: 2px;
+            background: var(--primary); transform: scaleX(0); transition: transform 0.3s ease;
+        }
+        .tab-btn.active { color: var(--primary); font-weight: 700; }
+        .tab-btn.active::after { transform: scaleX(1); }
+
+        /* Κουμπί Γλώσσας */
         .lang-switch {
             background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
             padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
@@ -68,39 +90,28 @@
         }
         .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
 
-        /* Navigation Tabs Container */
-        .tab-container {
-            display: flex; justify-content: center; gap: 12px; margin: 120px auto 20px auto; padding: 0 5%;
-        }
-        .tab-btn {
-            background: var(--surface-dark); border: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-main); padding: 12px 24px; border-radius: 30px;
-            cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.3s;
-        }
-        .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
-        .tab-btn.active { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); }
+        /* Content Viewports (Main Content Area) */
+        main { margin-top: 100px; } /* Κενό για να μην κρύβεται από το Navigation */
+        .content-section { display: none; padding: 60px 10% 80px 10%; min-height: 70vh; }
+        .content-section.active { display: block; animation: tabFade 0.5s ease-in-out; }
 
-        /* Content Sections */
-        .content-section { display: none; padding: 30px 8% 80px 8%; min-height: 65vh; }
-        .content-section.active { display: block; animation: tabFade 0.4s ease-in-out; }
+        @keyframes tabFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes tabFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { font-size: 2.3rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; font-weight: 800; }
+        h2 { font-size: 2.5rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; font-weight: 800; }
         .accent { color: var(--primary); }
 
-        /* Hero Element in About Tab */
-        .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; }
+        /* Hero Layout (About Tab) */
+        .hero-title { font-size: 4.5rem; line-height: 1.1; margin-bottom: 15px; font-weight: 800; }
         #typed { color: var(--primary); font-family: var(--font-code); font-weight: 600; }
 
-        /* Grid Framework */
+        /* Grid Architecture */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 30px; border-radius: 16px;
+            background: var(--surface-dark); padding: 35px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-        .card h3 { margin-bottom: 12px; font-size: 1.35rem; color: #fff; font-weight: 600; }
+        .card h3 { margin-bottom: 12px; font-size: 1.4rem; color: #fff; font-weight: 600; }
         .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
         
         .card-meta { font-family: var(--font-code); color: var(--primary); font-size: 0.85rem; margin-bottom: 8px; display: block; }
@@ -111,16 +122,15 @@
         .card-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
         .card-links a:hover { color: var(--primary); }
 
-        /* Resume PDF Button */
+        /* PDF Resume Button */
         .cv-btn {
             display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
             background: transparent; border: 2px solid var(--primary); color: var(--primary);
-            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 30px; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.1);
+            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 35px; transition: 0.3s;
         }
-        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(0, 242, 255, 0.3); }
+        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(0, 242, 255, 0.2); }
 
-        /* Accessibility Widget */
+        /* Accessibility Widget Container */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
         .a11y-toggle { 
             width: 55px; height: 55px; border-radius: 50%; background: var(--primary); 
@@ -140,13 +150,16 @@
         }
         .a11y-panel button:hover { background: var(--primary); color: var(--bg-dark); }
 
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; margin-top: 40px; }
 
-        @media (max-width: 768px) {
-            .tab-container { flex-wrap: wrap; margin-top: 90px; gap: 8px; }
-            .tab-btn { width: 47%; text-align: center; padding: 10px; font-size: 0.85rem; }
-            .hero-title { font-size: 2.3rem; }
-            h2 { font-size: 1.8rem; }
+        /* Responsive UI Optimization */
+        @media (max-width: 900px) {
+            nav { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            .nav-tabs { width: 100%; justify-content: center; }
+            .tab-btn { padding: 6px 10px; font-size: 0.85rem; }
+            .tab-btn::after { bottom: -17px; }
+            main { margin-top: 140px; }
+            .hero-title { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -167,24 +180,25 @@
 
     <nav>
         <div class="logo">HOLEVAS.DEV</div>
+        
         <div class="nav-right">
+            <div class="nav-tabs" role="tablist">
+                <button class="tab-btn active" role="tab" onclick="openTab(event, 'about')" data-i18n="tab_about">About Me</button>
+                <button class="tab-btn" role="tab" onclick="openTab(event, 'education')" data-i18n="tab_edu">Education</button>
+                <button class="tab-btn" role="tab" onclick="openTab(event, 'projects')" data-i18n="tab_proj">Projects</button>
+                <button class="tab-btn" role="tab" onclick="openTab(event, 'contact')" data-i18n="tab_cont">Contact</button>
+            </div>
+            
             <button class="lang-switch" id="langBtn">EN</button>
         </div>
     </nav>
 
-    <div class="tab-container">
-        <button class="tab-btn active" onclick="openTab(event, 'about')" data-i18n="tab_about">About Me</button>
-        <button class="tab-btn" onclick="openTab(event, 'education')" data-i18n="tab_edu">Education</button>
-        <button class="tab-btn" onclick="openTab(event, 'projects')" data-i18n="tab_proj">Projects</button>
-        <button class="tab-btn" onclick="openTab(event, 'contact')" data-i18n="tab_cont">Contact</button>
-    </div>
-
     <main>
         
-        <section id="about" class="content-section active">
+        <section id="about" class="content-section active" role="tabpanel">
             <p style="font-family: var(--font-code); color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;" data-i18n="about_welcome">Welcome to my space</p>
-            <h1 class="hero-title">Dimitrios <span class="accent">Holevas</span></h1>
-            <div style="font-size: 2rem; min-height: 50px; margin-bottom: 25px;"><span id="typed"></span></div>
+            <h1 class="hero-title">Dimitrios <span class="accent">Cholevas</span></h1>
+            <div style="font-size: 2.5rem; min-height: 60px; margin-bottom: 25px;"><span id="typed"></span></div>
             
             <h2 style="font-size: 1.6rem; margin-top: 40px; border: none; padding: 0;" data-i18n="about_bio_title">Professional Profile</h2>
             <p style="font-size: 1.1rem; max-width: 800px; color: var(--text-main); margin-bottom: 15px;" data-i18n="about_desc1">
@@ -197,7 +211,7 @@
             <a href="resume.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume / CV</span></a>
         </section>
 
-        <section id="education" class="content-section">
+        <section id="education" class="content-section" role="tabpanel">
             <h2 data-i18n="edu_title">Education & <span class="accent">Academic Work</span></h2>
             
             <div class="grid">
@@ -236,12 +250,12 @@
             </div>
         </section>
 
-        <section id="projects" class="content-section">
+        <section id="projects" class="content-section" role="tabpanel">
             <h2 data-i18n="proj_title">Selected <span class="accent">Engineering Projects</span></h2>
             
             <div class="grid">
                 <div class="card">
-                    <span class="card-meta">[BACKEND SYSTEM Architecture]</span>
+                    <span class="card-meta">[BACKEND SYSTEM ARCHITECTURE]</span>
                     <h3>E-Commerce Core API</h3>
                     <p data-i18n="p1_desc">Σχεδιασμός και υλοποίηση ενός RESTful API για ηλεκτρονικό κατάστημα. Περιλαμβάνει σύστημα αυθεντικοποίησης JWT, διαχείριση χρηστών και βάση δεδομένων.</p>
                     <div class="tags"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>JWT</span></div>
@@ -272,10 +286,10 @@
             </div>
         </section>
 
-        <section id="contact" class="content-section">
+        <section id="contact" class="content-section" role="tabpanel">
             <h2 data-i18n="cont_title">Let's <span class="accent">Connect</span></h2>
             <p style="font-size: 1.1rem; max-width: 650px; margin-bottom: 30px;" data-i18n="cont_desc">
-                Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μη διστάσετε να επικοινωνήσετε μαζί μου απευθείας.
+                Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μπορείτε να επικοινωνήσετε μαζί μου απευθείας.
             </p>
             
             <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
@@ -294,7 +308,7 @@
                 <div class="card" style="text-align: center;">
                     <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
                     <h3>GitHub</h3>
-                    <p data-i18n="cont_gh_desc">Code Repositories Repository</p>
+                    <p data-i18n="cont_gh_desc">Code Repositories Gateway</p>
                     <div class="card-links" style="justify-content: center;"><a href="https://github.com/holevasdimitrios" target="_blank" data-i18n="cont_action_visit">Open Profile</a></div>
                 </div>
             </div>
@@ -303,7 +317,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Dimitrios Holevas. All Rights Reserved.</p>
+        <p>&copy; 2026 Dimitrios Cholevas. All Rights Reserved.</p>
         <p style="font-size: 0.8rem; margin-top: 10px; color: var(--primary);" data-i18n="footer_subtext">Engineered with absolute digital accessibility and zero build overhead.</p>
     </footer>
 
@@ -314,7 +328,7 @@
         // AOS Animation Core Init
         AOS.init({ duration: 800, once: true });
 
-        // Multi-Language Localization Engine Dictionary (100% Comprehensive Map)
+        // Multi-Language Localization Engine Dictionary
         const translations = {
             en: {
                 tab_about: "About Me", tab_edu: "Education", tab_proj: "Projects", tab_cont: "Contact",
@@ -382,7 +396,6 @@
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
             
-            // Re-trigger AOS layouts generation 
             AOS.refresh();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -400,7 +413,6 @@
             });
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
             
-            // Typed.js Dynamic Injection Engine
             if (typedInstance) typedInstance.destroy();
             typedInstance = new Typed('#typed', {
                 strings: translations[currentLang].typed_strings,
@@ -438,7 +450,6 @@
             document.documentElement.style.setProperty('--font-scale', '100%');
         }
 
-        // Core Engine Boot load
         updateContent();
     </script>
 </body>

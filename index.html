@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Cholevas | IT Systems & Infrastructure Specialist</title>
+    <title>Dimitrios Cholevas | Software Engineer & A11y Advocate</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;800&family=Fira+Code:wght=400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark: #050505;
-            --surface-dark: #111111;
-            --primary: #00f2ff;
-            --secondary: #7000ff;
-            --text-main: #e0e0e0;
-            --text-dim: #999999;
+            --bg-dark: #020617;
+            --surface-dark: #0f172a;
+            --primary: #22d3ee;
+            --secondary: #818cf8;
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
             --font-main: 'Inter', sans-serif;
             --font-code: 'Fira Code', monospace;
             --font-scale: 100%;
@@ -29,7 +29,7 @@
         body.underline-links a, body.underline-links .tab-btn { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline-color: var(--primary); }
         html { font-size: var(--font-scale); scroll-behavior: smooth; }
 
         body {
@@ -38,99 +38,85 @@
             transition: background 0.3s;
         }
 
-        /* Animated Particles Background */
-        #particles-js {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: var(--bg-dark);
-        }
+        /* Particles Background */
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
 
-        /* Navigation (Fixed Header) */
+        /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 8%;
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px);
             z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; }
         
-        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
 
-        /* Menu Tabs in Navbar */
+        /* Tabs in Navbar */
         .nav-tabs { display: flex; gap: 5px; }
         .tab-btn {
-            background: transparent; border: none; color: var(--text-main);
-            padding: 8px 15px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
-            transition: 0.3s; position: relative; border-radius: 20px;
+            background: transparent; border: none; color: var(--text-dim);
+            padding: 8px 16px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            transition: 0.3s; border-radius: 8px;
         }
-        .tab-btn:hover { background: rgba(0, 242, 255, 0.05); color: var(--primary); }
-        .tab-btn.active { color: var(--primary); background: rgba(0, 242, 255, 0.1); }
+        .tab-btn:hover { color: var(--primary); background: rgba(34, 211, 238, 0.05); }
+        .tab-btn.active { color: var(--primary); background: rgba(34, 211, 238, 0.1); }
 
         .lang-switch {
             background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
-            padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
-            margin-left: 10px; transition: 0.3s;
+            padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
         }
-        .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
 
-        /* Content Container */
+        /* Sections */
         main { margin-top: 100px; }
-        .content-section { display: none; padding: 40px 10% 80px 10%; min-height: 70vh; }
-        .content-section.active { display: block; animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .content-section { display: none; padding: 60px 8%; min-height: 75vh; }
+        .content-section.active { display: block; animation: fadeInUp 0.6s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { font-size: 2.5rem; margin-bottom: 35px; font-weight: 800; color: #fff; }
+        h2 { font-size: 2.8rem; margin-bottom: 30px; font-weight: 800; }
         .accent { color: var(--primary); }
 
-        /* Cards & Grid */
+        /* Terminal Mini-Game Style */
+        .terminal {
+            background: #000; border: 1px solid var(--primary); border-radius: 12px;
+            padding: 20px; font-family: var(--font-code); color: #fff; margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); font-size: 0.9rem;
+        }
+        .terminal-header { display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-body { height: 200px; overflow-y: auto; scrollbar-width: none; }
+        .terminal-input-line { display: flex; gap: 10px; align-items: center; }
+        .terminal-input { background: transparent; border: none; color: var(--primary); width: 100%; outline: none; font-family: inherit; }
+
+        /* Cards Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 35px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease;
-            position: relative; overflow: hidden;
+            background: var(--surface-dark); padding: 30px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .card:hover { 
-            transform: translateY(-8px) scale(1.02); border-color: var(--primary); 
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
-        }
-        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 10px; display: block; font-weight: bold;}
-        .card h3 { margin-bottom: 15px; font-size: 1.4rem; font-weight: 700; color: #fff; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; }
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1); }
+        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 8px; display: block; font-weight: bold; }
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { background: rgba(34, 211, 238, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; }
 
-        .tag-container { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag { background: rgba(0, 242, 255, 0.08); color: var(--primary); padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px;
-            background: transparent; border: 2px solid var(--primary); color: var(--primary);
-            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 25px; transition: 0.3s;
-        }
-        .btn:hover { background: var(--primary); color: var(--bg-dark); transform: scale(1.05); }
-
-        /* Accessibility Floating Widget */
+        /* A11y Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
-        .a11y-toggle { 
-            width: 55px; height: 55px; border-radius: 50%; background: var(--primary); 
-            color: var(--bg-dark); border: none; cursor: pointer; font-size: 1.5rem;
-            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
-        }
-        .a11y-panel {
-            position: absolute; bottom: 70px; left: 0; width: 280px; background: var(--surface-dark); 
-            border: 2px solid var(--primary); border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 10px;
-        }
-        .a11y-panel.active { display: flex; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: scale(0.8); opacity: 0; } }
-        .a11y-panel button { padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; }
-        .a11y-panel button:hover { background: var(--primary); color: var(--bg-dark); }
+        .a11y-toggle { width: 55px; height: 55px; border-radius: 50%; background: var(--primary); color: #000; border: none; cursor: pointer; font-size: 1.4rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4); }
+        .a11y-panel { position: absolute; bottom: 70px; left: 0; width: 260px; background: var(--surface-dark); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .a11y-panel.active { display: flex; }
+        .a11y-panel button { padding: 10px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; border-radius: 6px; }
+        .a11y-panel button:hover { background: var(--primary); color: #000; }
 
-        footer { text-align: center; padding: 50px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+        .cv-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; background: var(--primary); color: #000; border-radius: 30px; text-decoration: none; font-weight: 800; margin-top: 20px; transition: 0.3s; }
+        .cv-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(34, 211, 238, 0.4); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; }
 
         @media (max-width: 900px) {
-            nav { padding: 15px 5%; flex-direction: column; gap: 10px; }
-            .nav-tabs { flex-wrap: wrap; justify-content: center; }
-            .tab-btn { padding: 5px 10px; font-size: 0.8rem; }
-            main { margin-top: 150px; }
+            nav { flex-direction: column; padding: 10px; height: auto; }
+            .nav-tabs { flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
+            main { margin-top: 160px; }
+            h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -138,18 +124,19 @@
     <div id="particles-js"></div>
 
     <div class="a11y-container">
-        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility"><i class="fa-solid fa-universal-access"></i></button>
+        <button class="a11y-toggle" id="a11yBtn" title="Accessibility Options"><i class="fa-solid fa-universal-access"></i></button>
         <div class="a11y-panel" id="a11yPanel">
-            <button onclick="adjustFont(1.1)"><i class="fa-solid fa-plus"></i> <span data-i18n="a11y_increase">Increase Font</span></button>
-            <button onclick="adjustFont(0.9)"><i class="fa-solid fa-minus"></i> <span data-i18n="a11y_decrease">Decrease Font</span></button>
-            <button onclick="toggleA11y('high-contrast')"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="a11y_contrast">High Contrast</span></button>
-            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale</span></button>
-            <button onclick="resetA11y()" style="background: #ef4444;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
+            <button onclick="adjustFont(1.1)">A+ Αύξηση Γραμματοσειράς</button>
+            <button onclick="adjustFont(0.9)">A- Μείωση Γραμματοσειράς</button>
+            <button onclick="toggleA11y('high-contrast')">Υψηλή Αντίθεση</button>
+            <button onclick="toggleA11y('grayscale')">Ασπρόμαυρη Λειτουργία</button>
+            <button onclick="toggleA11y('underline-links')">Υπογράμμιση Links</button>
+            <button onclick="resetA11y()" style="background: #ef4444;">Επαναφορά</button>
         </div>
     </div>
 
     <nav>
-        <a href="#" class="logo">CHOLEVAS.DEV</a>
+        <a href="#" class="logo">Cholevas.DEV</a>
         <div class="nav-right">
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab(event, 'about')" data-i18n="tab_about">Profile</button>
@@ -164,201 +151,219 @@
 
     <main>
         <section id="about" class="content-section active">
-            <h1 style="font-size: 4rem; font-weight: 800; margin-bottom: 10px;">Dimitrios <span class="accent">Holevas</span></h1>
-            <div style="font-size: 2.2rem; min-height: 50px; font-family: var(--font-code); color: var(--primary);"><span id="typed"></span></div>
+            <h1 style="font-size: 4rem; font-weight: 800;" data-aos="fade-right">Dimitrios <span class="accent">Cholevas</span></h1>
+            <div style="font-size: 2rem; min-height: 50px; font-family: var(--font-code); color: var(--primary);"><span id="typed"></span></div>
             
             <div class="grid">
                 <div class="card" style="grid-column: span 2;">
-                    <h3 data-i18n="profile_title">About Me</h3>
-                    <p data-i18n="profile_desc">Τελειόφοιτος φοιτητής Πληροφορικής και Τηλεπικοινωνιών στο ΕΚΠΑ. Εξειδικεύομαι στην υποστήριξη συστημάτων, τις υποδομές πληροφορικής και τη διαχείριση δικτύων. Παθιασμένος με την επίλυση τεχνικών προβλημάτων και τη συνεχή μάθηση.</p>
-                    <a href="resume.pdf" target="_blank" class="btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Full CV</span></a>
+                    <h3 data-i18n="story_title">The Journey</h3>
+                    <p data-i18n="story_desc">Μεγάλωσα στην πανέμορφη Καλαμπάκα και τα τελευταία 5 χρόνια (από το ακαδημαϊκό έτος 2021-2022) βρίσκομαι στην Αθήνα, κυνηγώντας το πάθος μου για την Πληροφορική στο ΕΚΠΑ. Πιστεύω ακράδαντα ότι ο ψηφιακός κόσμος πρέπει να είναι προσβάσιμος, συμπεριληπτικός και απόλυτα λειτουργικός για όλους τους ανθρώπους, χωρίς κανέναν αποκλεισμό.</p>
+                    
+                    <div class="terminal" data-aos="zoom-in">
+                        <div class="terminal-header">
+                            <div class="dot" style="background:#ff5f56"></div>
+                            <div class="dot" style="background:#ffbd2e"></div>
+                            <div class="dot" style="background:#27c93f"></div>
+                            <span style="font-size:0.7rem; color:#666; margin-left:10px">guest@Cholevas-pc: ~</span>
+                        </div>
+                        <div class="terminal-body" id="termBody">
+                            <div>Welcome! Type 'help' to see available commands.</div>
+                        </div>
+                        <div class="terminal-input-line">
+                            <span>$</span>
+                            <input type="text" class="terminal-input" id="termInput" autofocus autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <a href="resume.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume</span></a>
                 </div>
             </div>
         </section>
 
         <section id="edu" class="content-section">
-            <h2 data-i18n="edu_title">Education & <span class="accent">Adequacy</span></h2>
+            <h2 data-i18n="edu_title">Academic <span class="accent">Background</span></h2>
             <div class="grid">
-                <div class="card">
-                    <span class="card-meta">2022 - PRESENT</span>
+                <div class="card" data-aos="fade-up">
+                    <span class="card-meta">2021 - PRESENT</span>
                     <h3 data-i18n="edu_uni">NKUA (EKPA)</h3>
-                    <p data-i18n="edu_desc">BSc in Computer Science & Telecommunications. Focusing on Systems Programming, Networking, and Database Systems.</p>
+                    <p data-i18n="edu_desc">BSc in Computer Science & Telecommunications. Focusing on Networks, Systems Programming, and Operating Systems.</p>
                     <div class="tag-container">
-                        <span class="tag" data-i18n="m1">Networks</span>
-                        <span class="tag" data-i18n="m2">OS</span>
-                        <span class="tag" data-i18n="m3">Databases</span>
-                        <span class="tag" data-i18n="m4">Algorithms</span>
+                        <span class="tag">Operating Systems</span><span class="tag">AI</span><span class="tag">Networks</span><span class="tag">Databases</span>
                     </div>
                 </div>
-                <div class="card">
-                    <span class="card-meta">PEDAGOGICAL COMPETENCE</span>
-                    <h3 data-i18n="ped_title">Teaching Adequacy</h3>
-                    <p data-i18n="ped_desc">Επιτυχής παρακολούθηση κύκλου μαθημάτων Παιδαγωγικής και Διδακτικής Επάρκειας, συμπεριλαμβανομένης της Ψηφιακής Προσβασιμότητας και της Διδακτικής Πληροφορικής.</p>
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="card-meta">PEDAGOGICAL ADEQUACY</span>
+                    <h3 data-i18n="ped_title">Teaching Qualification</h3>
+                    <p data-i18n="ped_desc">Ολοκλήρωση κύκλου μαθημάτων Παιδαγωγικής και Διδακτικής Επάρκειας, συμπεριλαμβανομένου του επίσημου σεμιναρίου eTwinning, της Ψηφιακής Προσβασιμότητας και της Διδακτικής της Πληροφορικής.</p>
                     <div class="tag-container">
-                        <span class="tag" data-i18n="p1">Didactics</span>
-                        <span class="tag" data-i18n="p2">Microteaching</span>
-                        <span class="tag" data-i18n="p3">Accessibility</span>
-                        <span class="tag" data-i18n="p4">Psychology</span>
+                        <span class="tag">eTwinning</span><span class="tag">A11y</span><span class="tag">Microteaching</span><span class="tag">Psychology</span>
                     </div>
                 </div>
-                <div class="card">
-                    <span class="card-meta">EPAL KALAMPAKAS</span>
-                    <h3 data-i18n="epal_title">Computer Technician</h3>
-                    <p data-i18n="epal_desc">Graduated with a perfect score (20/20). Specialized in Information Technology Applications.</p>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="card-meta">EPAKAL KALAMBAKA</span>
+                    <h3 data-i18n="epal_title">Computer Systems Technician</h3>
+                    <p data-i18n="epal_desc">Graduated with a perfect 20/20. Specialized in Information Technology & Infrastructure.</p>
                 </div>
             </div>
         </section>
 
         <section id="work" class="content-section">
-            <h2 data-i18n="work_title">Professional <span class="accent">Experience</span></h2>
+            <h2 data-i18n="work_title">Career <span class="accent">Milestones</span></h2>
             <div class="grid">
-                <div class="card">
+                <div class="card" data-aos="fade-right">
                     <span class="card-meta">APR 2026 - JUL 2026</span>
-                    <h3 data-i18n="intern_title">IT Support & Infrastructure Intern</h3>
+                    <h3 data-i18n="intern_title">IT Infrastructure Intern</h3>
                     <p data-i18n="intern_loc">Municipality of Kalambaka</p>
-                    <p style="margin-top: 10px;" data-i18n="intern_desc">Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, καθώς και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.</p>
+                    <p data-i18n="intern_desc">Διαχείριση και συντήρηση υπολογιστικών υποδομών, έλεγχος λειτουργικού συστήματος, επίλυση προβλημάτων δικτύου και τεχνική υποστήριξη υπηρεσιών του Δήμου.</p>
                     <div class="tag-container">
-                        <span class="tag">Network Maintenance</span>
-                        <span class="tag">System Support</span>
-                        <span class="tag">Infrastructure</span>
+                        <span class="tag">Technical Support</span><span class="tag">Sys Admin</span><span class="tag">Networking</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-right" data-aos-delay="100">
+                    <span class="card-meta">BARCELONA, SPAIN | 2019</span>
+                    <h3 data-i18n="erasmus_title">Erasmus+ Mobile App Dev</h3>
+                    <p data-i18n="erasmus_desc">International program focusing on Mobile Application Development and Digital Marketing strategies.</p>
+                    <div class="tag-container">
+                        <span class="tag">Android</span><span class="tag">UI/UX Layouts</span><span class="tag">Marketing</span>
+                    </div>
+                </div>
+                <div class="card" data-aos="fade-right" data-aos-delay="200">
                     <span class="card-meta">MARCH 2023</span>
-                    <h3 data-i18n="judge_title">STEM Judge</h3>
-                    <p data-i18n="judge_desc">Member of the Scientific Committee / Judge for the National STEM & Educational Robotics Competition at Athens College.</p>
+                    <h3 data-i18n="judge_title">STEM Judge @ Athens College</h3>
+                    <p data-i18n="judge_desc">Member of the Scientific Committee / Judge for the National Educational Robotics & STEM Competition.</p>
                 </div>
             </div>
         </section>
 
         <section id="skills" class="content-section">
-            <h2 data-i18n="skills_title">Skills & <span class="accent">Interests</span></h2>
+            <h2 data-i18n="skills_title">Arsenal & <span class="accent">Expertise</span></h2>
             <div class="grid">
-                <div class="card">
-                    <h3 data-i18n="tech_title">Tech Stack</h3>
+                <div class="card" data-aos="zoom-in">
+                    <h3 data-i18n="prog_title">Programming Languages</h3>
                     <div class="tag-container">
-                        <span class="tag">Python</span><span class="tag">C / C++</span><span class="tag">SQL</span><span class="tag">HTML</span><span class="tag">Git</span>
-                    </div>
-                    <div style="margin-top:20px;" class="tag-container">
-                        <span class="tag">Linux</span><span class="tag">Windows Server</span><span class="tag">TCP/IP</span><span class="tag">DNS</span>
+                        <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">HTML</span>
                     </div>
                 </div>
-                <div class="card">
-                    <h3 data-i18n="interests_title">Research Interests</h3>
-                    <p data-i18n="interests_desc">Ενδιαφέρον για προχωρημένα συστήματα διαχείρισης δεδομένων, δικτύωση υπολογιστών και υλικό συστημάτων υψηλής απόδοσης.</p>
+                <div class="card" data-aos="zoom-in" data-aos-delay="100">
+                    <h3 data-i18n="tools_title">Productivity Tools</h3>
                     <div class="tag-container">
-                        <span class="tag">Data Management</span>
-                        <span class="tag">Networking & Telecoms</span>
-                        <span class="tag">Computer Engineering</span>
+                        <span class="tag">Excel (Advanced Formulas)</span><span class="tag">PowerPoint</span><span class="tag">Canva</span><span class="tag">Google Workspace</span><span class="tag">Git</span>
+                    </div>
+                </div>
+                <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                    <h3 data-i18n="lang_title">Languages</h3>
+                    <div class="tag-container">
+                        <span class="tag">Greek (Native / Μητρική)</span><span class="tag">English (C2 Proficiency - LRN)</span>
+                    </div>
+                </div>
+                <div class="card" data-aos="zoom-in" data-aos-delay="300">
+                    <h3 data-i18n="soft_title">Research Interests</h3>
+                    <p data-i18n="interests_desc">Ενδιαφέρον για προχωρημένα συστήματα διαχείρισης δεδομένων (Data Management), δίκτυα επόμενης γενιάς, τηλεπικοινωνιακές δομές και μηχανική υπολογιστών.</p>
+                    <div class="tag-container">
+                        <span class="tag">Data Management</span><span class="tag">Telecoms & Networks</span><span class="tag">Systems Engineering</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="content-section">
-            <h2 data-i18n="cont_title">Get In <span class="accent">Touch</span></h2>
+            <h2 data-i18n="cont_title">Let's <span class="accent">Talk</span></h2>
             <div class="grid">
                 <div class="card" style="text-align: center;">
-                    <i class="fa-solid fa-envelope" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h3>Email</h3>
-                    <p>holevasdimitrios71@gmail.com</p>
-                    <a href="mailto:your-email@email.com" class="btn" data-i18n="cont_send">Send Message</a>
-                </div>
-                <div class="card" style="text-align: center;">
-                    <i class="fa-brands fa-linkedin" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h3>LinkedIn</h3>
-                    <div class="card-links"><a href="#" target="_blank" class="btn">Connect</a></div>
+                    <i class="fa-solid fa-paper-plane" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Direct Email</h3>
+                    <p>your-email@email.com</p>
+                    <a href="mailto:your-email@email.com" class="cv-btn" id="emailBtn">Send Message</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Dimitrios Cholevas. All Rights Reserved.</p>
-        <p style="font-size: 0.7rem; margin-top: 5px; color: var(--primary);">BSc Student in Computer Science | NKUA</p>
+        <p>&copy; 2026 Dimitrios Cholevas. Crafted for functionality and web accessibility.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
     <script>
-        // Particles.js Floating Particles Core Engine Configurations
+        // Particles Background Core Config
         particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00f2ff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } }
-            },
-            "retina_detect": true
+            "particles": { "number": { "value": 70 }, "color": { "value": "#22d3ee" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1 } },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
         });
 
         AOS.init({ duration: 800, once: true });
 
-        // Bilingual Dynamic Content Mapping System (EN / EL Dictionary)
+        // Terminal Game Logic Engine
+        const termInput = document.getElementById('termInput');
+        const termBody = document.getElementById('termBody');
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.toLowerCase().trim();
+                const newLine = document.createElement('div');
+                newLine.innerHTML = `<span style="color:var(--primary)">$</span> ${cmd}`;
+                termBody.appendChild(newLine);
+                
+                const response = document.createElement('div');
+                response.style.color = "#94a3b8";
+                if (cmd === 'help') response.innerHTML = "Commands: bio, skills, location, clear, win";
+                else if (cmd === 'bio') response.innerHTML = "CS student @ NKUA. Specialized in IT support, networks and digital accessibility.";
+                else if (cmd === 'skills') response.innerHTML = "Python, C, C++, SQL, Linux, Windows, TCP/IP, Advanced Excel.";
+                else if (cmd === 'location') response.innerHTML = "Grew up in Kalambaka. Based in Athens for studies (2021-Present).";
+                else if (cmd === 'win') {
+                    response.innerHTML = "🎉 YOU DISCOVERED THE SECRET CONFETTI CORNER!";
+                    confetti();
+                }
+                else if (cmd === 'clear') { termBody.innerHTML = ''; response.innerHTML = ""; }
+                else response.innerHTML = "Command not found. Type 'help'.";
+                
+                termBody.appendChild(response);
+                termInput.value = '';
+                termBody.scrollTop = termBody.scrollHeight;
+            }
+        });
+
+        // Dictionary Maps (EN / EL)
         const translations = {
             en: {
                 tab_about: "Profile", tab_edu: "Education", tab_work: "Experience", tab_skills: "Skills", tab_cont: "Contact",
-                profile_title: "Professional Summary",
-                profile_desc: "Senior Computer Science and Telecommunications student at NKUA, seeking an internship or roles in IT Support, Infrastructure, and technical services. Familiar with Windows, Linux, and TCP/IP networking, with hands-on coding experience in Python, C, and SQL. Driven by analytical thinking, precise documentation, and structured team workflows.",
-                cv_download: "Download Full CV",
-                edu_title: "Education & Academic Records",
-                edu_uni: "NKUA (EKPA)", 
-                edu_desc: "BSc in Computer Science & Telecommunications. Completed specialized core tracks covering scalable system software development structures.",
-                m1: "Computer Networks", m2: "Operating Systems", m3: "Database Design", m4: "Algorithms & Complexity",
-                ped_title: "Pedagogical Competence", 
-                ped_desc: "Completed full educational curriculum yielding formal Teaching Proficiency upon graduation. Deep dive into accessible technical knowledge transfers.",
-                p1: "Informatics Didactics", p2: "Microteaching Lab", p3: "Digital Accessibility & Assistive Tech", p4: "Educational Psychology",
-                epal_title: "EPAKAL Kalambaka", epal_desc: "Technical School Graduate - Perfect 20/20 Grade. IT Applications Systems Specialist.",
-                work_title: "Professional Milestones",
-                intern_title: "IT Support & Infrastructure Intern", 
-                intern_loc: "Municipality of Kalambaka", 
-                intern_desc: "Hands-on engineering internship managing localized IT ticketing queues, hardware decoupling architectures, peripheral deployment matrices, and troubleshooting primary active routing connections.",
-                judge_title: "Scientific Committee / STEM Judge", judge_desc: "Appointed as an official evaluator and judge for the National STEM & Educational Robotics Competition at Athens College.",
-                skills_title: "Tech Skills & Core Focus",
-                tech_title: "Technology Stack Matrix",
-                interests_title: "Advanced Research Fields", interests_desc: "Main architectural focus points geared towards advanced graduate master tracks focusing on heavy enterprise data pipelines and systems engineering.",
-                cont_title: "Let's Connect", cont_send: "Send Message",
-                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_reset: "Reset Settings", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)",
-                typed_strings: ["IT Infrastructure Support.", "Computer Science Student.", "Networking Enthusiast."]
+                story_title: "The Journey",
+                story_desc: "I grew up in the scenic town of Kalambaka and spent the last 5 years (since 2021) based in Athens, pursuing my deep passion for Computer Science and Telecommunications at NKUA. I firmly believe that the digital ecosystem must be high-performing, clean, and 100% inclusive for every human being across the globe.",
+                edu_title: "Academic Background",
+                edu_uni: "NKUA (EKPA)", edu_desc: "BSc in Computer Science & Telecommunications. Major tracks in advanced systems layouting, distributed networking, and database structures.",
+                ped_title: "Teaching Qualification", ped_desc: "Successfully completed the university cycle for formal pedagogical competence. Highly trained in Informatics Didactics, eTwinning seminars, and Assistive Tech frameworks.",
+                epal_title: "Computer Systems Technician", epal_desc: "Graduated with a perfect 20/20 grade. High focus on application deployment and local IT troubleshooting frameworks.",
+                work_title: "Career Milestones",
+                intern_title: "IT Infrastructure Intern", intern_loc: "Municipality of Kalambaka", intern_desc: "Managing core computing resources, maintaining municipal client systems, local area network equipment configurations, and providing hands-on operational tech support.",
+                erasmus_title: "Erasmus+ Barcelona", erasmus_desc: "Intensive international training mobility program specializing in Mobile Application Development frameworks and modern Digital Marketing strategies.",
+                judge_title: "STEM Judge @ Athens College", judge_desc: "Honored to serve as a scientific committee member and official evaluator for the Greek National Educational Robotics & STEM Competition.",
+                skills_title: "Arsenal & Expertise", prog_title: "Programming Languages", tools_title: "Productivity Tools", lang_title: "Communication Languages", soft_title: "Advanced Matrix Focus",
+                interests_desc: "Core architectural goals targeted towards upcoming graduate research master programs focusing on enterprise high-performance data engineering and complex network infrastructure.",
+                cont_title: "Let's Talk", cv_download: "Get Resume (PDF)",
+                typed_strings: ["IT Infrastructure Specialist.", "From Kalambaka to Athens.", "Web Accessibility Advocate."]
             },
             el: {
-                tab_about: "Προφίλ", tab_edu: "Σπουδές", tab_work: "Προϋπηρεσία", tab_skills: "Δεξιότητες", tab_cont: "Επικοινωνία",
-                profile_title: "Επαγγελματικό Προφίλ",
-                profile_desc: "Τελειόφοιτος φοιτητής Πληροφορικής και Τηλεπικοινωνιών στο ΕΚΠΑ, που αναζητά πρακτική άσκηση στον τομέα IT Support / Infrastructure ή στην τεχνική υποστήριξη. Εξοικειωμένος με Windows, Linux και βασικές αρχές δικτύων TCP/IP, με εμπειρία σε γλώσσες προγραμματισμού Python, C και SQL. Ισχυρό ενδιαφέρον για συνεχή μάθηση μέσω πρακτικής εμπειρίας στην επίλυση τεχνικών προβλημάτων, την τεκμηρίωση και την ομαδική συνεργασία.",
-                cv_download: "Κατέβασε το CV (PDF)",
-                edu_title: "Σπουδές & Ακαδημαϊκό Έργο",
-                edu_uni: "Εθνικό & Καποδιστριακό Πανεπιστήμιο Αθηνών", 
-                edu_desc: "BSc, Πληροφορικής και Τηλεπικοινωνιών (Επί πτυχίω). Παρακολούθηση μαθημάτων προγραμματισμού συστημάτων, δομών δεδομένων και κατανεμημένων δικτύων.",
-                m1: "Δίκτυα Υπολογιστών", m2: "Λειτουργικά Συστήματα", m3: "Σχεδίαση Βάσεων Δεδομένων", m4: "Αλγόριθμοι & Πολυπλοκότητα",
-                ped_title: "Παιδαγωγική & Διδακτική Επάρκεια", 
-                ped_desc: "Ολοκλήρωση του θεσμοθετημένου κύκλου σπουδών για τη λήψη διδακτικής επάρκειας πληροφορικής. Εστίαση σε σύγχρονες μεθόδους μάθησης και καθολική προσβασιμότητα.",
-                p1: "Διδακτική της Πληροφορικής", p2: "Σχολική Τάξη & Μικροδιδασκαλία", p3: "Ψηφιακή Προσβασιμότητα & Υποστηρικτικές Τεχνολογίες", p4: "Παιδαγωγική & Γνωστική Ψυχολογία",
-                epal_title: "ΕΠΑΛ Καλαμπάκας", epal_desc: "Απολυτήριο με βαθμό 20/20. Τεχνικός Εφαρμογών Πληροφορικής.",
-                work_title: "Επαγγελματική Εμπειρία",
-                intern_title: "Πρακτική Άσκηση: IT Support & Υποδομές", 
-                intern_loc: "Δήμος Καλαμπάκας (20 Απριλίου - 19 Ιουλίου)", 
-                intern_desc: "Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, έλεγχος λειτουργικού συστήματος και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.",
-                judge_title: "Κριτής / Επιστημονική Επιτροπή STEM", judge_desc: "Μέλος της Επιστημονικής Επιτροπής και Κριτής στον Τελικό Πανελλήνιο Διαγωνισμό STEM και Εκπαιδευτικής Ρομποτικής στο Κολλέγιο Αθηνών (Μάρτιος 2023).",
-                skills_title: "Δεξιότητες & Ενδιαφέροντα",
-                tech_title: "Τεχνικές Γνώσεις",
-                interests_title: "Ερευνητικά & Μεταπτυχιακά Ενδιαφέροντα", interests_desc: "Ενδιαφέρον για εξειδίκευση σε προχωρημένα συστήματα διαχείρισης δεδομένων (Data Management), δίκτυα επόμενης γενιάς, τηλεπικοινωνιακές δομές και μηχανική υπολογιστών.",
-                cont_title: "Επικοινωνία", cont_send: "Στείλε Email",
-                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_reset: "Επαναφορά", a11y_contrast: "Υψηλή Αντίθεση", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)",
-                typed_strings: ["Τεχνικός Υποστήριξης IT.", "Φοιτητής Πληροφορικής ΕΚΠΑ.", "Λάτρης των Δικτύων."]
+                tab_about: "Προφίλ", tab_edu: "Σπουδές", tab_work: "Εμπειρία", tab_skills: "Δεξιότητες", tab_cont: "Επικοινωνία",
+                story_title: "Η Διαδρομή",
+                story_desc: "Μεγάλωσα στην πανέμορφη Καλαμπάκα και τα τελευταία 5 χρόνια (από το ακαδημαϊκό έτος 2021-2022) βρίσκομαι στην Αθήνα, κυνηγώντας το πάθος μου για την Πληροφορική στο ΕΚΠΑ. Πιστεύω ακράδαντα ότι ο ψηφιακός κόσμος πρέπει να είναι προσβάσιμος, συμπεριληπτικός και απόλυτα λειτουργικός για όλους τους ανθρώπους, χωρίς κανέναν αποκλεισμό.",
+                edu_title: "Σπουδές & Επάρκεια",
+                edu_uni: "Εθνικό & Καποδιστριακό Πανεπιστήμιο Αθηνών", edu_desc: "Πτυχίο Πληροφορικής & Τηλεπικοινωνιών. Εστίαση σε Δίκτυα Υπολογιστών, Λειτουργικά Συστήματα, Προγραμματισμό Συστήματος και Δομές Δεδομένων.",
+                ped_title: "Παιδαγωγική & Διδακτική Επάρκεια", ped_desc: "Ολοκλήρωση του θεσμοθετημένου κύκλου σπουδών για τη λήψη διδακτικής επάρκειας πληροφορικής. Παρακολούθηση μαθημάτων Διδακτικής, σεμιναρίου eTwinning και Ψηφιακής Προσβασιμότητας.",
+                epal_title: "Τεχνικός Συστημάτων", epal_desc: "Απολυτήριο με βαθμό 20/20. Εξειδίκευση σε υποδομές IT και Τεχνικός Εφαρμογών Πληροφορικής.",
+                work_title: "Επαγγελματική Πορεία",
+                intern_title: "Πρακτική Άσκηση: IT Support & Υποδομές", intern_loc: "Δήμος Καλαμπάκας (20 Απριλίου - 19 Ιουλίου)", intern_desc: "Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, έλεγχος λειτουργικού συστήματος και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.",
+                erasmus_title: "Erasmus+ Βαρκελώνη", erasmus_desc: "Διεθνές πρόγραμμα κινητότητας με αντικείμενο το Mobile Application Development και τις στρατηγικές Digital Marketing στην Ισπανία.",
+                judge_title: "Κριτής STEM", judge_desc: "Μέλος της Επιστημονικής Επιτροπής και Κριτής στον Τελικό Πανελλήνιο Διαγωνισμό STEM και Εκπαιδευτικής Ρομποτικής στο Κολλέγιο Αθηνών (Μάρτιος 2023).",
+                skills_title: "Δεξιότητες", prog_title: "Γλώσσες Προγραμματισμού", tools_title: "Ψηφιακά Εργαλεία", lang_title: "Γλώσσες", soft_title: "Ερευνητικά & Μεταπτυχιακά Ενδιαφέροντα",
+                interests_desc: "Ενδιαφέρον για εξειδίκευση σε προχωρημένα συστήματα διαχείρισης δεδομένων (Data Management), δίκτυα επόμενης γενιάς, τηλεπικοινωνιακές δομές και μηχανική υπολογιστών.",
+                cont_title: "Επικοινωνία", cv_download: "Κατέβασε το CV (PDF)",
+                typed_strings: ["Λάτρης της Προσβασιμότητας.", "Από την Καλαμπάκα στην Αθήνα.", "IT Support & Υποδομές."]
             }
         };
 
-        // Tab Switching Runtime Manager
         function openTab(evt, tabId) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -367,7 +372,6 @@
             AOS.refresh();
         }
 
-        // Language Translation Runtime Controller
         let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
         let typedInstance;
 
@@ -379,7 +383,6 @@
                 }
             });
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
-            
             if (typedInstance) typedInstance.destroy();
             typedInstance = new Typed('#typed', {
                 strings: translations[currentLang].typed_strings,
@@ -393,7 +396,7 @@
             updateContent();
         });
 
-        // Accessibility Interactive Core Systems
+        // A11y Controller
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yPanel = document.getElementById('a11yPanel');
         a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
@@ -405,17 +408,12 @@
         });
 
         let fontMod = 100;
-        function adjustFont(m) { 
-            fontMod *= m; 
-            if(fontMod > 135) fontMod = 135;
-            if(fontMod < 85) fontMod = 85;
-            document.documentElement.style.setProperty('--font-scale', fontMod + '%'); 
-        }
+        function adjustFont(m) { fontMod *= m; if(fontMod > 135) fontMod = 135; if(fontMod < 85) fontMod = 85; document.documentElement.style.setProperty('--font-scale', fontMod + '%'); }
         function toggleA11y(c) { document.body.classList.toggle(c); }
         function resetA11y() { document.body.className = ''; fontMod = 100; document.documentElement.style.setProperty('--font-scale', '100%'); }
 
-        // Boot system startup
         updateContent();
+        document.getElementById('emailBtn').addEventListener('click', () => confetti());
     </script>
 </body>
 </html>

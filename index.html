@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Holevas | Academic & Software Engineer Portfolio</title>
+    <title>Dimitrios Cholevas | Academic & Software Engineer Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,6 +11,7 @@
 
     <style>
         :root {
+            /* Tokyo Night Tech Dark Palette */
             --bg-dark: #050505;
             --surface-dark: #111111;
             --primary: #00f2ff;
@@ -22,8 +23,13 @@
             --font-scale: 100%;
         }
 
+        /* Accessibility Modifiers */
         body.high-contrast {
-            --bg-dark: #000000; --surface-dark: #000000; --primary: #ffff00; --text-main: #ffffff; --text-dim: #ffffff;
+            --bg-dark: #000000;
+            --surface-dark: #000000;
+            --primary: #ffff00;
+            --text-main: #ffffff;
+            --text-dim: #ffffff;
         }
         body.underline-links a { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
@@ -32,64 +38,87 @@
         html { font-size: var(--font-scale); scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark); color: var(--text-main);
-            font-family: var(--font-main); line-height: 1.6; overflow-x: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
         .glow-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.03) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.04) 0%, transparent 60%);
             z-index: -1; pointer-events: none;
         }
 
         /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 25px 8%;
+            position: fixed; top: 0; width: 100%; padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px);
             z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
-        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); font-family: var(--font-code); }
+        
+        .lang-switch {
+            background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
+            transition: 0.3s;
+        }
+        .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
 
-        /* Tabs Styling */
+        /* Navigation Tabs Container */
         .tab-container {
-            display: flex; justify-content: center; gap: 15px; margin: 120px auto 30px auto; padding: 0 5%;
+            display: flex; justify-content: center; gap: 12px; margin: 120px auto 20px auto; padding: 0 5%;
         }
         .tab-btn {
             background: var(--surface-dark); border: 1px solid rgba(255,255,255,0.05);
             color: var(--text-main); padding: 12px 24px; border-radius: 30px;
             cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.3s;
         }
-        .tab-btn:hover, .tab-btn:focus { border-color: var(--primary); color: var(--primary); }
+        .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
         .tab-btn.active { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); }
 
         /* Content Sections */
-        .content-section { display: none; padding: 40px 10%; min-height: 60vh; }
-        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        .content-section { display: none; padding: 30px 8% 80px 8%; min-height: 65vh; }
+        .content-section.active { display: block; animation: tabFade 0.4s ease-in-out; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes tabFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 2.5rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        h2 { font-size: 2.3rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; font-weight: 800; }
         .accent { color: var(--primary); }
 
-        /* Grid Layouts */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
+        /* Hero Element in About Tab */
+        .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; }
+        #typed { color: var(--primary); font-family: var(--font-code); font-weight: 600; }
+
+        /* Grid Framework */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 30px; border-radius: 15px;
+            background: var(--surface-dark); padding: 30px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card h3 { margin-bottom: 10px; font-size: 1.4rem; color: #fff; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .card h3 { margin-bottom: 12px; font-size: 1.35rem; color: #fff; font-weight: 600; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+        
+        .card-meta { font-family: var(--font-code); color: var(--primary); font-size: 0.85rem; margin-bottom: 8px; display: block; }
+        .tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tags span { background: rgba(0, 242, 255, 0.07); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-family: var(--font-code); }
+        
+        .card-links { margin-top: 20px; display: flex; gap: 15px; }
+        .card-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s; }
+        .card-links a:hover { color: var(--primary); }
 
-        /* Cv Button */
+        /* Resume PDF Button */
         .cv-btn {
-            display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px;
+            display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
             background: transparent; border: 2px solid var(--primary); color: var(--primary);
-            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; transition: 0.3s;
+            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 30px; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.1);
         }
-        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); }
+        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(0, 242, 255, 0.3); }
 
         /* Accessibility Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
@@ -98,25 +127,25 @@
             color: var(--bg-dark); border: none; cursor: pointer; font-size: 1.5rem;
             display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
         }
+        .a11y-toggle:hover { transform: scale(1.05); }
         .a11y-panel {
             position: absolute; bottom: 70px; left: 0; width: 280px; background: var(--surface-dark); 
             border: 2px solid var(--primary); border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         .a11y-panel.active { display: flex; }
-        .a11y-panel button { padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; }
+        .a11y-panel button { 
+            padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.04); 
+            color: #fff; text-align: left; cursor: pointer; font-size: 0.9rem; transition: 0.2s;
+        }
         .a11y-panel button:hover { background: var(--primary); color: var(--bg-dark); }
 
-        .lang-switch {
-            background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
-            padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
-        }
-        .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
-
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            .tab-container { flex-wrap: wrap; margin-top: 100px; }
-            .tab-btn { width: 45%; text-align: center; padding: 10px; }
+            .tab-container { flex-wrap: wrap; margin-top: 90px; gap: 8px; }
+            .tab-btn { width: 47%; text-align: center; padding: 10px; font-size: 0.85rem; }
+            .hero-title { font-size: 2.3rem; }
             h2 { font-size: 1.8rem; }
         }
     </style>
@@ -125,14 +154,14 @@
     <div class="glow-bg"></div>
 
     <div class="a11y-container">
-        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility"><i class="fa-solid fa-universal-access"></i></button>
+        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility Menu"><i class="fa-solid fa-universal-access"></i></button>
         <div class="a11y-panel" id="a11yPanel">
             <button onclick="adjustFont(1.1)"><i class="fa-solid fa-plus"></i> <span data-i18n="a11y_increase">Increase Font</span></button>
             <button onclick="adjustFont(0.9)"><i class="fa-solid fa-minus"></i> <span data-i18n="a11y_decrease">Decrease Font</span></button>
             <button onclick="toggleA11y('high-contrast')"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="a11y_contrast">High Contrast</span></button>
-            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale</span></button>
+            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale Mode</span></button>
             <button onclick="toggleA11y('underline-links')"><i class="fa-solid fa-underline"></i> <span data-i18n="a11y_underline">Underline Links</span></button>
-            <button onclick="resetA11y()" style="background: #ef4444;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
+            <button onclick="resetA11y()" style="background: #ef4444; color: white;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
         </div>
     </div>
 
@@ -151,67 +180,201 @@
     </div>
 
     <main>
+        
         <section id="about" class="content-section active">
-            <h2 data-i18n="about_title">About <span class="accent">Me</span></h2>
-            <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-main);" data-i18n="about_text1">
-                Γεια σας! Είμαι ο Δημήτρης Χολέβας, απόφοιτος του τμήματος Πληροφορικής. Εξειδικεύομαι στην ανάπτυξη λογισμικού και στη δημιουργία προσβάσιμων, συμπεριληπτικών ψηφιακών εμπειριών.
+            <p style="font-family: var(--font-code); color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;" data-i18n="about_welcome">Welcome to my space</p>
+            <h1 class="hero-title">Dimitrios <span class="accent">Holevas</span></h1>
+            <div style="font-size: 2rem; min-height: 50px; margin-bottom: 25px;"><span id="typed"></span></div>
+            
+            <h2 style="font-size: 1.6rem; margin-top: 40px; border: none; padding: 0;" data-i18n="about_bio_title">Professional Profile</h2>
+            <p style="font-size: 1.1rem; max-width: 800px; color: var(--text-main); margin-bottom: 15px;" data-i18n="about_desc1">
+                Είμαι απόφοιτος του τμήματος Πληροφορικής με βαθύ ενδιαφέρον για την ανάπτυξη σύγχρονων, κλιμακούμενων και προσβάσιμων (WCAG compliant) εφαρμογών ιστού.
             </p>
-            <p style="margin-top: 15px; max-width: 800px; color: var(--text-dim);" data-i18n="about_text2">
-                Το ενδιαφέρον μου εστιάζεται στον καθαρό κώδικα, την αρχιτεκτονική συστημάτων backend και την εφαρμογή των διεθνών προτύπων προσβασιμότητας (WCAG) στον παγκόσμιο ιστό.
+            <p style="font-size: 1rem; max-width: 800px; color: var(--text-dim);" data-i18n="about_desc2">
+                Γεφυρώνω το χάσμα μεταξύ της ακαδημαϊκής θεωρίας της επιστήμης υπολογιστών και της πρακτικής μηχανικής λογισμικού, δίνοντας έμφαση στον καθαρό κώδικα και την αποδοτικότητα.
             </p>
-            <a href="#" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume / CV</span></a>
+            
+            <a href="resume.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume / CV</span></a>
         </section>
 
         <section id="education" class="content-section">
             <h2 data-i18n="edu_title">Education & <span class="accent">Academic Work</span></h2>
+            
             <div class="grid">
-                <div class="card">
-                    <span style="font-family:var(--font-code); color:var(--primary);">2022 - 2026</span>
-                    <h3 data-i18n="edu_degree">BSc in Computer Science</h3>
-                    <p data-i18n="edu_uni">Πανεπιστήμιο / Ίδρυμα Σπουδών</p>
+                <div class="card" data-aos="fade-up">
+                    <span class="card-meta">2022 - 2026</span>
+                    <h3 data-i18n="edu_card_title">BSc in Computer Science</h3>
+                    <p data-i18n="edu_card_desc">Ολοκλήρωση σπουδών στον τομέα της Πληροφορικής με εξειδίκευση στην Τεχνολογία Λογισμικού και τα Πληροφοριακά Συστήματα.</p>
+                    <div class="tags">
+                        <span data-i18n="tag_se">Software Engineering</span>
+                        <span data-i18n="tag_db">Databases</span>
+                        <span data-i18n="tag_ds">Data Structures</span>
+                    </div>
                 </div>
-                <div class="card">
-                    <span style="font-family:var(--font-code); color:var(--primary);">THESIS</span>
-                    <h3 data-i18n="thesis_title">Πτυχιακή Εργασία</h3>
-                    <p data-i18n="thesis_desc">Τίτλος και σύντομη ακαδημαϊκή περίληψη της πτυχιακής σου εργασίας. Τι πρόβλημα έλυσες και τι τεχνολογίες χρησιμοποίησες.</p>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="card-meta">RESEARCH / THESIS</span>
+                    <h3 data-i18n="thesis_card_title">Graduation Thesis</h3>
+                    <p data-i18n="thesis_card_desc">Σχεδίαση, ανάπτυξη και συγγραφή ερευνητικής πτυχιακής εργασίας. Ανάλυση προβλήματος, επιλογή κατάλληλης αρχιτεκτονικής και τεχνολογικού stack.</p>
+                    <div class="tags">
+                        <span>Research</span>
+                        <span>Architecture</span>
+                        <span>Documentation</span>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="card-meta">CORE COMPETENCIES</span>
+                    <h3 data-i18n="courses_card_title">Key Coursework</h3>
+                    <p data-i18n="courses_card_desc">Επιτυχής παρακολούθηση και αριστεία σε εξειδικευμένα μαθήματα κορμού και κατεύθυνσης της επιστήμης υπολογιστών.</p>
+                    <div class="tags">
+                        <span data-i18n="course_1">Algorithms</span>
+                        <span data-i18n="course_2">Web Dev</span>
+                        <span data-i18n="course_3">Distributed Systems</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="content-section">
-            <h2 data-i18n="proj_title">Selected <span class="accent">Projects</span></h2>
+            <h2 data-i18n="proj_title">Selected <span class="accent">Engineering Projects</span></h2>
+            
             <div class="grid">
                 <div class="card">
-                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 5px;">[BACKEND]</div>
-                    <h3>E-Commerce Backend</h3>
-                    <p data-i18n="p1_desc">Highly scalable Node.js API with JWT authentication and PostgreSQL integration.</p>
+                    <span class="card-meta">[BACKEND SYSTEM Architecture]</span>
+                    <h3>E-Commerce Core API</h3>
+                    <p data-i18n="p1_desc">Σχεδιασμός και υλοποίηση ενός RESTful API για ηλεκτρονικό κατάστημα. Περιλαμβάνει σύστημα αυθεντικοποίησης JWT, διαχείριση χρηστών και βάση δεδομένων.</p>
+                    <div class="tags"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>JWT</span></div>
+                    <div class="card-links">
+                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
                 </div>
+
                 <div class="card">
-                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 5px;">[AI / ML]</div>
-                    <h3>Vision Classifier</h3>
-                    <p data-i18n="p2_desc">Real-time object detection model built with Python and TensorFlow.</p>
+                    <span class="card-meta">[ARTIFICIAL INTELLIGENCE / ML]</span>
+                    <h3>Computer Vision Object Classifier</h3>
+                    <p data-i18n="p2_desc">Ανάπτυξη νευρωνικού δικτύου για την αναγνώριση και ταξινόμηση αντικειμένων σε πραγματικό χρόνο από ροή βίντεο ή εικόνων.</p>
+                    <div class="tags"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>NumPy</span></div>
+                    <div class="card-links">
+                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="card-meta">[FRONTEND / USER EXPERIENCE / A11Y]</span>
+                    <h3>Accessible SPA UI Framework</h3>
+                    <p data-i18n="p3_desc">Ανάπτυξη διεπαφής χρήστη (UI) προσαρμοσμένης πλήρως στα διεθνή πρότυπα προσβασιμότητας WCAG, με ενσωματωμένα εργαλεία υποβοήθησης.</p>
+                    <div class="tags"><span>HTML5</span><span>CSS Variables</span><span>Vanilla JS</span><span>A11y</span></div>
+                    <div class="card-links">
+                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="content-section">
-            <h2 data-i18n="cont_title">Get In <span class="accent">Touch</span></h2>
-            <p data-i18n="cont_text">Αυτή την περίοδο είμαι ανοιχτός σε νέες επαγγελματικές και ερευνητικές προτάσεις. Μπορείτε να επικοινωνήσετε μαζί μου στα παρακάτω δίκτυα:</p>
-            <div style="display:flex; gap:20px; margin-top:30px; font-size: 2rem;">
-                <a href="mailto:your-email@email.com" style="color:var(--primary);"><i class="fas fa-envelope"></i></a>
-                <a href="#" style="color:var(--primary);"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/holevasdimitrios" style="color:var(--primary);"><i class="fab fa-github"></i></a>
+            <h2 data-i18n="cont_title">Let's <span class="accent">Connect</span></h2>
+            <p style="font-size: 1.1rem; max-width: 650px; margin-bottom: 30px;" data-i18n="cont_desc">
+                Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μη διστάσετε να επικοινωνήσετε μαζί μου απευθείας.
+            </p>
+            
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="card" style="text-align: center;">
+                    <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>Email</h3>
+                    <p style="margin-bottom: 15px;">your-email@email.com</p>
+                    <div class="card-links" style="justify-content: center;"><a href="mailto:your-email@email.com" data-i18n="cont_action_mail">Send Message</a></div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fab fa-linkedin" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>LinkedIn</h3>
+                    <p data-i18n="cont_li_desc">Professional Network Connection</p>
+                    <div class="card-links" style="justify-content: center;"><a href="https://linkedin.com" target="_blank" data-i18n="cont_action_visit">Open Profile</a></div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>GitHub</h3>
+                    <p data-i18n="cont_gh_desc">Code Repositories Repository</p>
+                    <div class="card-links" style="justify-content: center;"><a href="https://github.com/holevasdimitrios" target="_blank" data-i18n="cont_action_visit">Open Profile</a></div>
+                </div>
             </div>
         </section>
+
     </main>
 
     <footer>
         <p>&copy; 2026 Dimitrios Holevas. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--primary);" data-i18n="footer_subtext">Engineered with absolute digital accessibility and zero build overhead.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
     <script>
-        // Tab Switcher Logic
+        // AOS Animation Core Init
+        AOS.init({ duration: 800, once: true });
+
+        // Multi-Language Localization Engine Dictionary (100% Comprehensive Map)
+        const translations = {
+            en: {
+                tab_about: "About Me", tab_edu: "Education", tab_proj: "Projects", tab_cont: "Contact",
+                about_welcome: "Welcome to my space",
+                about_bio_title: "Professional Profile",
+                about_desc1: "I am a Computer Science graduate deeply invested in building modern, scalable, and highly accessible (WCAG-compliant) web applications.",
+                about_desc2: "Bridging the gap between theoretical computer science and practical software engineering with a sharp focus on clean code patterns and runtime efficiency.",
+                cv_download: "Download Resume / CV",
+                edu_title: "Education & Academic Work",
+                edu_card_title: "BSc in Computer Science",
+                edu_card_desc: "Completed core academic curriculum focusing heavily on software lifecycle engineering, compiler theories, and systems architecture optimization.",
+                tag_se: "Software Engineering", tag_db: "Databases", tag_ds: "Data Structures",
+                thesis_card_title: "Graduation Thesis Research",
+                thesis_card_desc: "Architected and documented a comprehensive graduation thesis solving distinct logic bottlenecks, using decoupled modern development frameworks.",
+                courses_card_title: "Key Core Coursework",
+                courses_card_desc: "Excelled in deep university tracks detailing foundational paradigms of discrete mathematics and real-world system optimization layers.",
+                course_1: "Algorithms", course_2: "Web Dev", course_3: "Distributed Systems",
+                proj_title: "Selected Engineering Projects",
+                p1_desc: "Engineered a production-ready RESTful web API featuring strict JWT token auth middleware, secure router handshakes, and a relational SQL storage engine.",
+                p2_desc: "Designed and trained an artificial convolutional neural network optimizing machine classification performance benchmarks via real-world input stream arrays.",
+                p3_desc: "Crafted a single-page frontend structure complying 100% with global WCAG specifications, embedding modular assisted-screen assistive technology tooling controls.",
+                cont_title: "Let's Connect",
+                cont_desc: "I am actively looking for software engineering tracks, collaborative research frameworks, or technical roles. Hit me up directly via any path.",
+                cont_action_mail: "Send Message", cont_action_visit: "Open Profile",
+                cont_li_desc: "Professional Network Connection", cont_gh_desc: "Code Repositories Gateway",
+                footer_subtext: "Engineered with absolute digital accessibility and zero build overhead.",
+                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)", a11y_underline: "Underline All Links", a11y_reset: "Reset Settings",
+                typed_strings: ["Software Engineer.", "A11y Advocate.", "Computer Science Graduate."]
+            },
+            el: {
+                tab_about: "Ποιος είμαι", tab_edu: "Σπουδές", tab_proj: "Projects", tab_cont: "Επικοινωνία",
+                about_welcome: "Καλώς ήλθατε στο χώρο μου",
+                about_bio_title: "Επαγγελματικό Προφίλ",
+                about_desc1: "Είμαι απόφοιτος του τμήματος Πληροφορικής με βαθύ ενδιαφέρον για την ανάπτυξη σύγχρονων, κλιμακούμενων και προσβάσιμων (WCAG compliant) εφαρμογών ιστού.",
+                about_desc2: "Γεφυρώνω το χάσμα μεταξύ της ακαδημαϊκής θεωρίας της επιστήμης υπολογιστών και της πρακτικής μηχανικής λογισμικού, δίνοντας έμφαση στον καθαρό κώδικα και την αποδοτικότητα.",
+                cv_download: "Κατέβασε το Βιογραφικό (PDF)",
+                edu_title: "Σπουδές & Ακαδημαϊκό Έργο",
+                edu_card_title: "Πτυχίο Επιστήμης Υπολογιστών",
+                edu_card_desc: "Ολοκλήρωση σπουδών στον τομέα της Πληροφορικής με εξειδίκευση στην Τεχνολογία Λογισμικού και τα Πληροφοριακά Συστήματα.",
+                tag_se: "Τεχνολογία Λογισμικού", tag_db: "Βάσεις Δεδομένων", tag_ds: "Δομές Δεδομένων",
+                thesis_card_title: "Πτυχιακή Εργασία & Έρευνα",
+                thesis_card_desc: "Σχεδίαση, ανάπτυξη και συγγραφή ερευνητικής πτυχιακής εργασίας. Ανάλυση προβλήματος, επιλογή κατάλληλης αρχιτεκτονικής και τεχνολογικού stack.",
+                courses_card_title: "Βασικά Μαθήματα Κορμού",
+                courses_card_desc: "Επιτυχής παρακολούθηση και αριστεία σε εξειδικευμένα μαθήματα κορμού και κατεύθυνσης της επιστήμης υπολογιστών.",
+                course_1: "Αλγόριθμοι", course_2: "Ανάπτυξη Ιστού", course_3: "Κατανεμημένα Συστήματα",
+                proj_title: "Επιλεγμένα Projects Μηχανικής",
+                p1_desc: "Σχεδιασμός και υλοποίηση ενός RESTful API για ηλεκτρονικό κατάστημα. Περιλαμβάνει σύστημα αυθεντικοποίησης JWT, διαχείριση χρηστών και βάση δεδομένων.",
+                p2_desc: "Ανάπτυξη νευρωνικού δικτύου για την αναγνώριση και ταξινόμηση αντικειμένων σε πραγματικό χρόνο από ροή βίντεο ή εικόνων.",
+                p3_desc: "Ανάπτυξη διεπαφής χρήστη (UI) προσαρμοσμένης πλήρως στα διεθνή πρότυπα προσβασιμότητας WCAG, με ενσωματωμένα εργαλεία υποβοήθησης.",
+                cont_title: "Ας Συνδεθούμε",
+                cont_desc: "Είμαι ανοιχτός σε προτάσεις μόνιμης απασχόλησης, ερευνητικά projects ή συνεργασίες. Μπορείτε να επικοινωνήσετε μαζί μου απευθείας.",
+                cont_action_mail: "Αποστολή Μηνύματος", cont_action_visit: "Άνοιγμα Προφίλ",
+                cont_li_desc: "Επαγγελματικό Δίκτυο Σύνδεσης", cont_gh_desc: "Πύλη Αποθετηρίων Κώδικα",
+                footer_subtext: "Σχεδιασμένο για μέγιστη ψηφιακή προσβασιμότητα και μηδενικό overhead μεταγλώττισης.",
+                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων",
+                typed_strings: ["Software Engineer.", "Υποστηρικτής Προσβασιμότητας.", "Απόφοιτος Πληροφορικής."]
+            }
+        };
+
+        // Navigation Tabs Execution Controller
         function openTab(evt, tabId) {
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -219,44 +382,30 @@
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
             
+            // Re-trigger AOS layouts generation 
+            AOS.refresh();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Dictionary (Ελληνικά & Αγγλικά)
-        const translations = {
-            en: {
-                tab_about: "About Me", tab_edu: "Education", tab_proj: "Projects", tab_cont: "Contact",
-                about_title: "About Me", about_text1: "Hello! I am Dimitrios Holevas, a Computer Science graduate. I specialize in software engineering and creating inclusive, accessible digital experiences.",
-                about_text2: "My focus lies in clean code, robust backend architectures, and implementing global accessibility web standards (WCAG).",
-                cv_download: "Download Resume / CV",
-                edu_title: "Education & Academic Work", edu_degree: "BSc in Computer Science", edu_uni: "University / Institution Name",
-                thesis_title: "BSc Thesis", thesis_desc: "Title and short abstract of your graduation thesis. Mention the problem solved and the stack used.",
-                proj_title: "Selected Projects", p1_desc: "Highly scalable Node.js API with JWT authentication and PostgreSQL integration.",
-                p2_desc: "Real-time object detection model built with Python and TensorFlow.",
-                cont_title: "Get In Touch", cont_text: "I am currently open to professional and research opportunities. Feel free to connect with me!",
-                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale Mode", a11y_underline: "Underline Links", a11y_reset: "Reset Settings"
-            },
-            el: {
-                tab_about: "Ποιος είμαι", tab_edu: "Σπουδές", tab_proj: "Projects", tab_cont: "Επικοινωνία",
-                about_title: "Ποιος είμαι", about_text1: "Γεια σας! Είμαι ο Δημήτρης Χολέβας, απόφοιτος του τμήματος Πληροφορικής. Εξειδικεύομαι στην ανάπτυξη λογισμικού και στη δημιουργία προσβάσιμων, συμπεριληπτικών ψηφιακών εμπειριών.",
-                about_text2: "Το ενδιαφέρον μου εστιάζεται στον καθαρό κώδικα, την αρχιτεκτονική συστημάτων backend και την εφαρμογή των διεθνών προτύπων προσβασιμότητας (WCAG) στον παγκόσμιο ιστό.",
-                cv_download: "Κατέβασε το Βιογραφικό (PDF)",
-                edu_title: "Σπουδές & Ακαδημαϊκό Έργο", edu_degree: "Πτυχίο Πληροφορικής (BSc)", edu_uni: "Όνομα Πανεπιστημίου / Σχολής",
-                thesis_title: "Πτυχιακή Εργασία", thesis_desc: "Τίτλος και σύντομη ακαδημαϊκή περίληψη της πτυχιακής σου εργασίας. Τι πρόβλημα έλυσες και τι τεχνολογίες χρησιμοποίησες.",
-                proj_title: "Επιλεγμένα Projects", p1_desc: "Υψηλά κλιμακούμενο Node.js API με ταυτοποίηση χρηστών JWT και βάση δεδομένων PostgreSQL.",
-                p2_desc: "Μοντέλο ανίχνευσης αντικειμένων σε πραγματικό χρόνο με χρήση Python και TensorFlow.",
-                cont_title: "Επικοινωνία", cont_text: "Αυτή την περίοδο είμαι ανοιχτός σε νέες επαγγελματικές και ερευνητικές προτάσεις. Μπορείτε να επικοινωνήσετε μαζί μου στα παρακάτω δίκτυα:",
-                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων"
-            }
-        };
-
+        // Localization Runtime Machine Controller
         let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
+        let typedInstance;
+
         function updateContent() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                el.innerText = translations[currentLang][key];
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
             });
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
+            
+            // Typed.js Dynamic Injection Engine
+            if (typedInstance) typedInstance.destroy();
+            typedInstance = new Typed('#typed', {
+                strings: translations[currentLang].typed_strings,
+                typeSpeed: 60, backSpeed: 40, loop: true
+            });
         }
 
         document.getElementById('langBtn').addEventListener('click', () => {
@@ -265,14 +414,22 @@
             updateContent();
         });
 
-        // A11y Engine
+        // Accessibility Widget Core Controllers
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yPanel = document.getElementById('a11yPanel');
         a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
 
+        window.addEventListener('click', (e) => {
+            if (!a11yBtn.contains(e.target) && !a11yPanel.contains(e.target)) {
+                a11yPanel.classList.remove('active');
+            }
+        });
+
         let currentFontScale = 100;
         function adjustFont(mod) {
             currentFontScale *= mod;
+            if(currentFontScale > 135) currentFontScale = 135;
+            if(currentFontScale < 85) currentFontScale = 85;
             document.documentElement.style.setProperty('--font-scale', currentFontScale + '%');
         }
         function toggleA11y(cls) { document.body.classList.toggle(cls); }
@@ -281,6 +438,7 @@
             document.documentElement.style.setProperty('--font-scale', '100%');
         }
 
+        // Core Engine Boot load
         updateContent();
     </script>
 </body>

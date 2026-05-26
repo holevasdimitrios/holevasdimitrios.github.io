@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimitrios Holevas | Software Engineer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Παλέτα Χρωμάτων - Tokyo Night Tech Dark */
+            --bg-dark: #050505;
+            --surface-dark: #111111;
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --text-main: #e0e0e0;
+            --text-dim: #999999;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --font-scale: 100%;
+        }
+
+        /* Κλάσεις Προσβασιμότητας (A11y) */
+        body.high-contrast {
+            --bg-dark: #000000;
+            --surface-dark: #000000;
+            --primary: #ffff00; /* Έντονο κίτρινο για μέγιστη αντίθεση */
+            --text-main: #ffffff;
+            --text-dim: #ffffff;
+            border: 2px solid #ffff00;
+        }
+
+        body.underline-links a { text-decoration: underline !important; }
+        body.grayscale { filter: grayscale(100%); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: var(--font-scale); scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Φόντο με εφέ Neon Glow */
+        .glow-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.04) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0; width: 100%; padding: 25px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: var(--primary); }
+
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; margin-left: 25px;}
+        .nav-links a:hover, .nav-links a:focus { color: var(--primary); outline: 2px dashed var(--primary); }
+
+        /* Κουμπί Αλλαγής Γλώσσας */
+        .lang-switch {
+            background: var(--surface-dark);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: var(--font-code);
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .lang-switch:hover, .lang-switch:focus { background: var(--primary); color: var(--bg-dark); outline: none; }
+
+        /* Sections */
+        section { padding: 140px 10% 80px 10%; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
+
+        .hero p { font-family: var(--font-code); color: var(--primary); margin-bottom: 15px; font-size: 1.1rem; }
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
+        .hero .accent { color: var(--primary); text-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
+        #typed { font-size: 2.5rem; min-height: 60px; color: var(--text-dim); font-family: var(--font-code); }
+
+        /* Projects Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
+
+        .card {
+            background: var(--surface-dark);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover, .card:focus-within { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .card h3 { margin-bottom: 15px; font-size: 1.6rem; font-weight: 600; }
+        .card p { color: var(--text-dim); margin-bottom: 25px; font-size: 0.95rem; }
+        
+        .card-links a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .card-links a:hover { text-decoration: underline; }
+
+        /* Μπάρα Προσβασιμότητας (Accessibility Widget) */
+        .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
+        .a11y-toggle { 
+            width: 55px; height: 55px; border-radius: 50%; background: var(--primary); 
+            color: var(--bg-dark); border: none; cursor: pointer; font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3); display: flex; justify-content: center; align-items: center;
+        }
+        .a11y-toggle:hover { transform: scale(1.05); }
+
+        .a11y-panel {
+            position: absolute; bottom: 70px; left: 0; width: 280px;
+            background: var(--surface-dark); border: 2px solid var(--primary);
+            border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .a11y-panel.active { display: flex; }
+        .a11y-panel button { 
+            padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05);
+            color: #fff; text-align: left; cursor: pointer; font-size: 0.95rem; transition: 0.2s;
+        }
+        .a11y-panel button:hover, .a11y-panel button:focus { background: var(--primary); color: var(--bg-dark); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+
+        /* Responsive Design για Κινητά */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            #typed { font-size: 1.8rem; }
+            nav { padding: 15px 5%; }
+            .nav-links { display: none; } /* Κρύβεται στα κινητά για απλότητα */
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <div class="a11y-container">
+        <button class="a11y-toggle" id="a11yBtn" aria-label="Επιλογές Προσβασιμότητας"><i class="fa-solid fa-universal-access"></i></button>
+        <div class="a11y-panel" id="a11yPanel">
+            <button onclick="adjustFont(1.1)"><i class="fa-solid fa-plus"></i> <span data-i18n="a11y_increase">Increase Font</span></button>
+            <button onclick="adjustFont(0.9)"><i class="fa-solid fa-minus"></i> <span data-i18n="a11y_decrease">Decrease Font</span></button>
+            <button onclick="toggleA11y('high-contrast')"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="a11y_contrast">High Contrast</span></button>
+            <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale</span></button>
+            <button onclick="toggleA11y('underline-links')"><i class="fa-solid fa-underline"></i> <span data-i18n="a11y_underline">Underline Links</span></button>
+            <button onclick="resetA11y()" style="background: #ef4444; color: white;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo">HOLEVAS.DEV</div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about" data-i18n="nav_about">About</a>
+                <a href="#projects" data-i18n="nav_projects">Projects</a>
+                <a href="mailto:your-email@email.com" data-i18n="nav_contact">Contact</a>
+            </div>
+            <button class="lang-switch" id="langBtn">EN</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="about">
+            <p data-i18n="hero_hello">Hello, I am</p>
+            <h1 data-aos="fade-up">Dimitrios <span class="accent">Holevas</span>.</h1>
+            <div id="typed"></div>
+            <p style="max-width: 650px; margin-top: 25px; color: var(--text-dim); font-size: 1.1rem;" data-i18n="hero_desc">
+                Specializing in building high-performance, inclusive digital experiences that merge code with clean design.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2 style="font-size: 2.2rem; margin-bottom: 10px;" data-i18n="projects_title">Selected Projects</h2>
+            <div class="grid">
+                
+                <div class="card" data-aos="zoom-in">
+                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 10px;">[API DESIGN]</div>
+                    <h3>E-Commerce Backend</h3>
+                    <p data-i18n="p1_desc">Highly scalable Node.js API with JWT authentication and PostgreSQL integration.</p>
+                    <div class="card-links">
+                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="zoom-in" data-aos-delay="100">
+                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 10px;">[AI / MACHINE LEARNING]</div>
+                    <h3>Vision Classifier</h3>
+                    <p data-i18n="p2_desc">Real-time object detection model built with Python and TensorFlow.</p>
+                    <div class="card-links">
+                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dimitrios Holevas. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--primary);" data-i18n="footer_text">Designed for performance and accessibility.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <script>
+        // Αρχικοποίηση των Animations στο Σκρολάρισμα (AOS)
+        AOS.init({ duration: 1000, once: true });
+
+        // Λεξικό Μεταφράσεων (Dictionary)
+        const translations = {
+            en: {
+                nav_about: "About", nav_projects: "Projects", nav_contact: "Contact",
+                hero_hello: "Hello, I am", 
+                hero_desc: "Specializing in building high-performance, inclusive digital experiences that merge code with clean design.",
+                projects_title: "Selected Projects", 
+                p1_desc: "Highly scalable Node.js API with JWT authentication and PostgreSQL integration.",
+                p2_desc: "Real-time object detection model built with Python and TensorFlow.", 
+                footer_text: "Designed for performance and accessibility.",
+                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", 
+                a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)", 
+                a11y_underline: "Underline All Links", a11y_reset: "Reset Settings",
+                typed_strings: ["Software Engineer.", "A11y Advocate.", "Full Stack Developer."]
+            },
+            el: {
+                nav_about: "Σχετικά", nav_projects: "Projects", nav_contact: "Επικοινωνία",
+                hero_hello: "Γεια σας, είμαι ο", 
+                hero_desc: "Εξειδικεύομαι στη δημιουργία ψηφιακών εμπειριών υψηλής απόδοσης που συνδυάζουν καθαρό κώδικα με σύγχρονο design.",
+                projects_title: "Επιλεγμένα Projects", 
+                p1_desc: "Υψηλά κλιμακούμενο Node.js API με ταυτοποίηση χρηστών JWT και βάση δεδομένων PostgreSQL.",
+                p2_desc: "Μοντέλο ανίχνευσης αντικειμένων σε πραγματικό χρόνο με χρήση Python και TensorFlow.", 
+                footer_text: "Σχεδιασμένο για μέγιστη απόδοση και πλήρη προσβασιμότητα.",
+                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", 
+                a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", 
+                a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων",
+                typed_strings: ["Software Engineer.", "Υποστηρικτής Προσβασιμότητας.", "Full Stack Developer."]
+            }
+        };
+
+        // Αυτόματη ανίχνευση γλώσσας συστήματος (Default: Αγγλικά αν δεν είναι Ελληνικά)
+        let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
+        let typedInstance;
+
+        // Συνάρτηση ενημέρωσης των κειμένων στην οθόνη
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerText = translations[currentLang][key];
+            });
+            document.getElementById('langBtn').innerText = currentLang.toUpperCase();
+            
+            // Επανεκκίνηση του Typed.js στη σωστή γλώσσα
+            if (typedInstance) typedInstance.destroy();
+            typedInstance = new Typed('#typed', {
+                strings: translations[currentLang].typed_strings,
+                typeSpeed: 60, backSpeed: 40, loop: true
+            });
+        }
+
+        // Event Listener για το χειροκίνητο κουμπί αλλαγής γλώσσας
+        document.getElementById('langBtn').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'el' : 'en';
+            localStorage.setItem('lang', currentLang); // Αποθήκευση για να το θυμάται στο επόμενο refresh
+            updateContent();
+        });
+
+        // Λειτουργίες Μπάρας Προσβασιμότητας (A11y JavaScript Engine)
+        const a11yBtn = document.getElementById('a11yBtn');
+        const a11yPanel = document.getElementById('a11yPanel');
+        a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
+
+        // Κλείσιμο του πάνελ αν κάνουμε κλικ κάπου αλλού
+        window.addEventListener('click', (e) => {
+            if (!a11yBtn.contains(e.target) && !a11yPanel.contains(e.target)) {
+                a11yPanel.classList.remove('active');
+            }
+        });
+
+        let currentFontScale = 100;
+        function adjustFont(mod) {
+            currentFontScale *= mod;
+            if(currentFontScale > 140) currentFontScale = 140;
+            if(currentFontScale < 80) currentFontScale = 80;
+            document.documentElement.style.setProperty('--font-scale', currentFontScale + '%');
+        }
+
+        function toggleA11y(cls) { document.body.classList.toggle(cls); }
+        
+        function resetA11y() {
+            document.body.className = '';
+            currentFontScale = 100;
+            document.documentElement.style.setProperty('--font-scale', '100%');
+        }
+
+        // Εκτέλεση κατά το πρώτο φόρτωμα της σελίδας
+        updateContent();
+    </script>
+</body>
+</html>

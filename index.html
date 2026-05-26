@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Holevas | Software Engineer</title>
+    <title>Dimitrios Holevas | Academic & Software Engineer Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,7 +11,6 @@
 
     <style>
         :root {
-            /* Παλέτα Χρωμάτων - Tokyo Night Tech Dark */
             --bg-dark: #050505;
             --surface-dark: #111111;
             --primary: #00f2ff;
@@ -23,16 +22,9 @@
             --font-scale: 100%;
         }
 
-        /* Κλάσεις Προσβασιμότητας (A11y) */
         body.high-contrast {
-            --bg-dark: #000000;
-            --surface-dark: #000000;
-            --primary: #ffff00; /* Έντονο κίτρινο για μέγιστη αντίθεση */
-            --text-main: #ffffff;
-            --text-dim: #ffffff;
-            border: 2px solid #ffff00;
+            --bg-dark: #000000; --surface-dark: #000000; --primary: #ffff00; --text-main: #ffffff; --text-dim: #ffffff;
         }
-
         body.underline-links a { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
 
@@ -40,112 +32,92 @@
         html { font-size: var(--font-scale); scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background 0.3s, color 0.3s;
+            background-color: var(--bg-dark); color: var(--text-main);
+            font-family: var(--font-main); line-height: 1.6; overflow-x: hidden;
         }
 
-        /* Φόντο με εφέ Neon Glow */
         .glow-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.04) 0%, transparent 60%);
-            z-index: -1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.03) 0%, transparent 60%);
+            z-index: -1; pointer-events: none;
         }
 
-        /* Navigation Menu */
+        /* Navigation */
         nav {
-            position: fixed;
-            top: 0; width: 100%; padding: 25px 8%;
+            position: fixed; top: 0; width: 100%; padding: 25px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: var(--primary); }
-
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
         .nav-right { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; margin-left: 25px;}
-        .nav-links a:hover, .nav-links a:focus { color: var(--primary); outline: 2px dashed var(--primary); }
 
-        /* Κουμπί Αλλαγής Γλώσσας */
-        .lang-switch {
-            background: var(--surface-dark);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: var(--font-code);
-            font-weight: bold;
-            transition: 0.3s;
+        /* Tabs Styling */
+        .tab-container {
+            display: flex; justify-content: center; gap: 15px; margin: 120px auto 30px auto; padding: 0 5%;
         }
+        .tab-btn {
+            background: var(--surface-dark); border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-main); padding: 12px 24px; border-radius: 30px;
+            cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.3s;
+        }
+        .tab-btn:hover, .tab-btn:focus { border-color: var(--primary); color: var(--primary); }
+        .tab-btn.active { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); }
 
-        .lang-switch:hover, .lang-switch:focus { background: var(--primary); color: var(--bg-dark); outline: none; }
+        /* Content Sections */
+        .content-section { display: none; padding: 40px 10%; min-height: 60vh; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
 
-        /* Sections */
-        section { padding: 140px 10% 80px 10%; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero p { font-family: var(--font-code); color: var(--primary); margin-bottom: 15px; font-size: 1.1rem; }
-        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
-        .hero .accent { color: var(--primary); text-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
-        #typed { font-size: 2.5rem; min-height: 60px; color: var(--text-dim); font-family: var(--font-code); }
+        h2 { font-size: 2.5rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .accent { color: var(--primary); }
 
-        /* Projects Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
-
+        /* Grid Layouts */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
         .card {
-            background: var(--surface-dark);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--surface-dark); padding: 30px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s;
         }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .card h3 { margin-bottom: 10px; font-size: 1.4rem; color: #fff; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
 
-        .card:hover, .card:focus-within { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .card h3 { margin-bottom: 15px; font-size: 1.6rem; font-weight: 600; }
-        .card p { color: var(--text-dim); margin-bottom: 25px; font-size: 0.95rem; }
-        
-        .card-links a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
-        .card-links a:hover { text-decoration: underline; }
+        /* Cv Button */
+        .cv-btn {
+            display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px;
+            background: transparent; border: 2px solid var(--primary); color: var(--primary);
+            border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; transition: 0.3s;
+        }
+        .cv-btn:hover { background: var(--primary); color: var(--bg-dark); }
 
-        /* Μπάρα Προσβασιμότητας (Accessibility Widget) */
+        /* Accessibility Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
         .a11y-toggle { 
             width: 55px; height: 55px; border-radius: 50%; background: var(--primary); 
             color: var(--bg-dark); border: none; cursor: pointer; font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3); display: flex; justify-content: center; align-items: center;
+            display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
         }
-        .a11y-toggle:hover { transform: scale(1.05); }
-
         .a11y-panel {
-            position: absolute; bottom: 70px; left: 0; width: 280px;
-            background: var(--surface-dark); border: 2px solid var(--primary);
-            border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: absolute; bottom: 70px; left: 0; width: 280px; background: var(--surface-dark); 
+            border: 2px solid var(--primary); border-radius: 15px; padding: 20px; display: none; flex-direction: column; gap: 12px;
         }
-
         .a11y-panel.active { display: flex; }
-        .a11y-panel button { 
-            padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05);
-            color: #fff; text-align: left; cursor: pointer; font-size: 0.95rem; transition: 0.2s;
+        .a11y-panel button { padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; }
+        .a11y-panel button:hover { background: var(--primary); color: var(--bg-dark); }
+
+        .lang-switch {
+            background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
         }
-        .a11y-panel button:hover, .a11y-panel button:focus { background: var(--primary); color: var(--bg-dark); }
+        .lang-switch:hover { background: var(--primary); color: var(--bg-dark); }
 
-        footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
 
-        /* Responsive Design για Κινητά */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            #typed { font-size: 1.8rem; }
-            nav { padding: 15px 5%; }
-            .nav-links { display: none; } /* Κρύβεται στα κινητά για απλότητα */
+            .tab-container { flex-wrap: wrap; margin-top: 100px; }
+            .tab-btn { width: 45%; text-align: center; padding: 10px; }
+            h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -153,163 +125,162 @@
     <div class="glow-bg"></div>
 
     <div class="a11y-container">
-        <button class="a11y-toggle" id="a11yBtn" aria-label="Επιλογές Προσβασιμότητας"><i class="fa-solid fa-universal-access"></i></button>
+        <button class="a11y-toggle" id="a11yBtn" aria-label="Accessibility"><i class="fa-solid fa-universal-access"></i></button>
         <div class="a11y-panel" id="a11yPanel">
             <button onclick="adjustFont(1.1)"><i class="fa-solid fa-plus"></i> <span data-i18n="a11y_increase">Increase Font</span></button>
             <button onclick="adjustFont(0.9)"><i class="fa-solid fa-minus"></i> <span data-i18n="a11y_decrease">Decrease Font</span></button>
             <button onclick="toggleA11y('high-contrast')"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="a11y_contrast">High Contrast</span></button>
             <button onclick="toggleA11y('grayscale')"><i class="fa-solid fa-droplet-slash"></i> <span data-i18n="a11y_grayscale">Grayscale</span></button>
             <button onclick="toggleA11y('underline-links')"><i class="fa-solid fa-underline"></i> <span data-i18n="a11y_underline">Underline Links</span></button>
-            <button onclick="resetA11y()" style="background: #ef4444; color: white;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
+            <button onclick="resetA11y()" style="background: #ef4444;"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="a11y_reset">Reset</span></button>
         </div>
     </div>
 
     <nav>
         <div class="logo">HOLEVAS.DEV</div>
         <div class="nav-right">
-            <div class="nav-links">
-                <a href="#about" data-i18n="nav_about">About</a>
-                <a href="#projects" data-i18n="nav_projects">Projects</a>
-                <a href="mailto:your-email@email.com" data-i18n="nav_contact">Contact</a>
-            </div>
             <button class="lang-switch" id="langBtn">EN</button>
         </div>
     </nav>
 
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="openTab(event, 'about')" data-i18n="tab_about">About Me</button>
+        <button class="tab-btn" onclick="openTab(event, 'education')" data-i18n="tab_edu">Education</button>
+        <button class="tab-btn" onclick="openTab(event, 'projects')" data-i18n="tab_proj">Projects</button>
+        <button class="tab-btn" onclick="openTab(event, 'contact')" data-i18n="tab_cont">Contact</button>
+    </div>
+
     <main>
-        <section class="hero" id="about">
-            <p data-i18n="hero_hello">Hello, I am</p>
-            <h1 data-aos="fade-up">Dimitrios <span class="accent">Holevas</span>.</h1>
-            <div id="typed"></div>
-            <p style="max-width: 650px; margin-top: 25px; color: var(--text-dim); font-size: 1.1rem;" data-i18n="hero_desc">
-                Specializing in building high-performance, inclusive digital experiences that merge code with clean design.
+        <section id="about" class="content-section active">
+            <h2 data-i18n="about_title">About <span class="accent">Me</span></h2>
+            <p style="font-size: 1.2rem; max-width: 800px; color: var(--text-main);" data-i18n="about_text1">
+                Γεια σας! Είμαι ο Δημήτρης Χολέβας, απόφοιτος του τμήματος Πληροφορικής. Εξειδικεύομαι στην ανάπτυξη λογισμικού και στη δημιουργία προσβάσιμων, συμπεριληπτικών ψηφιακών εμπειριών.
             </p>
+            <p style="margin-top: 15px; max-width: 800px; color: var(--text-dim);" data-i18n="about_text2">
+                Το ενδιαφέρον μου εστιάζεται στον καθαρό κώδικα, την αρχιτεκτονική συστημάτων backend και την εφαρμογή των διεθνών προτύπων προσβασιμότητας (WCAG) στον παγκόσμιο ιστό.
+            </p>
+            <a href="#" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume / CV</span></a>
         </section>
 
-        <section id="projects">
-            <h2 style="font-size: 2.2rem; margin-bottom: 10px;" data-i18n="projects_title">Selected Projects</h2>
+        <section id="education" class="content-section">
+            <h2 data-i18n="edu_title">Education & <span class="accent">Academic Work</span></h2>
             <div class="grid">
-                
-                <div class="card" data-aos="zoom-in">
-                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 10px;">[API DESIGN]</div>
+                <div class="card">
+                    <span style="font-family:var(--font-code); color:var(--primary);">2022 - 2026</span>
+                    <h3 data-i18n="edu_degree">BSc in Computer Science</h3>
+                    <p data-i18n="edu_uni">Πανεπιστήμιο / Ίδρυμα Σπουδών</p>
+                </div>
+                <div class="card">
+                    <span style="font-family:var(--font-code); color:var(--primary);">THESIS</span>
+                    <h3 data-i18n="thesis_title">Πτυχιακή Εργασία</h3>
+                    <p data-i18n="thesis_desc">Τίτλος και σύντομη ακαδημαϊκή περίληψη της πτυχιακής σου εργασίας. Τι πρόβλημα έλυσες και τι τεχνολογίες χρησιμοποίησες.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2 data-i18n="proj_title">Selected <span class="accent">Projects</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 5px;">[BACKEND]</div>
                     <h3>E-Commerce Backend</h3>
                     <p data-i18n="p1_desc">Highly scalable Node.js API with JWT authentication and PostgreSQL integration.</p>
-                    <div class="card-links">
-                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> View Code</a>
-                    </div>
                 </div>
-
-                <div class="card" data-aos="zoom-in" data-aos-delay="100">
-                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 10px;">[AI / MACHINE LEARNING]</div>
+                <div class="card">
+                    <div style="font-size: 0.8rem; color: var(--primary); font-family: var(--font-code); margin-bottom: 5px;">[AI / ML]</div>
                     <h3>Vision Classifier</h3>
                     <p data-i18n="p2_desc">Real-time object detection model built with Python and TensorFlow.</p>
-                    <div class="card-links">
-                        <a href="https://github.com/holevasdimitrios" target="_blank"><i class="fab fa-github"></i> View Code</a>
-                    </div>
                 </div>
+            </div>
+        </section>
 
+        <section id="contact" class="content-section">
+            <h2 data-i18n="cont_title">Get In <span class="accent">Touch</span></h2>
+            <p data-i18n="cont_text">Αυτή την περίοδο είμαι ανοιχτός σε νέες επαγγελματικές και ερευνητικές προτάσεις. Μπορείτε να επικοινωνήσετε μαζί μου στα παρακάτω δίκτυα:</p>
+            <div style="display:flex; gap:20px; margin-top:30px; font-size: 2rem;">
+                <a href="mailto:your-email@email.com" style="color:var(--primary);"><i class="fas fa-envelope"></i></a>
+                <a href="#" style="color:var(--primary);"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/holevasdimitrios" style="color:var(--primary);"><i class="fab fa-github"></i></a>
             </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Dimitrios Holevas. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; color: var(--primary);" data-i18n="footer_text">Designed for performance and accessibility.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
     <script>
-        // Αρχικοποίηση των Animations στο Σκρολάρισμα (AOS)
-        AOS.init({ duration: 1000, once: true });
+        // Tab Switcher Logic
+        function openTab(evt, tabId) {
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-        // Λεξικό Μεταφράσεων (Dictionary)
+        // Dictionary (Ελληνικά & Αγγλικά)
         const translations = {
             en: {
-                nav_about: "About", nav_projects: "Projects", nav_contact: "Contact",
-                hero_hello: "Hello, I am", 
-                hero_desc: "Specializing in building high-performance, inclusive digital experiences that merge code with clean design.",
-                projects_title: "Selected Projects", 
-                p1_desc: "Highly scalable Node.js API with JWT authentication and PostgreSQL integration.",
-                p2_desc: "Real-time object detection model built with Python and TensorFlow.", 
-                footer_text: "Designed for performance and accessibility.",
-                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", 
-                a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale (Colorblind)", 
-                a11y_underline: "Underline All Links", a11y_reset: "Reset Settings",
-                typed_strings: ["Software Engineer.", "A11y Advocate.", "Full Stack Developer."]
+                tab_about: "About Me", tab_edu: "Education", tab_proj: "Projects", tab_cont: "Contact",
+                about_title: "About Me", about_text1: "Hello! I am Dimitrios Holevas, a Computer Science graduate. I specialize in software engineering and creating inclusive, accessible digital experiences.",
+                about_text2: "My focus lies in clean code, robust backend architectures, and implementing global accessibility web standards (WCAG).",
+                cv_download: "Download Resume / CV",
+                edu_title: "Education & Academic Work", edu_degree: "BSc in Computer Science", edu_uni: "University / Institution Name",
+                thesis_title: "BSc Thesis", thesis_desc: "Title and short abstract of your graduation thesis. Mention the problem solved and the stack used.",
+                proj_title: "Selected Projects", p1_desc: "Highly scalable Node.js API with JWT authentication and PostgreSQL integration.",
+                p2_desc: "Real-time object detection model built with Python and TensorFlow.",
+                cont_title: "Get In Touch", cont_text: "I am currently open to professional and research opportunities. Feel free to connect with me!",
+                a11y_increase: "Increase Font Size", a11y_decrease: "Decrease Font Size", a11y_contrast: "High Contrast Mode", a11y_grayscale: "Grayscale Mode", a11y_underline: "Underline Links", a11y_reset: "Reset Settings"
             },
             el: {
-                nav_about: "Σχετικά", nav_projects: "Projects", nav_contact: "Επικοινωνία",
-                hero_hello: "Γεια σας, είμαι ο", 
-                hero_desc: "Εξειδικεύομαι στη δημιουργία ψηφιακών εμπειριών υψηλής απόδοσης που συνδυάζουν καθαρό κώδικα με σύγχρονο design.",
-                projects_title: "Επιλεγμένα Projects", 
-                p1_desc: "Υψηλά κλιμακούμενο Node.js API με ταυτοποίηση χρηστών JWT και βάση δεδομένων PostgreSQL.",
-                p2_desc: "Μοντέλο ανίχνευσης αντικειμένων σε πραγματικό χρόνο με χρήση Python και TensorFlow.", 
-                footer_text: "Σχεδιασμένο για μέγιστη απόδοση και πλήρη προσβασιμότητα.",
-                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", 
-                a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", 
-                a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων",
-                typed_strings: ["Software Engineer.", "Υποστηρικτής Προσβασιμότητας.", "Full Stack Developer."]
+                tab_about: "Ποιος είμαι", tab_edu: "Σπουδές", tab_proj: "Projects", tab_cont: "Επικοινωνία",
+                about_title: "Ποιος είμαι", about_text1: "Γεια σας! Είμαι ο Δημήτρης Χολέβας, απόφοιτος του τμήματος Πληροφορικής. Εξειδικεύομαι στην ανάπτυξη λογισμικού και στη δημιουργία προσβάσιμων, συμπεριληπτικών ψηφιακών εμπειριών.",
+                about_text2: "Το ενδιαφέρον μου εστιάζεται στον καθαρό κώδικα, την αρχιτεκτονική συστημάτων backend και την εφαρμογή των διεθνών προτύπων προσβασιμότητας (WCAG) στον παγκόσμιο ιστό.",
+                cv_download: "Κατέβασε το Βιογραφικό (PDF)",
+                edu_title: "Σπουδές & Ακαδημαϊκό Έργο", edu_degree: "Πτυχίο Πληροφορικής (BSc)", edu_uni: "Όνομα Πανεπιστημίου / Σχολής",
+                thesis_title: "Πτυχιακή Εργασία", thesis_desc: "Τίτλος και σύντομη ακαδημαϊκή περίληψη της πτυχιακής σου εργασίας. Τι πρόβλημα έλυσες και τι τεχνολογίες χρησιμοποίησες.",
+                proj_title: "Επιλεγμένα Projects", p1_desc: "Υψηλά κλιμακούμενο Node.js API με ταυτοποίηση χρηστών JWT και βάση δεδομένων PostgreSQL.",
+                p2_desc: "Μοντέλο ανίχνευσης αντικειμένων σε πραγματικό χρόνο με χρήση Python και TensorFlow.",
+                cont_title: "Επικοινωνία", cont_text: "Αυτή την περίοδο είμαι ανοιχτός σε νέες επαγγελματικές και ερευνητικές προτάσεις. Μπορείτε να επικοινωνήσετε μαζί μου στα παρακάτω δίκτυα:",
+                a11y_increase: "Αύξηση Γραμματοσειράς", a11y_decrease: "Μείωση Γραμματοσειράς", a11y_contrast: "Λειτουργία Υψηλής Αντίθεσης", a11y_grayscale: "Ασπρόμαυρο (Αχρωματοψία)", a11y_underline: "Υπογράμμιση Συνδέσμων", a11y_reset: "Επαναφορά Ρυθμίσεων"
             }
         };
 
-        // Αυτόματη ανίχνευση γλώσσας συστήματος (Default: Αγγλικά αν δεν είναι Ελληνικά)
         let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
-        let typedInstance;
-
-        // Συνάρτηση ενημέρωσης των κειμένων στην οθόνη
         function updateContent() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 el.innerText = translations[currentLang][key];
             });
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
-            
-            // Επανεκκίνηση του Typed.js στη σωστή γλώσσα
-            if (typedInstance) typedInstance.destroy();
-            typedInstance = new Typed('#typed', {
-                strings: translations[currentLang].typed_strings,
-                typeSpeed: 60, backSpeed: 40, loop: true
-            });
         }
 
-        // Event Listener για το χειροκίνητο κουμπί αλλαγής γλώσσας
         document.getElementById('langBtn').addEventListener('click', () => {
             currentLang = currentLang === 'en' ? 'el' : 'en';
-            localStorage.setItem('lang', currentLang); // Αποθήκευση για να το θυμάται στο επόμενο refresh
+            localStorage.setItem('lang', currentLang);
             updateContent();
         });
 
-        // Λειτουργίες Μπάρας Προσβασιμότητας (A11y JavaScript Engine)
+        // A11y Engine
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yPanel = document.getElementById('a11yPanel');
         a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
 
-        // Κλείσιμο του πάνελ αν κάνουμε κλικ κάπου αλλού
-        window.addEventListener('click', (e) => {
-            if (!a11yBtn.contains(e.target) && !a11yPanel.contains(e.target)) {
-                a11yPanel.classList.remove('active');
-            }
-        });
-
         let currentFontScale = 100;
         function adjustFont(mod) {
             currentFontScale *= mod;
-            if(currentFontScale > 140) currentFontScale = 140;
-            if(currentFontScale < 80) currentFontScale = 80;
             document.documentElement.style.setProperty('--font-scale', currentFontScale + '%');
         }
-
         function toggleA11y(cls) { document.body.classList.toggle(cls); }
-        
         function resetA11y() {
-            document.body.className = '';
-            currentFontScale = 100;
+            document.body.className = ''; currentFontScale = 100;
             document.documentElement.style.setProperty('--font-scale', '100%');
         }
 
-        // Εκτέλεση κατά το πρώτο φόρτωμα της σελίδας
         updateContent();
     </script>
 </body>

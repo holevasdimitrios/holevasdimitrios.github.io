@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Cholevas | Software Engineer & A11y Advocate</title>
+    <title>Dimitrios Cholevas</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -110,6 +110,9 @@
         .cv-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; background: var(--primary); color: #000; border-radius: 30px; text-decoration: none; font-weight: 800; margin-top: 20px; transition: 0.3s; }
         .cv-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(34, 211, 238, 0.4); }
 
+        .proj-link { color: var(--primary); text-decoration: none; font-weight: bold; font-family: var(--font-code); display: inline-flex; align-items: center; gap: 5px; margin-top: 15px; transition: 0.2s; }
+        .proj-link:hover { color: var(--secondary); text-shadow: 0 0 8px var(--primary); }
+
         footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; }
 
         @media (max-width: 900px) {
@@ -175,7 +178,7 @@
                         </div>
                     </div>
                     
-                    <a href="resume.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume</span></a>
+                    <a href="Dimitrios_Cholevas_CV.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download My CV</span></a>
                 </div>
             </div>
         </section>
@@ -199,8 +202,19 @@
                         <span class="tag">eTwinning</span><span class="tag">A11y</span><span class="tag">Microteaching</span><span class="tag">Psychology</span>
                     </div>
                 </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="150" style="border: 1px solid rgba(34, 211, 238, 0.3);">
+                    <span class="card-meta">ACADEMIC PORTFOLIO</span>
+                    <h3 data-i18n="portfolio_title">Computational Learning Theory</h3>
+                    <p data-i18n="portfolio_desc">Συλλογή από 7 ολοκληρωμένες θεωρητικές εργασίες με αυστηρές μαθηματικές αποδείξεις και PAC αναλύσεις, γραμμένες εξολοκλήρου σε LaTeX.</p>
+                    <div class="tag-container">
+                        <span class="tag">PAC Learning</span><span class="tag">VC Dimension</span><span class="tag">SGD</span><span class="tag">LaTeX</span>
+                    </div>
+                    <a href="https://github.com/holevasdimitrios/computational-learning-theory" target="_blank" class="proj-link">
+                        <i class="fa-brands fa-github"></i> <span data-i18n="portfolio_link">View Repository</span>
+                    </a>
+                </div>
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="card-meta">EPAKAL KALAMBAKA</span>
+                    <span class="card-meta">EPAL KALAMBAKA</span>
                     <h3 data-i18n="epal_title">Computer Systems Technician</h3>
                     <p data-i18n="epal_desc">Graduated with a perfect 20/20. Specialized in Information Technology & Infrastructure.</p>
                 </div>
@@ -272,8 +286,8 @@
                 <div class="card" style="text-align: center;">
                     <i class="fa-solid fa-paper-plane" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>Direct Email</h3>
-                    <p>your-email@email.com</p>
-                    <a href="mailto:your-email@email.com" class="cv-btn" id="emailBtn">Send Message</a>
+                    <p>holevasdimitrios71@gmail.com</p>
+                    <a href="mailto:holevasdimitrios71@gmail.com" class="cv-btn" id="emailBtn">Send Message</a>
                 </div>
             </div>
         </section>
@@ -335,6 +349,8 @@
                 edu_title: "Academic Background",
                 edu_uni: "NKUA (EKPA)", edu_desc: "BSc in Computer Science & Telecommunications. Major tracks in advanced systems layouting, distributed networking, and database structures.",
                 ped_title: "Teaching Qualification", ped_desc: "Successfully completed the university cycle for formal pedagogical competence. Highly trained in Informatics Didactics, eTwinning seminars, and Assistive Tech frameworks.",
+                portfolio_title: "Computational Learning Theory Portfolio", portfolio_desc: "Curated collection of 7 advanced academic assignments containing rigorous mathematical proofs and non-asymptotic PAC learning error bounds written in LaTeX.",
+                portfolio_link: "View GitHub Repository",
                 epal_title: "Computer Systems Technician", epal_desc: "Graduated with a perfect 20/20 grade. High focus on application deployment and local IT troubleshooting frameworks.",
                 work_title: "Career Milestones",
                 intern_title: "IT Infrastructure Intern", intern_loc: "Municipality of Kalambaka", intern_desc: "Managing core computing resources, maintaining municipal client systems, local area network equipment configurations, and providing hands-on operational tech support.",
@@ -342,7 +358,7 @@
                 judge_title: "STEM Judge @ Athens College", judge_desc: "Honored to serve as a scientific committee member and official evaluator for the Greek National Educational Robotics & STEM Competition.",
                 skills_title: "Arsenal & Expertise", prog_title: "Programming Languages", tools_title: "Productivity Tools", lang_title: "Communication Languages", soft_title: "Advanced Matrix Focus",
                 interests_desc: "Core architectural goals targeted towards upcoming graduate research master programs focusing on enterprise high-performance data engineering and complex network infrastructure.",
-                cont_title: "Let's Talk", cv_download: "Get Resume (PDF)",
+                cont_title: "Let's Talk", cv_download: "Get My CV (PDF)",
                 typed_strings: ["IT Infrastructure Specialist.", "From Kalambaka to Athens.", "Web Accessibility Advocate."]
             },
             el: {
@@ -352,6 +368,8 @@
                 edu_title: "Σπουδές & Επάρκεια",
                 edu_uni: "Εθνικό & Καποδιστριακό Πανεπιστήμιο Αθηνών", edu_desc: "Πτυχίο Πληροφορικής & Τηλεπικοινωνιών. Εστίαση σε Δίκτυα Υπολογιστών, Λειτουργικά Συστήματα, Προγραμματισμό Συστήματος και Δομές Δεδομένων.",
                 ped_title: "Παιδαγωγική & Διδακτική Επάρκεια", ped_desc: "Ολοκλήρωση του θεσμοθετημένου κύκλου σπουδών για τη λήψη διδακτικής επάρκειας πληροφορικής. Παρακολούθηση μαθημάτων Διδακτικής, σεμιναρίου eTwinning και Ψηφιακής Προσβασιμότητας.",
+                portfolio_title: "Υπολογιστική Θεωρία Μηχανικής Μάθησης", portfolio_desc: "Συλλογή από 7 ολοκληρωμένες θεωρητικές εργασίες με αυστηρές μαθηματικές αποδείξεις και PAC αναλύσεις, γραμμένες εξολοκλήρου σε LaTeX.",
+                portfolio_link: "Προβολή στο GitHub",
                 epal_title: "Τεχνικός Συστημάτων", epal_desc: "Απολυτήριο με βαθμό 20/20. Εξειδίκευση σε υποδομές IT και Τεχνικός Εφαρμογών Πληροφορικής.",
                 work_title: "Επαγγελματική Πορεία",
                 intern_title: "Πρακτική Άσκηση: IT Support & Υποδομές", intern_loc: "Δήμος Καλαμπάκας (20 Απριλίου - 19 Ιουλίου)", intern_desc: "Ανάπτυξη δεξιοτήτων τεχνικής υποστήριξης, διαχείριση και συντήρηση υπολογιστικών υποδομών, έλεγχος λειτουργικού συστήματος και διαχείριση δικτυακού εξοπλισμού και υπηρεσιών.",

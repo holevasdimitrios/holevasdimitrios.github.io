@@ -114,7 +114,9 @@
         .proj-link:hover { color: var(--secondary); text-shadow: 0 0 8px var(--primary); }
 
         footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
-        .visitor-counter { margin-top: 10px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; }
+        .system-status { margin-top: 8px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .live-dot { width: 8px; height: 8px; background-color: #27c93f; border-radius: 50%; box-shadow: 0 0 8px #27c93f; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         @media (max-width: 900px) {
             nav { flex-direction: column; padding: 10px; height: auto; }
@@ -302,8 +304,8 @@
 
     <footer>
         <p>&copy; 2026 Dimitrios Cholevas. Crafted for functionality and web accessibility.</p>
-        <div class="visitor-counter">
-            <i class="fa-solid fa-eye"></i> Visitors: <span id="visit-count">Loading...</span>
+        <div class="system-status">
+            <div class="live-dot"></div> Athens, GR &bull; System Online &bull; <span id="live-clock">--:--:--</span>
         </div>
     </footer>
 
@@ -321,7 +323,7 @@
 
         AOS.init({ duration: 800, once: true });
 
-        // Terminal Game Logic Engine (Enriched with AI & Security commands)
+        // Terminal Game Logic Engine
         const termInput = document.getElementById('termInput');
         const termBody = document.getElementById('termBody');
         termInput.addEventListener('keydown', (e) => {
@@ -446,16 +448,15 @@
         updateContent();
         document.getElementById('emailBtn').addEventListener('click', () => confetti());
 
-        // Visitor Counter Integration (Ενημερωμένο και ασφαλές για CounterAPI)
-        fetch('https://api.counterapi.dev/v1/holevasdimitrios/visits/up')
-            .then(res => res.json())
-            .then(data => {
-                const views = data.count ?? data.value ?? data.result ?? 1;
-                document.getElementById('visit-count').innerText = views;
-            })
-            .catch(err => {
-                document.getElementById('visit-count').innerText = '1';
-            });
+        // Live Digital Clock & System Status Script
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-GB');
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) clockEl.innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>

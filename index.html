@@ -446,7 +446,7 @@
         updateContent();
         document.getElementById('emailBtn').addEventListener('click', () => confetti());
 
-        // Visitor Counter Integration via CounterAPI
+        // Visitor Counter Integration (Ενημερωμένο και ασφαλές για CounterAPI)
         fetch('https://api.counterapi.dev/v1/holevasdimitrios/visits/up')
             .then(res => res.json())
             .then(data => {

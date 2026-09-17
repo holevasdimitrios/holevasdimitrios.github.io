@@ -321,7 +321,7 @@
 
         AOS.init({ duration: 800, once: true });
 
-        // Terminal Game Logic Engine
+        // Terminal Game Logic Engine (Enriched with AI & Security commands)
         const termInput = document.getElementById('termInput');
         const termBody = document.getElementById('termBody');
         termInput.addEventListener('keydown', (e) => {
@@ -333,10 +333,13 @@
                 
                 const response = document.createElement('div');
                 response.style.color = "#94a3b8";
-                if (cmd === 'help') response.innerHTML = "Commands: bio, skills, location, clear, win";
-                else if (cmd === 'bio') response.innerHTML = "IT Support Specialist @ Municipality & CS student @ NKUA. Passionate about AI & Cybersecurity.";
-                else if (cmd === 'skills') response.innerHTML = "Python, C, C++, SQL, AI/ML, Cybersecurity, Linux, Windows, TCP/IP.";
+                if (cmd === 'help') response.innerHTML = "Commands: bio, skills, ai, security, location, contact, clear, win";
+                else if (cmd === 'bio') response.innerHTML = "IT Support Specialist @ Municipality & CS student @ NKUA.";
+                else if (cmd === 'skills') response.innerHTML = "Python, C, C++, SQL, Linux, Windows, TCP/IP, Git.";
+                else if (cmd === 'ai') response.innerHTML = "Passionate about Machine Learning, PAC learning, and AI concepts.";
+                else if (cmd === 'security') response.innerHTML = "Focused on Cybersecurity, SOC operations, and Blue Team defense.";
                 else if (cmd === 'location') response.innerHTML = "Based in Athens, Greece.";
+                else if (cmd === 'contact') response.innerHTML = "Email: holevasdimitrios71@gmail.com";
                 else if (cmd === 'win') {
                     response.innerHTML = "🎉 YOU DISCOVERED THE SECRET CONFETTI CORNER!";
                     confetti();
@@ -443,11 +446,12 @@
         updateContent();
         document.getElementById('emailBtn').addEventListener('click', () => confetti());
 
-        // Visitor Counter Integration
+        // Visitor Counter Integration via CounterAPI
         fetch('https://api.counterapi.dev/v1/holevasdimitrios/visits/up')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('visit-count').innerText = data.count;
+                const views = data.count ?? data.value ?? data.result ?? 1;
+                document.getElementById('visit-count').innerText = views;
             })
             .catch(err => {
                 document.getElementById('visit-count').innerText = '1';

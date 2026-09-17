@@ -444,13 +444,13 @@
         document.getElementById('emailBtn').addEventListener('click', () => confetti());
 
         // Visitor Counter Integration
-        fetch('https://api.countapi.xyz/hit/holevasdimitrios.github.io/visits')
+        fetch('https://api.counterapi.dev/v1/holevasdimitrios/visits/up')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('visit-count').innerText = data.value;
+                document.getElementById('visit-count').innerText = data.count;
             })
             .catch(err => {
-                document.getElementById('visit-count').innerText = 'Active';
+                document.getElementById('visit-count').innerText = '1';
             });
     </script>
 </body>

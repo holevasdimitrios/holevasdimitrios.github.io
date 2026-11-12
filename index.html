@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Cholevas | MSc Student & Data Specialist</title>
+    <title>Dimitrios Cholevas | MSc & Data Specialist</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
             --bg-dark: #020617;
-            --surface-dark: #0f172a;
             --primary: #22d3ee;
             --secondary: #818cf8;
-            --text-main: #f1f5f9;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
             --text-dim: #94a3b8;
             --font-main: 'Inter', sans-serif;
             --font-code: 'Fira Code', monospace;
@@ -23,109 +23,140 @@
         }
 
         /* Accessibility Modifiers */
-        body.high-contrast { --bg-dark: #000; --surface-dark: #000; --primary: #ffff00; --text-main: #fff; --text-dim: #fff; }
+        body.high-contrast { --bg-dark: #000; --primary: #ffff00; --text-main: #fff; --text-dim: #fff; }
         body.underline-links a, body.underline-links .tab-btn { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline-color: var(--primary); }
-        html { font-size: var(--font-scale); scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; cursor: none; /* Hides default cursor */ }
+        html { font-size: var(--font-scale); scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             background-color: var(--bg-dark); color: var(--text-main);
             font-family: var(--font-main); line-height: 1.6; overflow-x: hidden;
-            transition: background 0.3s;
         }
 
-        /* Particles Background */
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
+        /* Custom Extravagant Cursor */
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 9999; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--primary); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 9998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        
+        /* Disable custom cursor on mobile */
+        @media (hover: none) and (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } * { cursor: auto; } }
 
-        /* Navigation */
+        /* Extravagant Background: Animated Orbs + Particles */
+        .bg-mesh { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; overflow: hidden; background: var(--bg-dark); }
+        .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; animation: float 20s infinite alternate ease-in-out; }
+        .orb-1 { width: 60vw; height: 60vw; background: var(--secondary); top: -20%; left: -10%; animation-duration: 25s; }
+        .orb-2 { width: 50vw; height: 50vw; background: var(--primary); bottom: -10%; right: -10%; animation-duration: 30s; animation-direction: alternate-reverse; opacity: 0.3; }
+        .orb-3 { width: 40vw; height: 40vw; background: var(--accent-purple); top: 30%; left: 40%; animation-duration: 35s; opacity: 0.25; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(100px, 150px) scale(1.1); } }
+        
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
+
+        /* Typography Enhancements */
+        h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.5px; }
+        .gradient-text { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-purple) 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            display: inline-block; 
+        }
+
+        /* Navigation - Glassmorphism */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.3); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; letter-spacing: -0.5px; }
+        .logo { font-size: 1.6rem; color: #fff; font-family: var(--font-code); text-decoration: none; font-weight: 900; }
         
         .nav-right { display: flex; align-items: center; gap: 15px; }
-
         .nav-tabs { display: flex; gap: 5px; }
-        .tab-btn {
-            background: transparent; border: none; color: var(--text-dim);
-            padding: 8px 16px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
-            transition: 0.3s; border-radius: 8px;
-        }
-        .tab-btn:hover { color: var(--primary); background: rgba(34, 211, 238, 0.05); }
-        .tab-btn.active { color: var(--primary); background: rgba(34, 211, 238, 0.1); }
+        .tab-btn { background: transparent; border: none; color: var(--text-dim); padding: 8px 16px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; border-radius: 8px; position: relative; overflow: hidden; }
+        .tab-btn:hover { color: #fff; }
+        .tab-btn.active { color: #fff; background: rgba(255,255,255,0.1); }
 
-        .lang-switch {
-            background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
-            padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font-code); font-weight: bold; transition: 0.3s;
-        }
-        .lang-switch:hover { background: var(--primary); color: #000; }
+        .lang-switch { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 6px 12px; border-radius: 8px; font-family: var(--font-code); font-weight: bold; transition: 0.3s; }
+        .lang-switch:hover { background: #fff; color: #000; }
 
         /* Sections */
-        main { margin-top: 100px; }
+        main { margin-top: 120px; }
         .content-section { display: none; padding: 60px 8%; min-height: 75vh; }
-        .content-section.active { display: block; animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section.active { display: block; animation: fadeUpExtravagant 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes fadeUpExtravagant { from { opacity: 0; transform: translateY(40px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-        h2 { font-size: 2.8rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
-        .accent { color: var(--primary); }
-        .section-subtitle { display: inline-block; font-size: 1.5rem; border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-bottom: 25px; font-weight: 600; color: var(--text-main); }
+        h2 { font-size: 3rem; margin-bottom: 40px; }
+        .section-subtitle { display: inline-block; font-size: 1.4rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 700; }
 
-        /* Cards Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
+        /* Glassmorphism Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 35px; border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden;
+            background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            padding: 40px; border-radius: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .card:hover { transform: translateY(-8px); border-color: rgba(34, 211, 238, 0.4); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
-        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 12px; display: block; font-weight: bold; letter-spacing: 1px; }
-        
-        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-        .tag { background: rgba(34, 211, 238, 0.08); color: var(--primary); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(34, 211, 238, 0.1); }
+        .card:hover { transform: translateY(-10px); border-top-color: rgba(34, 211, 238, 0.5); border-left-color: rgba(34, 211, 238, 0.5); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); background: rgba(15, 23, 42, 0.6); }
+        .card::before { content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent); transform: skewX(-25deg); transition: 0.7s; }
+        .card:hover::before { left: 150%; }
 
-        /* News / Blog Feed Styling */
-        .news-card { border-left: 4px solid var(--primary); display: flex; flex-direction: column; }
-        .news-card h4 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
-        .news-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 20px; }
-        .news-links { display: flex; gap: 15px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
+        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.85rem; margin-bottom: 15px; display: inline-block; font-weight: 700; letter-spacing: 1.5px; background: rgba(34,211,238,0.1); padding: 4px 12px; border-radius: 20px; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+        .tag { background: rgba(255,255,255,0.03); color: #fff; padding: 8px 16px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .tag:hover { background: rgba(34,211,238,0.15); border-color: var(--primary); color: var(--primary); }
+
+        /* News / Blog Styling */
+        .news-card { display: flex; flex-direction: column; }
+        .news-card h4 { font-size: 1.6rem; margin-bottom: 15px; line-height: 1.3; }
+        .news-card p { color: var(--text-dim); font-size: 1.05rem; flex-grow: 1; margin-bottom: 25px; line-height: 1.7; }
+        .news-links { display: flex; gap: 20px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
+
+        /* Buttons & Links */
+        .cv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 36px; background: #fff; color: #000; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 1.05rem; margin-top: 25px; transition: 0.4s; letter-spacing: 0.5px; position: relative; overflow: hidden; }
+        .cv-btn:hover { background: var(--primary); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(34, 211, 238, 0.3); }
+        .cv-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
+        .cv-btn-outline:hover { background: #fff; color: #000; border-color: #fff; }
+
+        .proj-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; font-size: 0.95rem; }
+        .proj-link:hover { color: #fff; letter-spacing: 0.5px; }
 
         /* A11y Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
-        .a11y-toggle { width: 55px; height: 55px; border-radius: 50%; background: var(--surface-dark); color: var(--primary); border: 1px solid var(--primary); cursor: pointer; font-size: 1.4rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); transition: 0.3s; }
-        .a11y-toggle:hover { background: var(--primary); color: #000; }
-        .a11y-panel { position: absolute; bottom: 70px; left: 0; width: 260px; background: var(--surface-dark); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        .a11y-panel.active { display: flex; }
-        .a11y-panel button { padding: 10px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; border-radius: 6px; transition: 0.2s; }
-        .a11y-panel button:hover { background: var(--primary); color: #000; }
+        .a11y-toggle { width: 60px; height: 60px; border-radius: 50%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 1.5rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.4s; }
+        .a11y-toggle:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+        .a11y-panel { position: absolute; bottom: 80px; left: 0; width: 280px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .a11y-panel.active { display: flex; animation: fadeUpExtravagant 0.4s ease; }
+        .a11y-panel button { padding: 12px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; border-radius: 8px; transition: 0.3s; font-weight: 500; }
+        .a11y-panel button:hover { background: var(--primary); color: #000; padding-left: 18px; }
 
-        /* Buttons & Links */
-        .cv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 30px; background: var(--primary); color: #000; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 25px; transition: 0.3s; letter-spacing: 0.5px; }
-        .cv-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2); }
-        .cv-btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
-        .cv-btn-outline:hover { background: var(--primary); color: #000; }
-
-        .proj-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-size: 0.9rem; }
-        .proj-link:hover { color: #fff; }
-
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; margin-top: 40px; }
-        .system-status { margin-top: 12px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .live-dot { width: 8px; height: 8px; background-color: #27c93f; border-radius: 50%; box-shadow: 0 0 8px #27c93f; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        footer { text-align: center; padding: 60px 20px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; margin-top: 80px; }
+        .system-status { margin-top: 15px; font-family: var(--font-code); color: var(--primary); font-size: 0.85rem; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .live-dot { width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; box-shadow: 0 0 12px #27c93f; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 
         @media (max-width: 900px) {
-            nav { flex-direction: column; padding: 15px; height: auto; }
+            nav { flex-direction: column; padding: 15px; }
             .nav-tabs { flex-wrap: wrap; justify-content: center; margin-top: 15px; margin-bottom: 10px; }
-            main { margin-top: 180px; }
-            h2 { font-size: 2.2rem; }
+            main { margin-top: 200px; }
+            h2 { font-size: 2.4rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Custom Extravagant Cursor Elements -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Animated Glowing Background Orbs -->
+    <div class="bg-mesh">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
+    <!-- Subtle Stardust -->
     <div id="particles-js"></div>
 
     <div class="a11y-container">
@@ -136,12 +167,12 @@
             <button onclick="toggleA11y('high-contrast')">Υψηλή Αντίθεση</button>
             <button onclick="toggleA11y('grayscale')">Ασπρόμαυρη Λειτουργία</button>
             <button onclick="toggleA11y('underline-links')">Υπογράμμιση Links</button>
-            <button onclick="resetA11y()" style="background: #ef4444;">Επαναφορά</button>
+            <button onclick="resetA11y()" style="background: #ef4444; color: #fff;">Επαναφορά</button>
         </div>
     </div>
 
     <nav>
-        <a href="#" class="logo">Cholevas.DEV</a>
+        <a href="#" class="logo gradient-text">Cholevas.DEV</a>
         <div class="nav-right">
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab(event, 'about')" data-i18n="tab_about">Profile</button>
@@ -157,14 +188,14 @@
     <main>
         <!-- PROFILE / ABOUT SECTION -->
         <section id="about" class="content-section active">
-            <h1 style="font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px;" data-aos="fade-right">Dimitrios <span class="accent">Cholevas</span></h1>
-            <div style="font-size: 1.8rem; min-height: 45px; font-family: var(--font-code); color: var(--primary); margin-bottom: 20px;"><span id="typed"></span></div>
+            <h1 style="font-size: 5rem; line-height: 1; margin-bottom: 15px;" data-aos="fade-up">Dimitrios <br><span class="gradient-text">Cholevas.</span></h1>
+            <div style="font-size: 1.8rem; font-weight: 300; min-height: 50px; font-family: var(--font-code); color: var(--text-main); opacity: 0.9; margin-bottom: 40px;" data-aos="fade-up" data-aos-delay="100"><span id="typed"></span></div>
             
-            <div class="grid" style="margin-top: 10px;">
-                <div class="card" style="grid-column: span 2;" data-aos="fade-up">
-                    <h3 data-i18n="story_title" style="margin-bottom: 15px; font-size: 1.5rem;">Professional Overview</h3>
-                    <p data-i18n="story_desc" style="font-size: 1.1rem; color: var(--text-dim);">Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.</p>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <div class="grid">
+                <div class="card" style="grid-column: span 2;" data-aos="fade-up" data-aos-delay="200">
+                    <h3 data-i18n="story_title" style="margin-bottom: 20px; font-size: 1.8rem; color: #fff;">Executive Summary</h3>
+                    <p data-i18n="story_desc" style="font-size: 1.15rem; color: var(--text-dim);">Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
                         <a href="Dimitrios_Cholevas_CV.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume</span></a>
                         <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="cv-btn cv-btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                     </div>
@@ -172,13 +203,13 @@
             </div>
 
             <!-- NEWS / BLOG SECTION -->
-            <div style="margin-top: 60px;">
-                <h3 class="section-subtitle" data-i18n="news_header">Recent Updates & Activity</h3>
-                <div class="grid" style="margin-top: 10px;">
+            <div style="margin-top: 80px;">
+                <h3 class="section-subtitle" data-i18n="news_header">Latest Intelligence</h3>
+                <div class="grid">
                     <!-- Event Post -->
-                    <div class="card news-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card news-card" data-aos="fade-up">
                         <span class="card-meta" data-i18n="news_event_date">LATEST EVENT</span>
-                        <h4 data-i18n="news_event_title">UniAI 1st External Event: AI for Good</h4>
+                        <h4 data-i18n="news_event_title" class="gradient-text" style="font-size:1.8rem;">UniAI 1st External Event: AI for Good</h4>
                         <p data-i18n="news_event_desc">We recently announced UniAI's first external event focusing on how Artificial Intelligence can be leveraged for social good. Extremely proud of the team's ongoing initiatives!</p>
                         <div class="news-links">
                             <a href="https://www.linkedin.com/posts/uniai_ai-for-good-%CE%BC%CF%80%CE%BF%CF%81%CE%B5%CE%AF-%CE%B7-%CF%84%CE%B5%CF%87%CE%BD%CE%B7%CF%84%CE%AE-%CE%BD%CE%BF%CE%B7%CE%BC%CE%BF%CF%83%CF%8D%CE%BD%CE%B7-activity-7524151564052295680-iP6a" target="_blank" class="proj-link">
@@ -187,13 +218,13 @@
                         </div>
                     </div>
                     <!-- Joined UniAI Post -->
-                    <div class="card news-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card news-card" data-aos="fade-up" data-aos-delay="150">
                         <span class="card-meta" data-i18n="news_uniai_date">OCTOBER 2026</span>
                         <h4 data-i18n="news_uniai_title">Joined the UniAI Community Team</h4>
                         <p data-i18n="news_uniai_desc">Happy to be a part of the UniAI team! We are working on some exciting things!!! My focus will be on leading the recruitment process and fostering open dialogue within our AI ecosystem.</p>
                         <div class="news-links">
-                            <a href="https://lnkd.in/p/dKHtXYCF" target="_blank" class="proj-link"><i class="fa-brands fa-linkedin"></i> <span data-i18n="news_uniai_link1">My Announcement</span></a>
-                            <a href="https://lnkd.in/p/dkZfNMN5" target="_blank" class="proj-link"><i class="fa-solid fa-users"></i> <span data-i18n="news_uniai_link2">Meet The Team</span></a>
+                            <a href="https://lnkd.in/p/dKHtXYCF" target="_blank" class="proj-link"><i class="fa-solid fa-bullhorn"></i> <span data-i18n="news_uniai_link1">My Announcement</span></a>
+                            <a href="https://lnkd.in/p/dkZfNMN5" target="_blank" class="proj-link"><i class="fa-solid fa-users-viewfinder"></i> <span data-i18n="news_uniai_link2">Meet The Team</span></a>
                         </div>
                     </div>
                 </div>
@@ -202,11 +233,11 @@
 
         <!-- EDUCATION SECTION -->
         <section id="edu" class="content-section">
-            <h2 data-i18n="edu_title">Academic <span class="accent">Background</span></h2>
+            <h2 data-i18n="edu_title">Academic <span class="gradient-text">Background</span></h2>
             <div class="grid">
                 <div class="card" data-aos="fade-up">
                     <span class="card-meta">OCT 2026 - PRESENT</span>
-                    <h3 data-i18n="edu_msc_uni">NKUA (EKPA) - MSc</h3>
+                    <h3 data-i18n="edu_msc_uni" style="font-size: 1.5rem; margin-bottom:10px;">NKUA (EKPA) - MSc</h3>
                     <p data-i18n="edu_msc_desc">M.Sc. in Informatics – Specialization: Data, Information and Knowledge Management.</p>
                     <div class="tag-container">
                         <span class="tag">Data Management</span><span class="tag">Knowledge Systems</span><span class="tag">Data Analytics</span>
@@ -214,29 +245,29 @@
                 </div>
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <span class="card-meta">OCT 2021 - OCT 2026</span>
-                    <h3 data-i18n="edu_uni">NKUA (EKPA) - BSc</h3>
+                    <h3 data-i18n="edu_uni" style="font-size: 1.5rem; margin-bottom:10px;">NKUA (EKPA) - BSc</h3>
                     <p data-i18n="edu_desc">B.Sc. in Computer Science & Telecommunications. Focused on Networks, Systems Programming, and Operating Systems.</p>
                     <div class="tag-container">
                         <span class="tag">Operating Systems</span><span class="tag">AI</span><span class="tag">Networks</span><span class="tag">Databases</span>
                     </div>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="150" style="border: 1px solid rgba(34, 211, 238, 0.3);">
+                <div class="card" data-aos="fade-up" data-aos-delay="150">
                     <span class="card-meta">ACADEMIC PORTFOLIO</span>
-                    <h3 data-i18n="portfolio_title">Computational Learning Theory</h3>
+                    <h3 data-i18n="portfolio_title" style="font-size: 1.5rem; margin-bottom:10px;">Computational Learning Theory</h3>
                     <p data-i18n="portfolio_desc">Collection of 7 advanced academic assignments containing rigorous mathematical proofs and PAC learning error bounds written in LaTeX.</p>
-                    <div class="tag-container">
-                        <span class="tag">PAC Learning</span><span class="tag">VC Dimension</span><span class="tag">SGD</span><span class="tag">LaTeX</span>
+                    <div class="tag-container" style="margin-bottom: 25px;">
+                        <span class="tag">PAC Learning</span><span class="tag">VC Dimension</span><span class="tag">LaTeX</span>
                     </div>
-                    <a href="https://github.com/holevasdimitrios/computational-learning-theory" target="_blank" class="proj-link" style="margin-top: 15px;">
+                    <a href="https://github.com/holevasdimitrios/computational-learning-theory" target="_blank" class="proj-link">
                         <i class="fa-brands fa-github"></i> <span data-i18n="portfolio_link">View Repository</span>
                     </a>
                 </div>
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <span class="card-meta">CERTIFICATIONS & TRAINING</span>
-                    <h3 data-i18n="ped_title">Certifications & eTwinning</h3>
+                    <h3 data-i18n="ped_title" style="font-size: 1.5rem; margin-bottom:10px;">Certifications & eTwinning</h3>
                     <p data-i18n="ped_desc">Completed pedagogical adequacy and official certifications including ITE 2: Introduction to eTwinning & ESEP, alongside Erasmus+ Mobility training.</p>
                     <div class="tag-container">
-                        <span class="tag">eTwinning</span><span class="tag">Erasmus+</span><span class="tag">Pedagogy</span><span class="tag">Digital Marketing</span>
+                        <span class="tag">eTwinning</span><span class="tag">Erasmus+</span><span class="tag">Pedagogy</span>
                     </div>
                 </div>
             </div>
@@ -244,72 +275,67 @@
 
         <!-- EXPERIENCE SECTION -->
         <section id="work" class="content-section">
-            <h2 data-i18n="work_title">Career <span class="accent">Milestones</span></h2>
+            <h2 data-i18n="work_title">Career <span class="gradient-text">Milestones</span></h2>
             <div class="grid">
-                <div class="card" data-aos="fade-right">
+                <div class="card" data-aos="fade-up">
                     <span class="card-meta">OCT 2026 - PRESENT</span>
-                    <h3 data-i18n="work_uniai_title">Community Team Member</h3>
-                    <p data-i18n="work_uniai_loc">UniAI | Remote</p>
+                    <h3 data-i18n="work_uniai_title" style="font-size: 1.6rem;">Community Team Member</h3>
+                    <p data-i18n="work_uniai_loc" style="font-family: var(--font-code); margin-bottom: 15px; color:#fff;">UniAI | Remote</p>
                     <p data-i18n="work_uniai_desc">Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback. Fostering an inclusive ecosystem for AI enthusiasts.</p>
                     <div class="tag-container">
                         <span class="tag">Community Management</span><span class="tag">Recruitment</span><span class="tag">Event Organization</span>
                     </div>
-                    <a href="https://www.linkedin.com/company/uniai/" target="_blank" class="proj-link" style="margin-top:20px;">
+                    <a href="https://www.linkedin.com/company/uniai/" target="_blank" class="proj-link" style="margin-top:25px;">
                         <i class="fa-brands fa-linkedin"></i> <span data-i18n="work_uniai_link">UniAI Official Page</span>
                     </a>
                 </div>
-                <div class="card" data-aos="fade-right" data-aos-delay="100">
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <span class="card-meta">APR 2026 - OCT 2026</span>
-                    <h3 data-i18n="intern_title">Information Technology Support Specialist</h3>
-                    <p data-i18n="intern_loc">Municipality of Kalambaka | Internship</p>
+                    <h3 data-i18n="intern_title" style="font-size: 1.6rem;">IT Support Specialist</h3>
+                    <p data-i18n="intern_loc" style="font-family: var(--font-code); margin-bottom: 15px; color:#fff;">Municipality of Kalambaka | Internship</p>
                     <p data-i18n="intern_desc">Provided technical support to users and administrative services, and troubleshot hardware, software, and network configuration issues.</p>
                     <div class="tag-container">
                         <span class="tag">Technical Support</span><span class="tag">Sys Admin</span><span class="tag">Networking</span>
                     </div>
                 </div>
-                <div class="card" data-aos="fade-right" data-aos-delay="200">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <span class="card-meta">BARCELONA, SPAIN | 2019</span>
-                    <h3 data-i18n="erasmus_title">Erasmus+ Barcelona</h3>
+                    <h3 data-i18n="erasmus_title" style="font-size: 1.6rem;">Erasmus+ Barcelona</h3>
                     <p data-i18n="erasmus_desc">Mobility program focusing on Mobile Application Development and Digital Marketing strategies.</p>
                     <div class="tag-container">
                         <span class="tag">Android</span><span class="tag">UI/UX Layouts</span><span class="tag">Marketing</span>
                     </div>
-                </div>
-                <div class="card" data-aos="fade-right" data-aos-delay="300">
-                    <span class="card-meta">MARCH 2023 - PRESENT</span>
-                    <h3 data-i18n="judge_title">STEM Judge @ Athens College</h3>
-                    <p data-i18n="judge_desc">Member of the Scientific Committee & Official Evaluator for the Greek National Educational Robotics & STEM Competition.</p>
                 </div>
             </div>
         </section>
 
         <!-- SKILLS SECTION -->
         <section id="skills" class="content-section">
-            <h2 data-i18n="skills_title">Arsenal & <span class="accent">Expertise</span></h2>
+            <h2 data-i18n="skills_title">Arsenal & <span class="gradient-text">Expertise</span></h2>
             <div class="grid">
                 <div class="card" data-aos="zoom-in">
-                    <h3 data-i18n="prog_title">Programming Languages</h3>
+                    <h3 data-i18n="prog_title" style="font-size: 1.4rem;">Programming Languages</h3>
                     <div class="tag-container">
-                        <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">HTML</span>
+                        <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">HTML/CSS</span>
                     </div>
                 </div>
                 <div class="card" data-aos="zoom-in" data-aos-delay="100">
-                    <h3 data-i18n="tools_title">Productivity Tools</h3>
+                    <h3 data-i18n="tools_title" style="font-size: 1.4rem;">Productivity Tools</h3>
                     <div class="tag-container">
-                        <span class="tag">Excel (Advanced Formulas)</span><span class="tag">PowerPoint</span><span class="tag">Canva</span><span class="tag">Google Workspace</span><span class="tag">Git</span>
+                        <span class="tag">Excel (Advanced)</span><span class="tag">PowerPoint</span><span class="tag">Git</span>
                     </div>
                 </div>
                 <div class="card" data-aos="zoom-in" data-aos-delay="200">
-                    <h3 data-i18n="lang_title">Languages</h3>
+                    <h3 data-i18n="lang_title" style="font-size: 1.4rem;">Languages</h3>
                     <div class="tag-container">
-                        <span class="tag">Greek (Native / Μητρική)</span><span class="tag">English (C2 Proficiency - LRN)</span>
+                        <span class="tag">Greek (Native)</span><span class="tag">English (C2 - LRN)</span>
                     </div>
                 </div>
                 <div class="card" data-aos="zoom-in" data-aos-delay="300">
-                    <h3 data-i18n="soft_title">Research & Tech Interests</h3>
-                    <p data-i18n="interests_desc" style="margin-top: 10px; color: var(--text-dim);">Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.</p>
+                    <h3 data-i18n="soft_title" style="font-size: 1.4rem; margin-bottom: 15px;">Research & Tech Interests</h3>
+                    <p data-i18n="interests_desc" style="color: var(--text-dim);">Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.</p>
                     <div class="tag-container">
-                        <span class="tag">Artificial Intelligence</span><span class="tag">Cybersecurity (SOC)</span><span class="tag">Data Management</span><span class="tag">Telecoms & Networks</span>
+                        <span class="tag">AI / ML</span><span class="tag">Cybersecurity</span><span class="tag">Data Management</span>
                     </div>
                 </div>
             </div>
@@ -317,18 +343,22 @@
 
         <!-- CONTACT SECTION -->
         <section id="contact" class="content-section">
-            <h2 data-i18n="cont_title">Let's <span class="accent">Connect</span></h2>
+            <h2 data-i18n="cont_title">Let's <span class="gradient-text">Connect</span></h2>
             <div class="grid">
-                <div class="card" style="text-align: center;" data-aos="fade-up">
-                    <i class="fa-solid fa-paper-plane" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h3>Direct Email</h3>
-                    <p style="color: var(--text-dim); margin: 10px 0;">holevasdimitrios71@gmail.com</p>
+                <div class="card" style="text-align: center; display: flex; flex-direction: column; align-items: center;" data-aos="fade-up">
+                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                        <i class="fa-solid fa-paper-plane" style="font-size: 2rem; color: var(--primary);"></i>
+                    </div>
+                    <h3 style="font-size: 1.8rem;">Direct Email</h3>
+                    <p style="color: var(--text-dim); margin: 15px 0;">holevasdimitrios71@gmail.com</p>
                     <a href="mailto:holevasdimitrios71@gmail.com" class="cv-btn">Send Message</a>
                 </div>
-                <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fa-brands fa-linkedin" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h3>LinkedIn</h3>
-                    <p style="color: var(--text-dim); margin: 10px 0;">Open to professional networking</p>
+                <div class="card" style="text-align: center; display: flex; flex-direction: column; align-items: center;" data-aos="fade-up" data-aos-delay="150">
+                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                        <i class="fa-brands fa-linkedin" style="font-size: 2.2rem; color: var(--primary);"></i>
+                    </div>
+                    <h3 style="font-size: 1.8rem;">LinkedIn</h3>
+                    <p style="color: var(--text-dim); margin: 15px 0;">Open to professional networking</p>
                     <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="cv-btn">View Profile</a>
                 </div>
             </div>
@@ -336,33 +366,65 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Dimitrios Cholevas. Crafted for functionality and web accessibility.</p>
+        <p style="font-weight: 500;">&copy; 2026 Dimitrios Cholevas. Engineered with precision.</p>
         <div class="system-status">
-            <div class="live-dot"></div> Athens, GR &bull; System Online &bull; <span id="live-clock">--:--:--</span>
+            <div class="live-dot"></div> Athens, GR &bull; System Active &bull; <span id="live-clock">--:--:--</span>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
-        // Particles Background Core Config
+        // Custom Extravagant Cursor Logic
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 300, fill: "forwards" });
+        });
+
+        // Hover Effect on Cursor for interactive elements
+        document.querySelectorAll('a, button, .card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(34, 211, 238, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Subtle Stardust Background Config (Minimalist Particles)
         particlesJS("particles-js", {
-            "particles": { "number": { "value": 60 }, "color": { "value": "#22d3ee" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1 } },
-            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
+            "particles": { "number": { "value": 80 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4 }, "size": { "value": 1.5 }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 0.4, "direction": "none", "random": true, "out_mode": "out" } },
+            "interactivity": { "events": { "onhover": { "enable": false } } }
         });
 
         // Initialize Animate On Scroll
-        AOS.init({ duration: 900, once: true, offset: 50 });
+        AOS.init({ duration: 1000, once: true, offset: 50 });
 
         // Dictionary Maps (EN / EL)
         const translations = {
             en: {
                 tab_about: "Profile", tab_edu: "Education", tab_work: "Experience", tab_skills: "Skills", tab_cont: "Contact",
-                story_title: "Professional Overview",
+                story_title: "Executive Summary",
                 story_desc: "Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.",
-                news_header: "Recent Updates & Activity",
+                news_header: "Latest Intelligence",
                 news_event_date: "LATEST EVENT",
                 news_event_title: "UniAI 1st External Event: AI for Good",
                 news_event_desc: "We recently announced UniAI's first external event focusing on how Artificial Intelligence can be leveraged for social good. Extremely proud of the team's ongoing initiatives!",
@@ -372,50 +434,48 @@
                 news_uniai_desc: "Happy to be a part of the UniAI team! We are working on some exciting things!!! My focus will be on leading the recruitment process and fostering open dialogue within our AI ecosystem.",
                 news_uniai_link1: "My Announcement",
                 news_uniai_link2: "Meet The Team",
-                edu_title: "Academic Background",
+                edu_title: "Academic",
                 edu_msc_uni: "NKUA (EKPA) - MSc", edu_msc_desc: "M.Sc. in Informatics – Specialization: Data, Information and Knowledge Management.",
                 edu_uni: "NKUA (EKPA) - BSc", edu_desc: "B.Sc. in Computer Science & Telecommunications. Focused on Networks, Systems Programming, and Operating Systems.",
                 ped_title: "Certifications & Training", ped_desc: "Completed pedagogical adequacy courses alongside official certifications, including ITE 2: Introduction to eTwinning and Erasmus+ Mobility.",
-                portfolio_title: "Computational Learning Theory Portfolio", portfolio_desc: "Curated collection of 7 advanced academic assignments containing rigorous mathematical proofs and non-asymptotic PAC learning error bounds written in LaTeX.",
+                portfolio_title: "Computational Learning Theory", portfolio_desc: "Curated collection of 7 advanced academic assignments containing rigorous mathematical proofs and non-asymptotic PAC learning error bounds written in LaTeX.",
                 portfolio_link: "View GitHub Repository",
-                work_title: "Career Milestones",
+                work_title: "Career",
                 work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback. Fostering an inclusive ecosystem for AI enthusiasts.", work_uniai_link: "UniAI Official Page",
                 intern_title: "IT Support Specialist", intern_loc: "Municipality of Kalambaka | Internship", intern_desc: "Provided technical support to users and administrative services, and troubleshot hardware, software, and network configuration issues.",
                 erasmus_title: "Erasmus+ Barcelona", erasmus_desc: "Mobility program focusing on Mobile Application Development and Digital Marketing strategies.",
-                judge_title: "STEM Judge @ Athens College", judge_desc: "Member of the Scientific Committee & Official Evaluator for the Greek National Educational Robotics & STEM Competition.",
-                skills_title: "Arsenal & Expertise", prog_title: "Programming Languages", tools_title: "Productivity Tools", lang_title: "Communication Languages", soft_title: "Research & Tech Interests",
+                skills_title: "Arsenal &", prog_title: "Programming Languages", tools_title: "Productivity Tools", lang_title: "Communication Languages", soft_title: "Research & Tech Interests",
                 interests_desc: "Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.",
-                cont_title: "Let's Connect", cv_download: "Download Resume",
+                cont_title: "Let's", cv_download: "Download Resume",
                 typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Data & AI Specialist."]
             },
             el: {
                 tab_about: "Προφίλ", tab_edu: "Σπουδές", tab_work: "Εμπειρία", tab_skills: "Δεξιότητες", tab_cont: "Επικοινωνία",
                 story_title: "Συνοπτικό Προφίλ",
                 story_desc: "Πρόσφατος απόφοιτος Πληροφορικής (BSc) από το ΕΚΠΑ και νυν μεταπτυχιακός φοιτητής (MSc) στη Διαχείριση Δεδομένων. Μεγάλο πάθος για την Τεχνητή Νοημοσύνη (AI), τη Μηχανική Μάθηση και την Κυβερνοασφάλεια (SOC/Blue Team). Λάτρης της συνεχούς μάθησης, της ομαδικότητας και της επίλυσης σύνθετων προβλημάτων σε περιβάλλοντα δεδομένων.",
-                news_header: "Πρόσφατα Νέα & Δραστηριότητα",
+                news_header: "Πρόσφατα Νέα",
                 news_event_date: "ΤΕΛΕΥΤΑΙΟ EVENT",
                 news_event_title: "UniAI 1st External Event: AI for Good",
                 news_event_desc: "Ανακοινώσαμε πρόσφατα το πρώτο external event της UniAI με θέμα το πώς η Τεχνητή Νοημοσύνη μπορεί να αξιοποιηθεί για το κοινό καλό. Είμαι πολύ περήφανος για τις δράσεις της ομάδας μας!",
-                news_event_link: "Πληροφορίες Event (LinkedIn)",
+                news_event_link: "Πληροφορίες Event",
                 news_uniai_date: "ΟΚΤΩΒΡΙΟΣ 2026",
                 news_uniai_title: "Νέο Μέλος στην Ομάδα Community της UniAI",
                 news_uniai_desc: "Είμαι πολύ χαρούμενος που αποτελώ πλέον μέρος της ομάδας της UniAI! Εστιάζω στη διαδικασία των προσλήψεων, την οργάνωση δράσεων και την ενδυνάμωση του δικτύου της κοινότητάς μας.",
                 news_uniai_link1: "Η Ανακοίνωσή μου",
                 news_uniai_link2: "Γνωρίστε την Ομάδα",
-                edu_title: "Σπουδές & Πιστοποιήσεις",
+                edu_title: "Ακαδημαϊκό",
                 edu_msc_uni: "ΕΚΠΑ - Μεταπτυχιακό (MSc)", edu_msc_desc: "M.Sc. στην Πληροφορική – Ειδίκευση: Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης.",
                 edu_uni: "ΕΚΠΑ - Πτυχίο (BSc)", edu_desc: "Πτυχίο Πληροφορικής & Τηλεπικοινωνιών. Εστίαση σε Δίκτυα Υπολογιστών, Λειτουργικά Συστήματα και Προγραμματισμό Συστήματος.",
                 ped_title: "Πιστοποιήσεις & Κατάρτιση", ped_desc: "Ολοκλήρωση κύκλου μαθημάτων διδακτικής επάρκειας και επίσημες πιστοποιήσεις, όπως ITE 2: Introduction to eTwinning και Erasmus+ Mobility.",
                 portfolio_title: "Υπολογιστική Θεωρία Μηχανικής Μάθησης", portfolio_desc: "Συλλογή από 7 ολοκληρωμένες θεωρητικές εργασίες με αυστηρές μαθηματικές αποδείξεις και PAC αναλύσεις, γραμμένες εξολοκλήρου σε LaTeX.",
                 portfolio_link: "Προβολή στο GitHub",
-                work_title: "Επαγγελματική Πορεία",
+                work_title: "Επαγγελματική",
                 work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Διαχείριση της διαδικασίας προσλήψεων (recruitment) και ενίσχυση των δεσμών της κοινότητας μέσω στοχευμένων δράσεων και ανάλυσης feedback.", work_uniai_link: "Επίσημη Σελίδα UniAI",
                 intern_title: "IT Support Specialist", intern_loc: "Δήμος Καλαμπάκας | Πρακτική Άσκηση", intern_desc: "Παροχή τεχνικής υποστήριξης σε χρήστες και διοικητικές υπηρεσίες του Δήμου, και επίλυση προβλημάτων hardware, software και δικτύου.",
                 erasmus_title: "Erasmus+ Βαρκελώνη", erasmus_desc: "Κινητικότητα με αντικείμενο το Mobile Application Development και τις στρατηγικές Digital Marketing.",
-                judge_title: "Κριτής STEM & Μέλος Επιστημονικής Επιτροπής", judge_desc: "Κολλέγιο Αθηνών - Αξιολογητής στον Πανελλήνιο Διαγωνισμό Εκπαιδευτικής Ρομποτικής & STEM.",
-                skills_title: "Δεξιότητες", prog_title: "Γλώσσες Προγραμματισμού", tools_title: "Ψηφιακά Εργαλεία", lang_title: "Γλώσσες", soft_title: "Ερευνητικά & Τεχνολογικά Ενδιαφέροντα",
+                skills_title: "Εξειδίκευση &", prog_title: "Γλώσσες Προγραμματισμού", tools_title: "Ψηφιακά Εργαλεία", lang_title: "Γλώσσες", soft_title: "Ερευνητικά & Τεχνολογικά Ενδιαφέροντα",
                 interests_desc: "Εστίαση σε Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management και δίκτυα επόμενης γενιάς.",
-                cont_title: "Επικοινωνία", cv_download: "Κατέβασμα CV (PDF)",
+                cont_title: "Ας", cv_download: "Κατέβασμα CV (PDF)",
                 typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Data & AI Specialist."]
             }
         };
@@ -425,7 +485,6 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
-            // Refresh AOS specifically for elements within the active tab
             setTimeout(() => { AOS.refresh(); }, 100);
         }
 
@@ -435,9 +494,7 @@
         function updateContent() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.innerText = translations[currentLang][key];
-                }
+                if (translations[currentLang][key]) { el.innerText = translations[currentLang][key]; }
             });
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
             if (typedInstance) typedInstance.destroy();
@@ -457,12 +514,7 @@
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yPanel = document.getElementById('a11yPanel');
         a11yBtn.addEventListener('click', () => a11yPanel.classList.toggle('active'));
-
-        window.addEventListener('click', (e) => {
-            if (!a11yBtn.contains(e.target) && !a11yPanel.contains(e.target)) {
-                a11yPanel.classList.remove('active');
-            }
-        });
+        window.addEventListener('click', (e) => { if (!a11yBtn.contains(e.target) && !a11yPanel.contains(e.target)) { a11yPanel.classList.remove('active'); } });
 
         let fontMod = 100;
         function adjustFont(m) { fontMod *= m; if(fontMod > 135) fontMod = 135; if(fontMod < 85) fontMod = 85; document.documentElement.style.setProperty('--font-scale', fontMod + '%'); }
@@ -471,12 +523,10 @@
 
         updateContent();
 
-        // Live Digital Clock & System Status Script
+        // Live Digital Clock
         function updateClock() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-GB');
-            const clockEl = document.getElementById('live-clock');
-            if (clockEl) clockEl.innerText = timeString;
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-GB');
         }
         setInterval(updateClock, 1000);
         updateClock();

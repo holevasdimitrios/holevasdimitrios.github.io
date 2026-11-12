@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimitrios Cholevas</title>
+    <title>Dimitrios Cholevas | MSc Student & Data Specialist</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,9 +23,7 @@
         }
 
         /* Accessibility Modifiers */
-        body.high-contrast {
-            --bg-dark: #000; --surface-dark: #000; --primary: #ffff00; --text-main: #fff; --text-dim: #fff;
-        }
+        body.high-contrast { --bg-dark: #000; --surface-dark: #000; --primary: #ffff00; --text-main: #fff; --text-dim: #fff; }
         body.underline-links a, body.underline-links .tab-btn { text-decoration: underline !important; }
         body.grayscale { filter: grayscale(100%); }
 
@@ -39,7 +37,7 @@
         }
 
         /* Particles Background */
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
 
         /* Navigation */
         nav {
@@ -48,11 +46,10 @@
             background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px);
             z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); font-family: var(--font-code); text-decoration: none; letter-spacing: -0.5px; }
         
         .nav-right { display: flex; align-items: center; gap: 15px; }
 
-        /* Tabs in Navbar */
         .nav-tabs { display: flex; gap: 5px; }
         .tab-btn {
             background: transparent; border: none; color: var(--text-dim);
@@ -64,65 +61,66 @@
 
         .lang-switch {
             background: var(--surface-dark); border: 1px solid var(--primary); color: var(--primary);
-            padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font-code); font-weight: bold;
+            padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--font-code); font-weight: bold; transition: 0.3s;
         }
+        .lang-switch:hover { background: var(--primary); color: #000; }
 
         /* Sections */
         main { margin-top: 100px; }
         .content-section { display: none; padding: 60px 8%; min-height: 75vh; }
-        .content-section.active { display: block; animation: fadeInUp 0.6s ease; }
+        .content-section.active { display: block; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 2.8rem; margin-bottom: 30px; font-weight: 800; }
+        h2 { font-size: 2.8rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
         .accent { color: var(--primary); }
-
-        /* Terminal Mini-Game Style */
-        .terminal {
-            background: #000; border: 1px solid var(--primary); border-radius: 12px;
-            padding: 20px; font-family: var(--font-code); color: #fff; margin-top: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); font-size: 0.9rem;
-        }
-        .terminal-header { display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .terminal-body { height: 200px; overflow-y: auto; scrollbar-width: none; }
-        .terminal-input-line { display: flex; gap: 10px; align-items: center; }
-        .terminal-input { background: transparent; border: none; color: var(--primary); width: 100%; outline: none; font-family: inherit; }
+        .section-subtitle { display: inline-block; font-size: 1.5rem; border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-bottom: 25px; font-weight: 600; color: var(--text-main); }
 
         /* Cards Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
         .card {
-            background: var(--surface-dark); padding: 30px; border-radius: 20px;
+            background: var(--surface-dark); padding: 35px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1); }
-        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 8px; display: block; font-weight: bold; }
-        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tag { background: rgba(34, 211, 238, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; }
+        .card:hover { transform: translateY(-6px); border-color: rgba(34, 211, 238, 0.3); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); }
+        .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 12px; display: block; font-weight: bold; letter-spacing: 1px; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .tag { background: rgba(34, 211, 238, 0.08); color: var(--primary); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(34, 211, 238, 0.1); }
+
+        /* News / Updates Styling */
+        .news-card { border-left: 4px solid var(--primary); }
+        .news-card h4 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; }
+        .news-card p { color: var(--text-dim); font-size: 0.95rem; }
 
         /* A11y Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
-        .a11y-toggle { width: 55px; height: 55px; border-radius: 50%; background: var(--primary); color: #000; border: none; cursor: pointer; font-size: 1.4rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4); }
+        .a11y-toggle { width: 55px; height: 55px; border-radius: 50%; background: var(--surface-dark); color: var(--primary); border: 1px solid var(--primary); cursor: pointer; font-size: 1.4rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); transition: 0.3s; }
+        .a11y-toggle:hover { background: var(--primary); color: #000; }
         .a11y-panel { position: absolute; bottom: 70px; left: 0; width: 260px; background: var(--surface-dark); border: 1px solid var(--primary); border-radius: 12px; padding: 15px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
         .a11y-panel.active { display: flex; }
-        .a11y-panel button { padding: 10px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; border-radius: 6px; }
+        .a11y-panel button { padding: 10px; border: none; background: rgba(255,255,255,0.05); color: #fff; text-align: left; cursor: pointer; border-radius: 6px; transition: 0.2s; }
         .a11y-panel button:hover { background: var(--primary); color: #000; }
 
-        .cv-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; background: var(--primary); color: #000; border-radius: 30px; text-decoration: none; font-weight: 800; margin-top: 20px; transition: 0.3s; }
-        .cv-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(34, 211, 238, 0.4); }
+        /* Buttons & Links */
+        .cv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 30px; background: var(--primary); color: #000; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 25px; transition: 0.3s; letter-spacing: 0.5px; }
+        .cv-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2); }
+        .cv-btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .cv-btn-outline:hover { background: var(--primary); color: #000; }
 
-        .proj-link { color: var(--primary); text-decoration: none; font-weight: bold; font-family: var(--font-code); display: inline-flex; align-items: center; gap: 5px; margin-top: 15px; transition: 0.2s; }
-        .proj-link:hover { color: var(--secondary); text-shadow: 0 0 8px var(--primary); }
+        .proj-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; transition: 0.2s; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+        .proj-link:hover { color: #fff; border-bottom-color: #fff; }
 
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
-        .system-status { margin-top: 8px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; margin-top: 40px; }
+        .system-status { margin-top: 12px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .live-dot { width: 8px; height: 8px; background-color: #27c93f; border-radius: 50%; box-shadow: 0 0 8px #27c93f; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         @media (max-width: 900px) {
-            nav { flex-direction: column; padding: 10px; height: auto; }
-            .nav-tabs { flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
-            main { margin-top: 160px; }
-            h2 { font-size: 2rem; }
+            nav { flex-direction: column; padding: 15px; height: auto; }
+            .nav-tabs { flex-wrap: wrap; justify-content: center; margin-top: 15px; margin-bottom: 10px; }
+            main { margin-top: 180px; }
+            h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -156,36 +154,44 @@
     </nav>
 
     <main>
+        <!-- PROFILE / ABOUT SECTION -->
         <section id="about" class="content-section active">
-            <h1 style="font-size: 4rem; font-weight: 800;" data-aos="fade-right">Dimitrios <span class="accent">Cholevas</span></h1>
-            <div style="font-size: 2rem; min-height: 50px; font-family: var(--font-code); color: var(--primary);"><span id="typed"></span></div>
+            <h1 style="font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px;" data-aos="fade-right">Dimitrios <span class="accent">Cholevas</span></h1>
+            <div style="font-size: 1.8rem; min-height: 45px; font-family: var(--font-code); color: var(--primary); margin-bottom: 20px;"><span id="typed"></span></div>
             
-            <div class="grid">
-                <div class="card" style="grid-column: span 2;">
-                    <h3 data-i18n="story_title">About</h3>
-                    <p data-i18n="story_desc">Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving.</p>
-                    
-                    <div class="terminal" data-aos="zoom-in">
-                        <div class="terminal-header">
-                            <div class="dot" style="background:#ff5f56"></div>
-                            <div class="dot" style="background:#ffbd2e"></div>
-                            <div class="dot" style="background:#27c93f"></div>
-                            <span style="font-size:0.7rem; color:#666; margin-left:10px">guest@Cholevas-pc: ~</span>
-                        </div>
-                        <div class="terminal-body" id="termBody">
-                            <div>Welcome! Type 'help' to see available commands.</div>
-                        </div>
-                        <div class="terminal-input-line">
-                            <span>$</span>
-                            <input type="text" class="terminal-input" id="termInput" autofocus autocomplete="off">
-                        </div>
+            <div class="grid" style="margin-top: 10px;">
+                <div class="card" style="grid-column: span 2;" data-aos="fade-up">
+                    <h3 data-i18n="story_title" style="margin-bottom: 15px; font-size: 1.5rem;">Professional Overview</h3>
+                    <p data-i18n="story_desc" style="font-size: 1.1rem; color: var(--text-dim);">Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="Dimitrios_Cholevas_CV.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download Resume</span></a>
+                        <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="cv-btn cv-btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                     </div>
-                    
-                    <a href="Dimitrios_Cholevas_CV.pdf" target="_blank" class="cv-btn"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="cv_download">Download My CV</span></a>
+                </div>
+            </div>
+
+            <!-- NEWS / BLOG SECTION -->
+            <div style="margin-top: 60px;">
+                <h3 class="section-subtitle" data-i18n="news_header">Recent Updates & Activity</h3>
+                <div class="grid" style="margin-top: 10px;">
+                    <div class="card news-card" data-aos="fade-up" data-aos-delay="100">
+                        <span class="card-meta" data-i18n="news_uniai_date">NOVEMBER 2026</span>
+                        <h4 data-i18n="news_uniai_title">Joined the UniAI Community Team</h4>
+                        <p data-i18n="news_uniai_desc">Happy to be a part of the UniAI team! We are working on some exciting things. My focus will be on leading the recruitment process, fostering open dialogue, and building strong connections within our AI community ecosystem.</p>
+                        <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="proj-link">
+                            <span data-i18n="news_uniai_link">View Post</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card news-card" data-aos="fade-up" data-aos-delay="200">
+                        <span class="card-meta" data-i18n="news_msc_date">OCTOBER 2026</span>
+                        <h4 data-i18n="news_msc_title">Commenced M.Sc. at NKUA</h4>
+                        <p data-i18n="news_msc_desc">A new academic chapter has begun! Successfully completed my B.Sc. and officially started my Master's degree in Informatics, specializing in Data, Information, and Knowledge Management at the National and Kapodistrian University of Athens.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- EDUCATION SECTION -->
         <section id="edu" class="content-section">
             <h2 data-i18n="edu_title">Academic <span class="accent">Background</span></h2>
             <div class="grid">
@@ -194,7 +200,7 @@
                     <h3 data-i18n="edu_msc_uni">NKUA (EKPA) - MSc</h3>
                     <p data-i18n="edu_msc_desc">M.Sc. in Informatics – Specialization: Data, Information and Knowledge Management.</p>
                     <div class="tag-container">
-                        <span class="tag">Data Management</span><span class="tag">Knowledge Systems</span>
+                        <span class="tag">Data Management</span><span class="tag">Knowledge Systems</span><span class="tag">Data Analytics</span>
                     </div>
                 </div>
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -227,6 +233,7 @@
             </div>
         </section>
 
+        <!-- EXPERIENCE SECTION -->
         <section id="work" class="content-section">
             <h2 data-i18n="work_title">Career <span class="accent">Milestones</span></h2>
             <div class="grid">
@@ -234,10 +241,13 @@
                     <span class="card-meta">OCT 2026 - PRESENT</span>
                     <h3 data-i18n="work_uniai_title">Community Team Member</h3>
                     <p data-i18n="work_uniai_loc">UniAI | Remote</p>
-                    <p data-i18n="work_uniai_desc">Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback.</p>
+                    <p data-i18n="work_uniai_desc">Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback. Fostering an inclusive ecosystem for AI enthusiasts.</p>
                     <div class="tag-container">
                         <span class="tag">Community Management</span><span class="tag">Recruitment</span><span class="tag">Event Organization</span>
                     </div>
+                    <a href="https://www.linkedin.com/company/uniai-hub/" target="_blank" class="proj-link" style="margin-top:15px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-link"></i> <span data-i18n="work_uniai_link">UniAI Official Page</span>
+                    </a>
                 </div>
                 <div class="card" data-aos="fade-right" data-aos-delay="100">
                     <span class="card-meta">APR 2026 - OCT 2026</span>
@@ -264,6 +274,7 @@
             </div>
         </section>
 
+        <!-- SKILLS SECTION -->
         <section id="skills" class="content-section">
             <h2 data-i18n="skills_title">Arsenal & <span class="accent">Expertise</span></h2>
             <div class="grid">
@@ -287,7 +298,7 @@
                 </div>
                 <div class="card" data-aos="zoom-in" data-aos-delay="300">
                     <h3 data-i18n="soft_title">Research & Tech Interests</h3>
-                    <p data-i18n="interests_desc">Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.</p>
+                    <p data-i18n="interests_desc" style="margin-top: 10px; color: var(--text-dim);">Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.</p>
                     <div class="tag-container">
                         <span class="tag">Artificial Intelligence</span><span class="tag">Cybersecurity (SOC)</span><span class="tag">Data Management</span><span class="tag">Telecoms & Networks</span>
                     </div>
@@ -295,19 +306,20 @@
             </div>
         </section>
 
+        <!-- CONTACT SECTION -->
         <section id="contact" class="content-section">
-            <h2 data-i18n="cont_title">Let's <span class="accent">Talk</span></h2>
+            <h2 data-i18n="cont_title">Let's <span class="accent">Connect</span></h2>
             <div class="grid">
-                <div class="card" style="text-align: center;">
+                <div class="card" style="text-align: center;" data-aos="fade-up">
                     <i class="fa-solid fa-paper-plane" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>Direct Email</h3>
-                    <p>holevasdimitrios71@gmail.com</p>
-                    <a href="mailto:holevasdimitrios71@gmail.com" class="cv-btn" id="emailBtn">Send Message</a>
+                    <p style="color: var(--text-dim); margin: 10px 0;">holevasdimitrios71@gmail.com</p>
+                    <a href="mailto:holevasdimitrios71@gmail.com" class="cv-btn">Send Message</a>
                 </div>
-                <div class="card" style="text-align: center;">
+                <div class="card" style="text-align: center;" data-aos="fade-up" data-aos-delay="100">
                     <i class="fa-brands fa-linkedin" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                     <h3>LinkedIn</h3>
-                    <p>Let's connect professionally</p>
+                    <p style="color: var(--text-dim); margin: 10px 0;">Open to professional networking</p>
                     <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="cv-btn">View Profile</a>
                 </div>
             </div>
@@ -324,55 +336,31 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
         // Particles Background Core Config
         particlesJS("particles-js", {
-            "particles": { "number": { "value": 70 }, "color": { "value": "#22d3ee" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1 } },
+            "particles": { "number": { "value": 60 }, "color": { "value": "#22d3ee" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1 } },
             "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
         });
 
-        AOS.init({ duration: 800, once: true });
-
-        // Terminal Game Logic Engine
-        const termInput = document.getElementById('termInput');
-        const termBody = document.getElementById('termBody');
-        termInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = termInput.value.toLowerCase().trim();
-                const newLine = document.createElement('div');
-                newLine.innerHTML = `<span style="color:var(--primary)">$</span> ${cmd}`;
-                termBody.appendChild(newLine);
-                
-                const response = document.createElement('div');
-                response.style.color = "#94a3b8";
-                if (cmd === 'help') response.innerHTML = "Commands: bio, skills, ai, security, location, contact, clear, win";
-                else if (cmd === 'bio') response.innerHTML = "MSc Student @ NKUA & Community Team Member @ UniAI.";
-                else if (cmd === 'skills') response.innerHTML = "Python, C, C++, SQL, Linux, Windows, TCP/IP, Git.";
-                else if (cmd === 'ai') response.innerHTML = "Passionate about Machine Learning, PAC learning, and AI concepts.";
-                else if (cmd === 'security') response.innerHTML = "Focused on Cybersecurity, SOC operations, and Blue Team defense.";
-                else if (cmd === 'location') response.innerHTML = "Based in Athens, Greece.";
-                else if (cmd === 'contact') response.innerHTML = "Email: holevasdimitrios71@gmail.com";
-                else if (cmd === 'win') {
-                    response.innerHTML = "🎉 YOU DISCOVERED THE SECRET CONFETTI CORNER!";
-                    confetti();
-                }
-                else if (cmd === 'clear') { termBody.innerHTML = ''; response.innerHTML = ""; }
-                else response.innerHTML = "Command not found. Type 'help'.";
-                
-                termBody.appendChild(response);
-                termInput.value = '';
-                termBody.scrollTop = termBody.scrollHeight;
-            }
-        });
+        // Initialize Animate On Scroll
+        AOS.init({ duration: 800, once: true, offset: 50 });
 
         // Dictionary Maps (EN / EL)
         const translations = {
             en: {
                 tab_about: "Profile", tab_edu: "Education", tab_work: "Experience", tab_skills: "Skills", tab_cont: "Contact",
-                story_title: "About",
-                story_desc: "Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving.",
+                story_title: "Professional Overview",
+                story_desc: "Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.",
+                news_header: "Recent Updates & Activity",
+                news_uniai_date: "NOVEMBER 2026",
+                news_uniai_title: "Joined the UniAI Community Team",
+                news_uniai_desc: "Happy to be a part of the UniAI team! We are working on some exciting things. My focus will be on leading the recruitment process, fostering open dialogue, and building strong connections within our AI community ecosystem.",
+                news_uniai_link: "View Post",
+                news_msc_date: "OCTOBER 2026",
+                news_msc_title: "Commenced M.Sc. at NKUA",
+                news_msc_desc: "A new academic chapter has begun! Successfully completed my B.Sc. and officially started my Master's degree in Informatics, specializing in Data, Information, and Knowledge Management at the National and Kapodistrian University of Athens.",
                 edu_title: "Academic Background",
                 edu_msc_uni: "NKUA (EKPA) - MSc", edu_msc_desc: "M.Sc. in Informatics – Specialization: Data, Information and Knowledge Management.",
                 edu_uni: "NKUA (EKPA) - BSc", edu_desc: "B.Sc. in Computer Science & Telecommunications. Focused on Networks, Systems Programming, and Operating Systems.",
@@ -380,19 +368,27 @@
                 portfolio_title: "Computational Learning Theory Portfolio", portfolio_desc: "Curated collection of 7 advanced academic assignments containing rigorous mathematical proofs and non-asymptotic PAC learning error bounds written in LaTeX.",
                 portfolio_link: "View GitHub Repository",
                 work_title: "Career Milestones",
-                work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback.",
+                work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Leading the recruitment process across departments and enhancing network connections through targeted events and data-driven feedback. Fostering an inclusive ecosystem for AI enthusiasts.", work_uniai_link: "UniAI Official Page",
                 intern_title: "IT Support Specialist", intern_loc: "Municipality of Kalambaka | Internship", intern_desc: "Provided technical support to users and administrative services, and troubleshot hardware, software, and network configuration issues.",
                 erasmus_title: "Erasmus+ Barcelona", erasmus_desc: "Mobility program focusing on Mobile Application Development and Digital Marketing strategies.",
                 judge_title: "STEM Judge @ Athens College", judge_desc: "Member of the Scientific Committee & Official Evaluator for the Greek National Educational Robotics & STEM Competition.",
                 skills_title: "Arsenal & Expertise", prog_title: "Programming Languages", tools_title: "Productivity Tools", lang_title: "Communication Languages", soft_title: "Research & Tech Interests",
                 interests_desc: "Focusing on Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management, and next-generation networks.",
-                cont_title: "Let's Talk", cv_download: "Get My CV (PDF)",
-                typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Cybersecurity & AI Enthusiast."]
+                cont_title: "Let's Connect", cv_download: "Download Resume",
+                typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Data & AI Specialist."]
             },
             el: {
                 tab_about: "Προφίλ", tab_edu: "Σπουδές", tab_work: "Εμπειρία", tab_skills: "Δεξιότητες", tab_cont: "Επικοινωνία",
-                story_title: "Σχετικά με εμένα",
-                story_desc: "Πρόσφατος απόφοιτος Πληροφορικής (BSc) από το ΕΚΠΑ και νυν μεταπτυχιακός φοιτητής (MSc) στη Διαχείριση Δεδομένων. Μεγάλο πάθος για την Τεχνητή Νοημοσύνη (AI), τη Μηχανική Μάθηση και την Κυβερνοασφάλεια (SOC/Blue Team). Λάτρης της συνεχούς μάθησης, της ομαδικότητας και της επίλυσης σύνθετων προβλημάτων.",
+                story_title: "Συνοπτικό Προφίλ",
+                story_desc: "Πρόσφατος απόφοιτος Πληροφορικής (BSc) από το ΕΚΠΑ και νυν μεταπτυχιακός φοιτητής (MSc) στη Διαχείριση Δεδομένων. Μεγάλο πάθος για την Τεχνητή Νοημοσύνη (AI), τη Μηχανική Μάθηση και την Κυβερνοασφάλεια (SOC/Blue Team). Λάτρης της συνεχούς μάθησης, της ομαδικότητας και της επίλυσης σύνθετων προβλημάτων σε περιβάλλοντα δεδομένων.",
+                news_header: "Πρόσφατα Νέα & Δραστηριότητα",
+                news_uniai_date: "ΝΟΕΜΒΡΙΟΣ 2026",
+                news_uniai_title: "Νέο Μέλος στην Ομάδα Community της UniAI",
+                news_uniai_desc: "Πολύ χαρούμενος που αποτελώ πλέον μέρος της ομάδας της UniAI! Εστιάζω στη διαδικασία των προσλήψεων, την οργάνωση δράσεων και την ενδυνάμωση του δικτύου της κοινότητάς μας.",
+                news_uniai_link: "Προβολή Στο LinkedIn",
+                news_msc_date: "ΟΚΤΩΒΡΙΟΣ 2026",
+                news_msc_title: "Έναρξη Μεταπτυχιακού (MSc) στο ΕΚΠΑ",
+                news_msc_desc: "Ένα νέο ακαδημαϊκό κεφάλαιο ξεκίνησε! Ολοκλήρωσα επιτυχώς το πτυχίο μου (BSc) και ξεκίνησα επίσημα το μεταπτυχιακό μου με ειδίκευση στη Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης.",
                 edu_title: "Σπουδές & Πιστοποιήσεις",
                 edu_msc_uni: "ΕΚΠΑ - Μεταπτυχιακό (MSc)", edu_msc_desc: "M.Sc. στην Πληροφορική – Ειδίκευση: Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης.",
                 edu_uni: "ΕΚΠΑ - Πτυχίο (BSc)", edu_desc: "Πτυχίο Πληροφορικής & Τηλεπικοινωνιών. Εστίαση σε Δίκτυα Υπολογιστών, Λειτουργικά Συστήματα και Προγραμματισμό Συστήματος.",
@@ -400,14 +396,14 @@
                 portfolio_title: "Υπολογιστική Θεωρία Μηχανικής Μάθησης", portfolio_desc: "Συλλογή από 7 ολοκληρωμένες θεωρητικές εργασίες με αυστηρές μαθηματικές αποδείξεις και PAC αναλύσεις, γραμμένες εξολοκλήρου σε LaTeX.",
                 portfolio_link: "Προβολή στο GitHub",
                 work_title: "Επαγγελματική Πορεία",
-                work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Διαχείριση της διαδικασίας προσλήψεων (recruitment) και ενίσχυση των δεσμών της κοινότητας μέσω στοχευμένων δράσεων και ανάλυσης feedback.",
+                work_uniai_title: "Community Team Member", work_uniai_loc: "UniAI | Remote", work_uniai_desc: "Διαχείριση της διαδικασίας προσλήψεων (recruitment) και ενίσχυση των δεσμών της κοινότητας μέσω στοχευμένων δράσεων και ανάλυσης feedback.", work_uniai_link: "Επίσημη Σελίδα UniAI",
                 intern_title: "IT Support Specialist", intern_loc: "Δήμος Καλαμπάκας | Πρακτική Άσκηση", intern_desc: "Παροχή τεχνικής υποστήριξης σε χρήστες και διοικητικές υπηρεσίες του Δήμου, και επίλυση προβλημάτων hardware, software και δικτύου.",
                 erasmus_title: "Erasmus+ Βαρκελώνη", erasmus_desc: "Κινητικότητα με αντικείμενο το Mobile Application Development και τις στρατηγικές Digital Marketing.",
                 judge_title: "Κριτής STEM & Μέλος Επιστημονικής Επιτροπής", judge_desc: "Κολλέγιο Αθηνών - Αξιολογητής στον Πανελλήνιο Διαγωνισμό Εκπαιδευτικής Ρομποτικής & STEM.",
                 skills_title: "Δεξιότητες", prog_title: "Γλώσσες Προγραμματισμού", tools_title: "Ψηφιακά Εργαλεία", lang_title: "Γλώσσες", soft_title: "Ερευνητικά & Τεχνολογικά Ενδιαφέροντα",
                 interests_desc: "Εστίαση σε Artificial Intelligence, Machine Learning, Cybersecurity (SOC/Blue Team), Data Management και δίκτυα επόμενης γενιάς.",
-                cont_title: "Επικοινωνία", cv_download: "Κατέβασε το CV (PDF)",
-                typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Cybersecurity & AI Enthusiast."]
+                cont_title: "Επικοινωνία", cv_download: "Κατέβασμα CV (PDF)",
+                typed_strings: ["MSc Student @ NKUA.", "Community Team @ UniAI.", "Data & AI Specialist."]
             }
         };
 
@@ -416,7 +412,8 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
-            AOS.refresh();
+            // Refresh AOS specifically for elements within the active tab
+            setTimeout(() => { AOS.refresh(); }, 100);
         }
 
         let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('el') ? 'el' : 'en');
@@ -433,7 +430,7 @@
             if (typedInstance) typedInstance.destroy();
             typedInstance = new Typed('#typed', {
                 strings: translations[currentLang].typed_strings,
-                typeSpeed: 60, backSpeed: 40, loop: true
+                typeSpeed: 50, backSpeed: 30, loop: true
             });
         }
 
@@ -460,7 +457,6 @@
         function resetA11y() { document.body.className = ''; fontMod = 100; document.documentElement.style.setProperty('--font-scale', '100%'); }
 
         updateContent();
-        document.getElementById('emailBtn').addEventListener('click', () => confetti());
 
         // Live Digital Clock & System Status Script
         function updateClock() {

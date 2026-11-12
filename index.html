@@ -68,8 +68,8 @@
         /* Sections */
         main { margin-top: 100px; }
         .content-section { display: none; padding: 60px 8%; min-height: 75vh; }
-        .content-section.active { display: block; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section.active { display: block; animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         h2 { font-size: 2.8rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
         .accent { color: var(--primary); }
@@ -79,19 +79,20 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
         .card {
             background: var(--surface-dark); padding: 35px; border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; overflow: hidden;
         }
-        .card:hover { transform: translateY(-6px); border-color: rgba(34, 211, 238, 0.3); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); }
+        .card:hover { transform: translateY(-8px); border-color: rgba(34, 211, 238, 0.4); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
         .card-meta { color: var(--primary); font-family: var(--font-code); font-size: 0.8rem; margin-bottom: 12px; display: block; font-weight: bold; letter-spacing: 1px; }
         
         .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
         .tag { background: rgba(34, 211, 238, 0.08); color: var(--primary); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(34, 211, 238, 0.1); }
 
-        /* News / Updates Styling */
-        .news-card { border-left: 4px solid var(--primary); }
-        .news-card h4 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; }
-        .news-card p { color: var(--text-dim); font-size: 0.95rem; }
+        /* News / Blog Feed Styling */
+        .news-card { border-left: 4px solid var(--primary); display: flex; flex-direction: column; }
+        .news-card h4 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
+        .news-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 20px; }
+        .news-links { display: flex; gap: 15px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
 
         /* A11y Widget */
         .a11y-container { position: fixed; bottom: 30px; left: 30px; z-index: 2000; }
@@ -108,8 +109,8 @@
         .cv-btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
         .cv-btn-outline:hover { background: var(--primary); color: #000; }
 
-        .proj-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; transition: 0.2s; padding-bottom: 2px; border-bottom: 1px solid transparent; }
-        .proj-link:hover { color: #fff; border-bottom-color: #fff; }
+        .proj-link { color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-size: 0.9rem; }
+        .proj-link:hover { color: #fff; }
 
         footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; margin-top: 40px; }
         .system-status { margin-top: 12px; font-family: var(--font-code); color: var(--primary); font-size: 0.8rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -174,18 +175,26 @@
             <div style="margin-top: 60px;">
                 <h3 class="section-subtitle" data-i18n="news_header">Recent Updates & Activity</h3>
                 <div class="grid" style="margin-top: 10px;">
+                    <!-- Event Post -->
                     <div class="card news-card" data-aos="fade-up" data-aos-delay="100">
-                        <span class="card-meta" data-i18n="news_uniai_date">NOVEMBER 2026</span>
-                        <h4 data-i18n="news_uniai_title">Joined the UniAI Community Team</h4>
-                        <p data-i18n="news_uniai_desc">Happy to be a part of the UniAI team! We are working on some exciting things. My focus will be on leading the recruitment process, fostering open dialogue, and building strong connections within our AI community ecosystem.</p>
-                        <a href="https://www.linkedin.com/in/dimitrios-cholevas-b45489258/" target="_blank" class="proj-link">
-                            <span data-i18n="news_uniai_link">View Post</span> <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                        <span class="card-meta" data-i18n="news_event_date">LATEST EVENT</span>
+                        <h4 data-i18n="news_event_title">UniAI 1st External Event: AI for Good</h4>
+                        <p data-i18n="news_event_desc">We recently announced UniAI's first external event focusing on how Artificial Intelligence can be leveraged for social good. Extremely proud of the team's ongoing initiatives!</p>
+                        <div class="news-links">
+                            <a href="https://www.linkedin.com/posts/uniai_ai-for-good-%CE%BC%CF%80%CE%BF%CF%81%CE%B5%CE%AF-%CE%B7-%CF%84%CE%B5%CF%87%CE%BD%CE%B7%CF%84%CE%AE-%CE%BD%CE%BF%CE%B7%CE%BC%CE%BF%CF%83%CF%8D%CE%BD%CE%B7-activity-7524151564052295680-iP6a" target="_blank" class="proj-link">
+                                <i class="fa-brands fa-linkedin"></i> <span data-i18n="news_event_link">View Event Details</span>
+                            </a>
+                        </div>
                     </div>
+                    <!-- Joined UniAI Post -->
                     <div class="card news-card" data-aos="fade-up" data-aos-delay="200">
-                        <span class="card-meta" data-i18n="news_msc_date">OCTOBER 2026</span>
-                        <h4 data-i18n="news_msc_title">Commenced M.Sc. at NKUA</h4>
-                        <p data-i18n="news_msc_desc">A new academic chapter has begun! Successfully completed my B.Sc. and officially started my Master's degree in Informatics, specializing in Data, Information, and Knowledge Management at the National and Kapodistrian University of Athens.</p>
+                        <span class="card-meta" data-i18n="news_uniai_date">OCTOBER 2026</span>
+                        <h4 data-i18n="news_uniai_title">Joined the UniAI Community Team</h4>
+                        <p data-i18n="news_uniai_desc">Happy to be a part of the UniAI team! We are working on some exciting things!!! My focus will be on leading the recruitment process and fostering open dialogue within our AI ecosystem.</p>
+                        <div class="news-links">
+                            <a href="https://lnkd.in/p/dKHtXYCF" target="_blank" class="proj-link"><i class="fa-brands fa-linkedin"></i> <span data-i18n="news_uniai_link1">My Announcement</span></a>
+                            <a href="https://lnkd.in/p/dkZfNMN5" target="_blank" class="proj-link"><i class="fa-solid fa-users"></i> <span data-i18n="news_uniai_link2">Meet The Team</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,7 +227,7 @@
                     <div class="tag-container">
                         <span class="tag">PAC Learning</span><span class="tag">VC Dimension</span><span class="tag">SGD</span><span class="tag">LaTeX</span>
                     </div>
-                    <a href="https://github.com/holevasdimitrios/computational-learning-theory" target="_blank" class="proj-link">
+                    <a href="https://github.com/holevasdimitrios/computational-learning-theory" target="_blank" class="proj-link" style="margin-top: 15px;">
                         <i class="fa-brands fa-github"></i> <span data-i18n="portfolio_link">View Repository</span>
                     </a>
                 </div>
@@ -245,8 +254,8 @@
                     <div class="tag-container">
                         <span class="tag">Community Management</span><span class="tag">Recruitment</span><span class="tag">Event Organization</span>
                     </div>
-                    <a href="https://www.linkedin.com/company/uniai-hub/" target="_blank" class="proj-link" style="margin-top:15px; font-size: 0.9rem;">
-                        <i class="fa-solid fa-link"></i> <span data-i18n="work_uniai_link">UniAI Official Page</span>
+                    <a href="https://www.linkedin.com/company/uniai/" target="_blank" class="proj-link" style="margin-top:20px;">
+                        <i class="fa-brands fa-linkedin"></i> <span data-i18n="work_uniai_link">UniAI Official Page</span>
                     </a>
                 </div>
                 <div class="card" data-aos="fade-right" data-aos-delay="100">
@@ -345,7 +354,7 @@
         });
 
         // Initialize Animate On Scroll
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        AOS.init({ duration: 900, once: true, offset: 50 });
 
         // Dictionary Maps (EN / EL)
         const translations = {
@@ -354,13 +363,15 @@
                 story_title: "Professional Overview",
                 story_desc: "Recent Computer Science graduate from NKUA, currently pursuing an M.Sc. in Data, Information, and Knowledge Management. Deeply passionate about Artificial Intelligence, Machine Learning, and Cybersecurity (SOC/Blue Team). Driven by continuous learning, teamwork, and complex problem-solving in data-centric environments.",
                 news_header: "Recent Updates & Activity",
-                news_uniai_date: "NOVEMBER 2026",
+                news_event_date: "LATEST EVENT",
+                news_event_title: "UniAI 1st External Event: AI for Good",
+                news_event_desc: "We recently announced UniAI's first external event focusing on how Artificial Intelligence can be leveraged for social good. Extremely proud of the team's ongoing initiatives!",
+                news_event_link: "View Event Details",
+                news_uniai_date: "OCTOBER 2026",
                 news_uniai_title: "Joined the UniAI Community Team",
-                news_uniai_desc: "Happy to be a part of the UniAI team! We are working on some exciting things. My focus will be on leading the recruitment process, fostering open dialogue, and building strong connections within our AI community ecosystem.",
-                news_uniai_link: "View Post",
-                news_msc_date: "OCTOBER 2026",
-                news_msc_title: "Commenced M.Sc. at NKUA",
-                news_msc_desc: "A new academic chapter has begun! Successfully completed my B.Sc. and officially started my Master's degree in Informatics, specializing in Data, Information, and Knowledge Management at the National and Kapodistrian University of Athens.",
+                news_uniai_desc: "Happy to be a part of the UniAI team! We are working on some exciting things!!! My focus will be on leading the recruitment process and fostering open dialogue within our AI ecosystem.",
+                news_uniai_link1: "My Announcement",
+                news_uniai_link2: "Meet The Team",
                 edu_title: "Academic Background",
                 edu_msc_uni: "NKUA (EKPA) - MSc", edu_msc_desc: "M.Sc. in Informatics – Specialization: Data, Information and Knowledge Management.",
                 edu_uni: "NKUA (EKPA) - BSc", edu_desc: "B.Sc. in Computer Science & Telecommunications. Focused on Networks, Systems Programming, and Operating Systems.",
@@ -382,13 +393,15 @@
                 story_title: "Συνοπτικό Προφίλ",
                 story_desc: "Πρόσφατος απόφοιτος Πληροφορικής (BSc) από το ΕΚΠΑ και νυν μεταπτυχιακός φοιτητής (MSc) στη Διαχείριση Δεδομένων. Μεγάλο πάθος για την Τεχνητή Νοημοσύνη (AI), τη Μηχανική Μάθηση και την Κυβερνοασφάλεια (SOC/Blue Team). Λάτρης της συνεχούς μάθησης, της ομαδικότητας και της επίλυσης σύνθετων προβλημάτων σε περιβάλλοντα δεδομένων.",
                 news_header: "Πρόσφατα Νέα & Δραστηριότητα",
-                news_uniai_date: "ΝΟΕΜΒΡΙΟΣ 2026",
+                news_event_date: "ΤΕΛΕΥΤΑΙΟ EVENT",
+                news_event_title: "UniAI 1st External Event: AI for Good",
+                news_event_desc: "Ανακοινώσαμε πρόσφατα το πρώτο external event της UniAI με θέμα το πώς η Τεχνητή Νοημοσύνη μπορεί να αξιοποιηθεί για το κοινό καλό. Είμαι πολύ περήφανος για τις δράσεις της ομάδας μας!",
+                news_event_link: "Πληροφορίες Event (LinkedIn)",
+                news_uniai_date: "ΟΚΤΩΒΡΙΟΣ 2026",
                 news_uniai_title: "Νέο Μέλος στην Ομάδα Community της UniAI",
-                news_uniai_desc: "Πολύ χαρούμενος που αποτελώ πλέον μέρος της ομάδας της UniAI! Εστιάζω στη διαδικασία των προσλήψεων, την οργάνωση δράσεων και την ενδυνάμωση του δικτύου της κοινότητάς μας.",
-                news_uniai_link: "Προβολή Στο LinkedIn",
-                news_msc_date: "ΟΚΤΩΒΡΙΟΣ 2026",
-                news_msc_title: "Έναρξη Μεταπτυχιακού (MSc) στο ΕΚΠΑ",
-                news_msc_desc: "Ένα νέο ακαδημαϊκό κεφάλαιο ξεκίνησε! Ολοκλήρωσα επιτυχώς το πτυχίο μου (BSc) και ξεκίνησα επίσημα το μεταπτυχιακό μου με ειδίκευση στη Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης.",
+                news_uniai_desc: "Είμαι πολύ χαρούμενος που αποτελώ πλέον μέρος της ομάδας της UniAI! Εστιάζω στη διαδικασία των προσλήψεων, την οργάνωση δράσεων και την ενδυνάμωση του δικτύου της κοινότητάς μας.",
+                news_uniai_link1: "Η Ανακοίνωσή μου",
+                news_uniai_link2: "Γνωρίστε την Ομάδα",
                 edu_title: "Σπουδές & Πιστοποιήσεις",
                 edu_msc_uni: "ΕΚΠΑ - Μεταπτυχιακό (MSc)", edu_msc_desc: "M.Sc. στην Πληροφορική – Ειδίκευση: Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης.",
                 edu_uni: "ΕΚΠΑ - Πτυχίο (BSc)", edu_desc: "Πτυχίο Πληροφορικής & Τηλεπικοινωνιών. Εστίαση σε Δίκτυα Υπολογιστών, Λειτουργικά Συστήματα και Προγραμματισμό Συστήματος.",
